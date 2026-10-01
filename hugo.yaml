@@ -1,0 +1,141 @@
+baseURL: "https://songyu-academic-home.app.workbuddy.host/"
+languageCode: "zh-cn"
+title: "songyu0903"
+theme: profile
+enableRobotsTXT: true
+
+outputs:
+  home:
+    - "HTML"
+    - "RSS"
+    - "JSON"
+  page:
+    - "HTML"
+    - "RSS"
+
+pagination:
+  pagerSize: 3
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+params:
+  title: "songyu0903"
+  description: "数学专业研究生 · 投资组合优化 | Mathematics graduate student working on portfolio optimization"
+  favicon: "/favicon.ico"
+  useBootstrapCDN: false
+  mathjax: true
+  animate: true
+
+  navbar:
+    brandName: "songyu0903"
+    disableSearch: true
+    stickyNavBar:
+      enable: true
+      showOnScrollUp: true
+    menus:
+      disableExperience: true
+      disableEducation: true
+      disableAchievements: true
+
+  # Hero 首屏
+  hero:
+    enable: true
+    intro: "你好，我是 / Hi, I'm"
+    title: "songyu0903."
+    subtitle: "Mathematics × Portfolio Optimization"
+    content: "数学专业硕士研究生，研究方向为投资组合优化，目前处于开题前的文献调研阶段。Graduate student in mathematics working on portfolio optimization — currently surveying the literature in preparation for my thesis proposal."
+    image: /images/hero.svg
+    bottomImage:
+      enable: true
+    button:
+      enable: true
+      name: "GitHub"
+      url: "https://github.com/songyu0903"
+      newPage: true
+    socialLinks:
+      fontAwesomeIcons:
+        - icon: fab fa-github
+          url: https://github.com/songyu0903
+
+  # About 关于我
+  about:
+    enable: true
+    title: "关于我 / About Me"
+    content: |-
+      我是一名数学专业的硕士研究生，研究方向为**投资组合优化**（Portfolio Optimization），目前处于开题前的文献调研阶段，目标是在该方向完成学术研究并发表成果。
+
+      *I am a graduate student in mathematics. My research focuses on **portfolio optimization**. I am currently conducting a systematic literature review in preparation for my thesis proposal, with the goal of producing publishable research.*
+
+      研究兴趣 / Research interests:
+
+      - 投资组合优化与资产配置 / Portfolio optimization & asset allocation
+      - 金融中的优化方法（凸优化、随机优化、鲁棒优化）/ Optimization methods in finance
+      - 量化金融与金融数学 / Quantitative finance & financial mathematics
+    skills:
+      enable: true
+      title: "常用工具 / Toolbox:"
+      items:
+        - "Python"
+        - "MATLAB"
+        - "LaTeX"
+        - "Markdown"
+        - "Git"
+        - "Obsidian"
+        - "VS Code"
+
+  # 关闭不适用的板块
+  experience:
+    enable: false
+  education:
+    enable: false
+  achievements:
+    enable: false
+
+  # Research 研究方向（复用 Projects 板块）
+  projects:
+    enable: true
+    title: "研究方向 / Research"
+    items:
+      - title: "投资组合优化 / Portfolio Optimization"
+        content: '从经典均值—方差框架 \(\min_w w^{\top}\Sigma w\) 出发，关注鲁棒优化与分布鲁棒优化在现代组合选择中的应用。From the classical mean-variance framework to robust and distributionally robust portfolio selection.'
+        badges:
+          - "凸优化"
+          - "鲁棒优化"
+          - "量化金融"
+        links:
+          - icon: fab fa-github
+            url: https://github.com/songyu0903
+      - title: "开题准备 / Thesis Proposal"
+        content: "正在进行系统性文献调研与开题报告撰写，工作论文准备中。Conducting a systematic literature review and preparing the thesis proposal; working papers in preparation."
+        badges:
+          - "文献调研"
+          - "LaTeX"
+          - "Python"
+
+  # Contact 联系
+  contact:
+    enable: true
+    title: "联系 / Contact"
+    content: "欢迎通过 GitHub 与我交流。Feel free to reach out via GitHub."
+    btnName: "GitHub"
+    btnLink: "https://github.com/songyu0903"
+
+  footer:
+    recentPosts:
+      enable: false
+    socialNetworks:
+      github: https://github.com/songyu0903
+
+  terms:
+    read: "阅读"
+    toc: "目录"
+    copyright: "版权所有"
+    emailText: "分享这个页面"
+
+  datesFormat:
+    article: "2006-01-02"
+    articleList: "2006-01-02"
+    articleRecent: "01-02"
