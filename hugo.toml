@@ -3,9 +3,9 @@ baseURL = "https://songyu0903.github.io/"
 theme = "researcher"
 disableKinds = ["taxonomy", "term"]
 enableEmoji = true
-math = true          # KaTeX support
 
 [params]
+  math = true        # enable KaTeX (checked via .Site.Params.math in the theme)
   author = "songyu0903"
   description = "Personal academic homepage of songyu0903 — mathematics graduate student working on portfolio optimization."
   favicon = "favicon.ico"
