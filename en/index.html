@@ -293,6 +293,67 @@
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
   }
+
+   
+  .fx-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+  @media (max-width: 640px) {
+    .fx-cards { grid-template-columns: 1fr; }
+  }
+  .fx-card {
+    position: relative;
+    padding: 1.4rem 1.5rem;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.55);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    animation: fx-card-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--d, 0s);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  html.dark .fx-card {
+    background: rgba(32, 33, 36, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+  }
+  .fx-card:hover {
+    transform: translateY(-6px) scale(1.015);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+  }
+  html.dark .fx-card:hover {
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  }
+  .fx-card h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  .fx-card p {
+    margin: 0 0 0.4rem;
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+  .fx-card-icon {
+    font-size: 1.6rem;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .fx-card-link {
+    font-weight: 600;
+    text-decoration: none;
+  }
+  @keyframes fx-card-in {
+    from { opacity: 0; transform: translateY(24px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
 </style>
 <script src="/js/particles.min.js" defer></script>
 <script>
@@ -453,6 +514,24 @@ document.addEventListener("DOMContentLoaded", function () {
       
         <span class="text-sm font-medium break-normal">
           Research
+        </span>
+      
+    </a>
+  
+
+    
+      
+  
+    <a
+      href="/en/latex/"
+      
+      class="flex items-center bf-icon-color-hover"
+      aria-label="LaTeX Notes"
+      title="LaTeX Notes">
+      
+      
+        <span class="text-sm font-medium break-normal">
+          LaTeX Notes
         </span>
       
     </a>
@@ -700,6 +779,25 @@ document.addEventListener("DOMContentLoaded", function () {
     <div class="px-2">
       <div class="flex items-center gap-4">
         <a
+          href="/en/latex/"
+          aria-label="LaTeX Notes"
+          
+          class="flex grow items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+          
+          <span title="LaTeX Notes" class="text-2xl font-bold tracking-tight">
+            LaTeX Notes
+          </span>
+        </a>
+        
+      </div>
+
+      
+    </div>
+  
+    
+    <div class="px-2">
+      <div class="flex items-center gap-4">
+        <a
           href="https://github.com/songyu0903"
           aria-label="GitHub"
           
@@ -790,14 +888,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
     </div>
   </header>
-  <section class="prose dark:prose-invert w-full"><div align="center">
-  <a href="https://github.com/songyu0903" target="_blank" rel="noopener">
-    <img src="https://ghchart.rshah.org/40c463/songyu0903"
-         alt="GitHub contribution calendar"
-         style="width:100%;max-width:850px"
-         onerror="this.outerHTML='<p>🖼️ Chart temporarily unavailable — <a href=\'https://github.com/songyu0903\' target=\'_blank\' rel=\'noopener\'>view activity on GitHub</a></p>';">
-  </a>
-  <p style="font-size:0.85rem;opacity:0.7">My commit activity over the past year · click to visit my profile</p>
+  <section class="prose dark:prose-invert w-full"><div class="fx-cards">
+  <div class="fx-card" style="--d:0.05s">
+    <div class="fx-card-icon">👋</div>
+    <h3>About Me</h3>
+    <p>Graduate student in mathematics working on <strong>portfolio optimization</strong> — using mathematical tools to answer how to allocate assets under uncertainty. Currently surveying the literature from Markowitz to robust and distributionally robust optimization.</p>
+  </div>
+  <div class="fx-card" style="--d:0.15s">
+    <div class="fx-card-icon">🔬</div>
+    <h3>Research Interests</h3>
+    <p>Portfolio optimization & asset allocation · Convex / stochastic / robust optimization · Quantitative finance & financial mathematics · Numerical methods & empirical analysis</p>
+    <a class="fx-card-link" href="/en/research/">Explore my research →</a>
+  </div>
+  <div class="fx-card" style="--d:0.25s">
+    <div class="fx-card-icon">🛠️</div>
+    <h3>Skills & Tools</h3>
+    <p><code>Python</code> <code>MATLAB</code> <code>LaTeX</code> <code>Git</code> <code>Obsidian</code> <code>VS Code</code></p>
+    <p>Numerical experiments in Python / MATLAB; all writing in LaTeX.</p>
+  </div>
+  <div class="fx-card" style="--d:0.35s">
+    <div class="fx-card-icon">📚</div>
+    <h3>Quick Links</h3>
+    <p><a class="fx-card-link" href="/en/latex/">LaTeX Notes →</a></p>
+    <p><a class="fx-card-link" href="https://github.com/songyu0903" target="_blank" rel="noopener">GitHub @songyu0903 →</a></p>
+  </div>
 </div>
 </section>
 </article>

@@ -10,6 +10,16 @@
     <lastBuildDate>Thu, 01 Oct 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://songyu0903.github.io/en/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>LaTeX Setup: TeX Live &#43; VS Code Workflow</title>
+      <link>https://songyu0903.github.io/en/latex/vscode-setup/</link>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/en/latex/vscode-setup/</guid>
+      <description>Ditch the bloated dedicated editors — a lightweight, efficient local writing environment with TeX Live + VS Code + LaTeX Workshop.</description>
+      
+    </item>
+    
+    <item>
       <title>Portfolio Optimization</title>
       <link>https://songyu0903.github.io/en/research/portfolio-optimization/</link>
       <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
@@ -20,12 +30,32 @@
     </item>
     
     <item>
+      <title>Math Typesetting: Professional and Maintainable Formulas</title>
+      <link>https://songyu0903.github.io/en/latex/math-typesetting/</link>
+      <pubDate>Sun, 20 Sep 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/en/latex/math-typesetting/</guid>
+      <description>How to choose amsmath environments, proper numbering and cross-referencing, and the essential package list for math students.</description>
+      
+    </item>
+    
+    <item>
       <title>Thesis Proposal</title>
       <link>https://songyu0903.github.io/en/research/thesis-proposal/</link>
       <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
       
       <guid>https://songyu0903.github.io/en/research/thesis-proposal/</guid>
       <description>Conducting a systematic literature review and preparing the thesis proposal.</description>
+      
+    </item>
+    
+    <item>
+      <title>Academic Writing Workflow: References, Templates &amp; Version Control</title>
+      <link>https://songyu0903.github.io/en/latex/writing-workflow/</link>
+      <pubDate>Tue, 01 Sep 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/en/latex/writing-workflow/</guid>
+      <description>Automated Zotero-to-BibTeX pipeline, Git-managed paper versions, and a pre-submission checklist.</description>
       
     </item>
     

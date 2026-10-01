@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>数学公式 on songyu0903</title>
+    <link>https://songyu0903.github.io/tags/%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/</link>
+    <description>Recent content in 数学公式 on songyu0903</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>© 2026 songyu0903</copyright>
+    <lastBuildDate>Sun, 20 Sep 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://songyu0903.github.io/tags/%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>数学公式排版心得：让公式既专业又好维护</title>
+      <link>https://songyu0903.github.io/latex/math-typesetting/</link>
+      <pubDate>Sun, 20 Sep 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/latex/math-typesetting/</guid>
+      <description>amsmath 环境怎么选、编号与交叉引用的正确姿势、数学生必备的宏包清单。</description>
+      
+    </item>
+    
+  </channel>
+</rss>

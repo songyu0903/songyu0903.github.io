@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Math on songyu0903</title>
+    <link>https://songyu0903.github.io/en/tags/math/</link>
+    <description>Recent content in Math on songyu0903</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2026 songyu0903</copyright>
+    <lastBuildDate>Sun, 20 Sep 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://songyu0903.github.io/en/tags/math/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Math Typesetting: Professional and Maintainable Formulas</title>
+      <link>https://songyu0903.github.io/en/latex/math-typesetting/</link>
+      <pubDate>Sun, 20 Sep 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/en/latex/math-typesetting/</guid>
+      <description>How to choose amsmath environments, proper numbering and cross-referencing, and the essential package list for math students.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

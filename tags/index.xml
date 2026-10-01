@@ -10,6 +10,36 @@
     <lastBuildDate>Thu, 01 Oct 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://songyu0903.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>LaTeX</title>
+      <link>https://songyu0903.github.io/tags/latex/</link>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/tags/latex/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>VS Code</title>
+      <link>https://songyu0903.github.io/tags/vs-code/</link>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/tags/vs-code/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>工具链</title>
+      <link>https://songyu0903.github.io/tags/%E5%B7%A5%E5%85%B7%E9%93%BE/</link>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/tags/%E5%B7%A5%E5%85%B7%E9%93%BE/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
       <title>量化金融</title>
       <link>https://songyu0903.github.io/tags/%E9%87%8F%E5%8C%96%E9%87%91%E8%9E%8D/</link>
       <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
@@ -40,11 +70,21 @@
     </item>
     
     <item>
-      <title>LaTeX</title>
-      <link>https://songyu0903.github.io/tags/latex/</link>
-      <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
+      <title>排版</title>
+      <link>https://songyu0903.github.io/tags/%E6%8E%92%E7%89%88/</link>
+      <pubDate>Sun, 20 Sep 2026 00:00:00 +0000</pubDate>
       
-      <guid>https://songyu0903.github.io/tags/latex/</guid>
+      <guid>https://songyu0903.github.io/tags/%E6%8E%92%E7%89%88/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>数学公式</title>
+      <link>https://songyu0903.github.io/tags/%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/</link>
+      <pubDate>Sun, 20 Sep 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/tags/%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/</guid>
       <description></description>
       
     </item>
@@ -55,6 +95,26 @@
       <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
       
       <guid>https://songyu0903.github.io/tags/%E6%96%87%E7%8C%AE%E8%B0%83%E7%A0%94/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>工作流</title>
+      <link>https://songyu0903.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/</link>
+      <pubDate>Tue, 01 Sep 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>学术写作</title>
+      <link>https://songyu0903.github.io/tags/%E5%AD%A6%E6%9C%AF%E5%86%99%E4%BD%9C/</link>
+      <pubDate>Tue, 01 Sep 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/tags/%E5%AD%A6%E6%9C%AF%E5%86%99%E4%BD%9C/</guid>
       <description></description>
       
     </item>

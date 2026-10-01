@@ -288,6 +288,67 @@
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
   }
+
+   
+  .fx-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+  @media (max-width: 640px) {
+    .fx-cards { grid-template-columns: 1fr; }
+  }
+  .fx-card {
+    position: relative;
+    padding: 1.4rem 1.5rem;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.55);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    animation: fx-card-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--d, 0s);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  html.dark .fx-card {
+    background: rgba(32, 33, 36, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+  }
+  .fx-card:hover {
+    transform: translateY(-6px) scale(1.015);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+  }
+  html.dark .fx-card:hover {
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  }
+  .fx-card h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  .fx-card p {
+    margin: 0 0 0.4rem;
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+  .fx-card-icon {
+    font-size: 1.6rem;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .fx-card-link {
+    font-weight: 600;
+    text-decoration: none;
+  }
+  @keyframes fx-card-in {
+    from { opacity: 0; transform: translateY(24px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
 </style>
 <script src="/js/particles.min.js" defer></script>
 <script>
@@ -448,6 +509,24 @@ document.addEventListener("DOMContentLoaded", function () {
       
         <span class="text-sm font-medium break-normal">
           研究方向
+        </span>
+      
+    </a>
+  
+
+    
+      
+  
+    <a
+      href="/latex/"
+      
+      class="flex items-center bf-icon-color-hover"
+      aria-label="LaTeX 心得"
+      title="LaTeX 心得">
+      
+      
+        <span class="text-sm font-medium break-normal">
+          LaTeX 心得
         </span>
       
     </a>
@@ -629,6 +708,25 @@ document.addEventListener("DOMContentLoaded", function () {
           
           <span title="研究方向" class="text-2xl font-bold tracking-tight">
             研究方向
+          </span>
+        </a>
+        
+      </div>
+
+      
+    </div>
+  
+    
+    <div class="px-2">
+      <div class="flex items-center gap-4">
+        <a
+          href="/latex/"
+          aria-label="LaTeX 心得"
+          
+          class="flex grow items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+          
+          <span title="LaTeX 心得" class="text-2xl font-bold tracking-tight">
+            LaTeX 心得
           </span>
         </a>
         

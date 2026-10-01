@@ -3,6 +3,38 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
+    <loc>https://songyu0903.github.io/latex/vscode-setup/</loc>
+    <lastmod>2026-10-01T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://songyu0903.github.io/en/latex/vscode-setup/"
+    />
+    <xhtml:link
+      rel="alternate"
+      hreflang="zh-CN"
+      href="https://songyu0903.github.io/latex/vscode-setup/"
+    />
+  </url>
+  <url>
+    <loc>https://songyu0903.github.io/latex/</loc>
+    <lastmod>2026-10-01T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://songyu0903.github.io/en/latex/"
+    />
+    <xhtml:link
+      rel="alternate"
+      hreflang="zh-CN"
+      href="https://songyu0903.github.io/latex/"
+    />
+  </url>
+  <url>
     <loc>https://songyu0903.github.io/research/portfolio-optimization/</loc>
     <lastmod>2026-10-01T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
@@ -51,6 +83,22 @@
     />
   </url>
   <url>
+    <loc>https://songyu0903.github.io/latex/math-typesetting/</loc>
+    <lastmod>2026-09-20T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://songyu0903.github.io/en/latex/math-typesetting/"
+    />
+    <xhtml:link
+      rel="alternate"
+      hreflang="zh-CN"
+      href="https://songyu0903.github.io/latex/math-typesetting/"
+    />
+  </url>
+  <url>
     <loc>https://songyu0903.github.io/research/thesis-proposal/</loc>
     <lastmod>2026-09-15T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
@@ -64,6 +112,22 @@
       rel="alternate"
       hreflang="zh-CN"
       href="https://songyu0903.github.io/research/thesis-proposal/"
+    />
+  </url>
+  <url>
+    <loc>https://songyu0903.github.io/latex/writing-workflow/</loc>
+    <lastmod>2026-09-01T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://songyu0903.github.io/en/latex/writing-workflow/"
+    />
+    <xhtml:link
+      rel="alternate"
+      hreflang="zh-CN"
+      href="https://songyu0903.github.io/latex/writing-workflow/"
     />
   </url>
 </urlset>

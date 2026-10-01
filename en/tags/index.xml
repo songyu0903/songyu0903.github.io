@@ -20,6 +20,16 @@
     </item>
     
     <item>
+      <title>LaTeX</title>
+      <link>https://songyu0903.github.io/en/tags/latex/</link>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/en/tags/latex/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
       <title>Quantitative Finance</title>
       <link>https://songyu0903.github.io/en/tags/quantitative-finance/</link>
       <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
@@ -40,11 +50,41 @@
     </item>
     
     <item>
-      <title>LaTeX</title>
-      <link>https://songyu0903.github.io/en/tags/latex/</link>
-      <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
+      <title>Toolchain</title>
+      <link>https://songyu0903.github.io/en/tags/toolchain/</link>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
       
-      <guid>https://songyu0903.github.io/en/tags/latex/</guid>
+      <guid>https://songyu0903.github.io/en/tags/toolchain/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>VS Code</title>
+      <link>https://songyu0903.github.io/en/tags/vs-code/</link>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/en/tags/vs-code/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Math</title>
+      <link>https://songyu0903.github.io/en/tags/math/</link>
+      <pubDate>Sun, 20 Sep 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/en/tags/math/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Typesetting</title>
+      <link>https://songyu0903.github.io/en/tags/typesetting/</link>
+      <pubDate>Sun, 20 Sep 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/en/tags/typesetting/</guid>
       <description></description>
       
     </item>
@@ -55,6 +95,26 @@
       <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
       
       <guid>https://songyu0903.github.io/en/tags/literature-review/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Academic Writing</title>
+      <link>https://songyu0903.github.io/en/tags/academic-writing/</link>
+      <pubDate>Tue, 01 Sep 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/en/tags/academic-writing/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Workflow</title>
+      <link>https://songyu0903.github.io/en/tags/workflow/</link>
+      <pubDate>Tue, 01 Sep 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/en/tags/workflow/</guid>
       <description></description>
       
     </item>
