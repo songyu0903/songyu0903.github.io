@@ -278,6 +278,105 @@
 
   
   
+    
+<style id="fx-style" disabled>
+  #fx-particles {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    pointer-events: none;
+  }
+  .tw-cursor {
+    display: inline-block;
+    width: 2px;
+    background: currentColor;
+    margin-left: 2px;
+    animation: tw-blink 0.9s steps(1) infinite;
+  }
+  @keyframes tw-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+</style>
+<script src="/js/particles.min.js" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  
+  var isHome = document.body.classList.contains("home") ||
+               !!document.querySelector("article .prose") &&
+               !!document.querySelector('article header h2') &&
+               !document.querySelector(".breadcrumbs, nav[aria-label='breadcrumb']");
+  
+  var path = window.location.pathname;
+  isHome = (path === "/" || path === "/index.html" || path === "/en/" || path === "/en/index.html");
+  if (!isHome) return;
+
+  
+  var st = document.getElementById("fx-style");
+  if (st) st.disabled = false;
+
+  
+  var holder = document.createElement("div");
+  holder.id = "fx-particles";
+  document.body.appendChild(holder);
+  if (window.particlesJS) {
+    particlesJS("fx-particles", {
+      particles: {
+        number: { value: 45, density: { enable: true, value_area: 900 } },
+        color: { value: "#64748b" },
+        shape: { type: "circle" },
+        opacity: { value: 0.35, random: true },
+        size: { value: 2.5, random: true },
+        line_linked: {
+          enable: true, distance: 130,
+          color: "#64748b", opacity: 0.18, width: 1
+        },
+        move: {
+          enable: true, speed: 0.8, direction: "none",
+          random: true, straight: false, out_mode: "out"
+        }
+      },
+      interactivity: {
+        detect_on: "window",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: false },
+          resize: true
+        },
+        modes: { grab: { distance: 160, line_linked: { opacity: 0.35 } } }
+      },
+      retina_detect: true
+    });
+  }
+
+  
+  var el = document.querySelector("article header h2");
+  if (el) {
+    var text = el.textContent.trim();
+    if (text) {
+      var textSpan = document.createElement("span");
+      var cursor = document.createElement("span");
+      cursor.className = "tw-cursor";
+      cursor.innerHTML = "&nbsp;";
+      el.textContent = "";
+      el.appendChild(textSpan);
+      el.appendChild(cursor);
+      var i = 0;
+      (function type() {
+        if (i < text.length) {
+          textSpan.textContent += text.charAt(i);
+          i++;
+          setTimeout(type, 90);
+        } else {
+          setTimeout(function () { cursor.style.display = "none"; }, 3000);
+        }
+      })();
+    }
+  }
+});
+</script>
+
+  
 
   
   
