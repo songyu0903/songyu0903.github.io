@@ -1,8 +1,112 @@
-baseURL: "https://songyu-academic-home.app.workbuddy.host/"
+baseURL: "https://songyu0903.github.io/"
 languageCode: "zh-cn"
 title: "songyu0903"
 theme: profile
 enableRobotsTXT: true
+hasCJKLanguage: true
+
+# 多语言：默认中文（/），英文在 /en/，导航栏右上角自动出现切换器
+defaultContentLanguage: "zh"
+defaultContentLanguageInSubdir: false
+
+languages:
+  zh:
+    languageName: "中文"
+    weight: 1
+    params:
+      description: "数学专业研究生 · 投资组合优化"
+      hero:
+        intro: "你好，我是"
+        title: "songyu0903."
+        subtitle: "数学 × 投资组合优化"
+        content: "数学专业硕士研究生，研究方向为投资组合优化，目前处于开题前的文献调研阶段，目标是在该方向完成学术研究并发表成果。"
+        button:
+          name: "GitHub"
+      about:
+        content: |-
+          我是一名数学专业的硕士研究生，研究方向为**投资组合优化**（Portfolio Optimization），目前处于开题前的文献调研阶段，目标是在该方向完成学术研究并发表成果。
+
+          研究兴趣：
+
+          - 投资组合优化与资产配置
+          - 金融中的优化方法（凸优化、随机优化、鲁棒优化）
+          - 量化金融与金融数学
+        skills:
+          title: "常用工具："
+      projects:
+        items:
+          - title: "投资组合优化"
+            content: '从经典均值—方差框架 \(\min_w w^{\top}\Sigma w\) 出发，关注鲁棒优化与分布鲁棒优化在现代组合选择中的应用。'
+            badges:
+              - "凸优化"
+              - "鲁棒优化"
+              - "量化金融"
+            links:
+              - icon: fab fa-github
+                url: https://github.com/songyu0903
+          - title: "开题准备"
+            content: "正在进行系统性文献调研与开题报告撰写，工作论文准备中。"
+            badges:
+              - "文献调研"
+              - "LaTeX"
+              - "Python"
+      contact:
+        content: "欢迎通过 GitHub 与我交流。"
+        btnName: "GitHub"
+      terms:
+        read: "阅读"
+        toc: "目录"
+        copyright: "版权所有"
+        emailText: "分享这个页面"
+
+  en:
+    languageName: "English"
+    weight: 2
+    params:
+      description: "Mathematics graduate student · Portfolio optimization"
+      hero:
+        intro: "Hi, I'm"
+        title: "songyu0903."
+        subtitle: "Mathematics × Portfolio Optimization"
+        content: "Graduate student in mathematics working on portfolio optimization. Currently surveying the literature in preparation for my thesis proposal, with the goal of producing publishable research."
+        button:
+          name: "GitHub"
+      about:
+        content: |-
+          I am a graduate student in mathematics. My research focuses on **portfolio optimization**, and I am currently conducting a systematic literature review in preparation for my thesis proposal, with the goal of producing publishable research.
+
+          Research interests:
+
+          - Portfolio optimization & asset allocation
+          - Optimization methods in finance (convex, stochastic, robust)
+          - Quantitative finance & financial mathematics
+        skills:
+          title: "Toolbox:"
+      projects:
+        items:
+          - title: "Portfolio Optimization"
+            content: 'Starting from the classical mean-variance framework \(\min_w w^{\top}\Sigma w\), I focus on robust and distributionally robust optimization in modern portfolio selection.'
+            badges:
+              - "Convex Optimization"
+              - "Robust Optimization"
+              - "Quantitative Finance"
+            links:
+              - icon: fab fa-github
+                url: https://github.com/songyu0903
+          - title: "Thesis Proposal"
+            content: "Conducting a systematic literature review and preparing the thesis proposal; working papers in preparation."
+            badges:
+              - "Literature Review"
+              - "LaTeX"
+              - "Python"
+      contact:
+        content: "Feel free to reach out via GitHub."
+        btnName: "GitHub"
+      terms:
+        read: "Read"
+        toc: "Table of Contents"
+        copyright: "All rights reserved"
+        emailText: "Check out this site"
 
 outputs:
   home:
@@ -23,7 +127,6 @@ markup:
 
 params:
   title: "songyu0903"
-  description: "数学专业研究生 · 投资组合优化 | Mathematics graduate student working on portfolio optimization"
   favicon: "/favicon.ico"
   useBootstrapCDN: false
   mathjax: true
@@ -40,19 +143,13 @@ params:
       disableEducation: true
       disableAchievements: true
 
-  # Hero 首屏
   hero:
     enable: true
-    intro: "你好，我是 / Hi, I'm"
-    title: "songyu0903."
-    subtitle: "Mathematics × Portfolio Optimization"
-    content: "数学专业硕士研究生，研究方向为投资组合优化，目前处于开题前的文献调研阶段。Graduate student in mathematics working on portfolio optimization — currently surveying the literature in preparation for my thesis proposal."
     image: /images/hero.svg
     bottomImage:
       enable: true
     button:
       enable: true
-      name: "GitHub"
       url: "https://github.com/songyu0903"
       newPage: true
     socialLinks:
@@ -60,23 +157,10 @@ params:
         - icon: fab fa-github
           url: https://github.com/songyu0903
 
-  # About 关于我
   about:
     enable: true
-    title: "关于我 / About Me"
-    content: |-
-      我是一名数学专业的硕士研究生，研究方向为**投资组合优化**（Portfolio Optimization），目前处于开题前的文献调研阶段，目标是在该方向完成学术研究并发表成果。
-
-      *I am a graduate student in mathematics. My research focuses on **portfolio optimization**. I am currently conducting a systematic literature review in preparation for my thesis proposal, with the goal of producing publishable research.*
-
-      研究兴趣 / Research interests:
-
-      - 投资组合优化与资产配置 / Portfolio optimization & asset allocation
-      - 金融中的优化方法（凸优化、随机优化、鲁棒优化）/ Optimization methods in finance
-      - 量化金融与金融数学 / Quantitative finance & financial mathematics
     skills:
       enable: true
-      title: "常用工具 / Toolbox:"
       items:
         - "Python"
         - "MATLAB"
@@ -86,7 +170,6 @@ params:
         - "Obsidian"
         - "VS Code"
 
-  # 关闭不适用的板块
   experience:
     enable: false
   education:
@@ -94,33 +177,11 @@ params:
   achievements:
     enable: false
 
-  # Research 研究方向（复用 Projects 板块）
   projects:
     enable: true
-    title: "研究方向 / Research"
-    items:
-      - title: "投资组合优化 / Portfolio Optimization"
-        content: '从经典均值—方差框架 \(\min_w w^{\top}\Sigma w\) 出发，关注鲁棒优化与分布鲁棒优化在现代组合选择中的应用。From the classical mean-variance framework to robust and distributionally robust portfolio selection.'
-        badges:
-          - "凸优化"
-          - "鲁棒优化"
-          - "量化金融"
-        links:
-          - icon: fab fa-github
-            url: https://github.com/songyu0903
-      - title: "开题准备 / Thesis Proposal"
-        content: "正在进行系统性文献调研与开题报告撰写，工作论文准备中。Conducting a systematic literature review and preparing the thesis proposal; working papers in preparation."
-        badges:
-          - "文献调研"
-          - "LaTeX"
-          - "Python"
 
-  # Contact 联系
   contact:
     enable: true
-    title: "联系 / Contact"
-    content: "欢迎通过 GitHub 与我交流。Feel free to reach out via GitHub."
-    btnName: "GitHub"
     btnLink: "https://github.com/songyu0903"
 
   footer:
@@ -128,12 +189,6 @@ params:
       enable: false
     socialNetworks:
       github: https://github.com/songyu0903
-
-  terms:
-    read: "阅读"
-    toc: "目录"
-    copyright: "版权所有"
-    emailText: "分享这个页面"
 
   datesFormat:
     article: "2006-01-02"

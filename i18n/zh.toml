@@ -1,0 +1,77 @@
+# Navigation
+[nav_about]
+other = "关于我"
+
+[nav_experience]
+other = "经历"
+
+[nav_education]
+other = "教育背景"
+
+[nav_projects]
+other = "研究方向"
+
+[nav_achievements]
+other = "荣誉成果"
+
+[nav_contact]
+other = "联系"
+
+[search_placeholder]
+other = "搜索..."
+
+# Sections
+[about]
+other = "关于我"
+
+[experience]
+other = "经历"
+
+[education]
+other = "教育背景"
+
+[projects]
+other = "研究方向"
+
+[achievements]
+other = "荣誉成果"
+
+[contact]
+other = "联系我"
+
+# Contact form
+[contact_email_placeholder]
+other = "输入你的邮箱"
+
+[contact_message_placeholder]
+other = "输入你的留言"
+
+# Footer
+[recent_posts]
+other = "最新文章"
+
+# Common terms
+[read]
+other = "阅读"
+
+[toc]
+other = "目录"
+
+[tags]
+other = "标签"
+
+[social]
+other = "社交"
+
+[copyright]
+other = "版权所有"
+
+[email_text]
+other = "分享这个页面"
+
+[page_not_found]
+other = "页面不存在"
+
+# Date formats
+[min_read]
+other = "分钟读完"
