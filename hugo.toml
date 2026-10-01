@@ -1,0 +1,36 @@
+title = "songyu0903"
+baseURL = "https://songyu0903.github.io/"
+theme = "researcher"
+disableKinds = ["taxonomy", "term"]
+enableEmoji = true
+math = true          # KaTeX support
+
+[params]
+  author = "songyu0903"
+  description = "Personal academic homepage of songyu0903 — mathematics graduate student working on portfolio optimization."
+  favicon = "favicon.ico"
+  [params.footer]
+    text = "Built with Hugo · Theme: researcher"
+    url = "https://github.com/songyu0903/songyu0903.github.io"
+  [params.style]
+    fontFamily = "Inconsolata, 'Noto Sans SC', monospace"
+    fontSize = "13pt"
+    pageWidth = "780px"
+    colorBlack = "#222222"
+    colorRed = "#b31b1b"
+  [[params.socialIcons]]
+    icon = "fab fa-github"
+    title = "GitHub"
+    url = "https://github.com/songyu0903"
+
+[permalinks]
+  "/" = "/:filename"
+
+[menu]
+  [[menu.main]]
+    name = "About / 主页"
+    url = "/"
+    weight = 1
+
+[markup.goldmark.renderer]
+  unsafe = true
