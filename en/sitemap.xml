@@ -1,41 +1,69 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
   <url>
-    <loc>https://songyu0903.github.io/en/categories/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://songyu0903.github.io/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://songyu0903.github.io/en/categories/"
-                />
-  </url><url>
     <loc>https://songyu0903.github.io/en/</loc>
+    <lastmod>2026-10-01T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
     <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://songyu0903.github.io/"
-                />
+      rel="alternate"
+      hreflang="zh-CN"
+      href="https://songyu0903.github.io/"
+    />
     <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://songyu0903.github.io/en/"
-                />
-  </url><url>
-    <loc>https://songyu0903.github.io/en/tags/</loc>
+      rel="alternate"
+      hreflang="en"
+      href="https://songyu0903.github.io/en/"
+    />
+  </url>
+  <url>
+    <loc>https://songyu0903.github.io/en/research/portfolio-optimization/</loc>
+    <lastmod>2026-10-01T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
     <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://songyu0903.github.io/tags/"
-                />
+      rel="alternate"
+      hreflang="zh-CN"
+      href="https://songyu0903.github.io/research/portfolio-optimization/"
+    />
     <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://songyu0903.github.io/en/tags/"
-                />
+      rel="alternate"
+      hreflang="en"
+      href="https://songyu0903.github.io/en/research/portfolio-optimization/"
+    />
+  </url>
+  <url>
+    <loc>https://songyu0903.github.io/en/research/</loc>
+    <lastmod>2026-10-01T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+      rel="alternate"
+      hreflang="zh-CN"
+      href="https://songyu0903.github.io/research/"
+    />
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://songyu0903.github.io/en/research/"
+    />
+  </url>
+  <url>
+    <loc>https://songyu0903.github.io/en/research/thesis-proposal/</loc>
+    <lastmod>2026-09-15T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+      rel="alternate"
+      hreflang="zh-CN"
+      href="https://songyu0903.github.io/research/thesis-proposal/"
+    />
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://songyu0903.github.io/en/research/thesis-proposal/"
+    />
   </url>
 </urlset>

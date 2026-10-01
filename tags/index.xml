@@ -1,15 +1,63 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>Tags on songyu0903</title>
-		<link>https://songyu0903.github.io/tags/</link>
-		<description>Recent content in Tags on songyu0903</description>
-		<generator>Hugo</generator>
-		<language>zh-cn</language>
-		
-		
-		
-		
-			<atom:link href="https://songyu0903.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
-	</channel>
+  <channel>
+    <title>Tags on songyu0903</title>
+    <link>https://songyu0903.github.io/tags/</link>
+    <description>Recent content in Tags on songyu0903</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>© 2026 songyu0903</copyright>
+    <lastBuildDate>Thu, 01 Oct 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://songyu0903.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>量化金融</title>
+      <link>https://songyu0903.github.io/tags/%E9%87%8F%E5%8C%96%E9%87%91%E8%9E%8D/</link>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/tags/%E9%87%8F%E5%8C%96%E9%87%91%E8%9E%8D/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>鲁棒优化</title>
+      <link>https://songyu0903.github.io/tags/%E9%B2%81%E6%A3%92%E4%BC%98%E5%8C%96/</link>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/tags/%E9%B2%81%E6%A3%92%E4%BC%98%E5%8C%96/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>凸优化</title>
+      <link>https://songyu0903.github.io/tags/%E5%87%B8%E4%BC%98%E5%8C%96/</link>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/tags/%E5%87%B8%E4%BC%98%E5%8C%96/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>LaTeX</title>
+      <link>https://songyu0903.github.io/tags/latex/</link>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/tags/latex/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>文献调研</title>
+      <link>https://songyu0903.github.io/tags/%E6%96%87%E7%8C%AE%E8%B0%83%E7%A0%94/</link>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/tags/%E6%96%87%E7%8C%AE%E8%B0%83%E7%A0%94/</guid>
+      <description></description>
+      
+    </item>
+    
+  </channel>
 </rss>

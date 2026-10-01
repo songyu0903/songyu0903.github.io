@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Research on songyu0903</title>
+    <link>https://songyu0903.github.io/en/research/</link>
+    <description>Recent content in Research on songyu0903</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2026 songyu0903</copyright>
+    <lastBuildDate>Thu, 01 Oct 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://songyu0903.github.io/en/research/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Portfolio Optimization</title>
+      <link>https://songyu0903.github.io/en/research/portfolio-optimization/</link>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/en/research/portfolio-optimization/</guid>
+      <description>From the classical mean-variance framework to robust and distributionally robust portfolio selection.</description>
+      
+    </item>
+    
+    <item>
+      <title>Thesis Proposal</title>
+      <link>https://songyu0903.github.io/en/research/thesis-proposal/</link>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://songyu0903.github.io/en/research/thesis-proposal/</guid>
+      <description>Conducting a systematic literature review and preparing the thesis proposal.</description>
+      
+    </item>
+    
+  </channel>
+</rss>
