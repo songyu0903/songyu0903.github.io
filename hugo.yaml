@@ -53,6 +53,7 @@ languages:
       calendar:
         title: "GitHub 活跃度"
         caption: "过去一年的 GitHub 提交记录，点击可查看主页"
+        fallback: "图表暂时无法加载，请点击前往 GitHub 查看动态"
       contact:
         content: "欢迎通过 GitHub 与我交流。"
         btnName: "GitHub"
@@ -105,6 +106,7 @@ languages:
       calendar:
         title: "GitHub Activity"
         caption: "My commit activity over the past year — click to visit my profile"
+        fallback: "Chart temporarily unavailable — click to view activity on GitHub"
       contact:
         content: "Feel free to reach out via GitHub."
         btnName: "GitHub"

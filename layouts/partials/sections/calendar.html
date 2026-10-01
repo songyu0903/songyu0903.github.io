@@ -10,7 +10,8 @@
                          alt="GitHub contribution calendar"
                          class="img-fluid"
                          loading="lazy"
-                         style="width: 100%; max-width: 850px;">
+                         style="width: 100%; max-width: 850px;"
+                         onerror="this.closest('div').innerHTML='<p>🖼️ {{ $cal.fallback | default "Chart unavailable — view activity on GitHub" }}</p>';">
                 </a>
                 {{ with $cal.caption }}<p class="mt-2 bg-transparent" style="font-size: 0.85rem; opacity: 0.75;">{{ . | markdownify }}</p>{{ end }}
             </div>
