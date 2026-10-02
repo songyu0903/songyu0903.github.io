@@ -5,18 +5,25 @@
     <link>https://songyu0903.github.io/tags/%E5%87%B8%E4%BC%98%E5%8C%96/</link>
     <description>Recent content in 凸优化 on songyu0903</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <copyright>© 2026 songyu0903</copyright>
+    <language>zh-cn</language>
     <lastBuildDate>Thu, 01 Oct 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://songyu0903.github.io/tags/%E5%87%B8%E4%BC%98%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
-    
     <item>
       <title>投资组合优化</title>
-      <link>https://songyu0903.github.io/research/portfolio-optimization/</link>
+      <link>https://songyu0903.github.io/posts/portfolio-optimization/</link>
       <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
       
-      <guid>https://songyu0903.github.io/research/portfolio-optimization/</guid>
-      <description>从经典均值—方差框架出发，关注鲁棒优化与分布鲁棒优化在现代组合选择中的应用。</description>
-      
+      <guid>https://songyu0903.github.io/posts/portfolio-optimization/</guid>
+      <description>&lt;p&gt;我的核心研究方向是&lt;strong&gt;投资组合优化&lt;/strong&gt;（Portfolio Optimization）。&lt;/p&gt;
+&lt;p&gt;一切始于 Markowitz (1952) 的均值—方差框架：在给定预期收益下最小化组合风险，&lt;/p&gt;
+&lt;p&gt;$$\min_{w}\ w^{\top}\Sigma w \quad \text{s.t.}\quad w^{\top}\mu \geq r_{\text{target}},\ \mathbf{1}^{\top}w = 1,\ w \geq 0$$&lt;/p&gt;
+&lt;p&gt;经典框架在实际应用中面临估计误差敏感、协方差矩阵病态等问题，我的关注点包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;鲁棒优化&lt;/strong&gt;（Robust Optimization）：在最坏情形扰动集下保证解的稳健性&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;分布鲁棒优化&lt;/strong&gt;（DRO）：在模糊概率集合（如 Wasserstein 球）上优化期望目标&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;参数不确定性&lt;/strong&gt;下的组合选择与正则化方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;相关代码与实验笔记会陆续整理到 &lt;a href=&#34;https://github.com/songyu0903&#34;&gt;GitHub&lt;/a&gt;。&lt;/p&gt;
+</description>
     </item>
     
   </channel>

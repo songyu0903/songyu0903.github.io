@@ -5,18 +5,71 @@
     <link>https://songyu0903.github.io/tags/%E6%8E%92%E7%89%88/</link>
     <description>Recent content in 排版 on songyu0903</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <copyright>© 2026 songyu0903</copyright>
+    <language>zh-cn</language>
     <lastBuildDate>Sun, 20 Sep 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://songyu0903.github.io/tags/%E6%8E%92%E7%89%88/index.xml" rel="self" type="application/rss+xml" />
-    
     <item>
       <title>数学公式排版心得：让公式既专业又好维护</title>
-      <link>https://songyu0903.github.io/latex/math-typesetting/</link>
+      <link>https://songyu0903.github.io/posts/math-typesetting/</link>
       <pubDate>Sun, 20 Sep 2026 00:00:00 +0000</pubDate>
       
-      <guid>https://songyu0903.github.io/latex/math-typesetting/</guid>
-      <description>amsmath 环境怎么选、编号与交叉引用的正确姿势、数学生必备的宏包清单。</description>
-      
+      <guid>https://songyu0903.github.io/posts/math-typesetting/</guid>
+      <description>&lt;p&gt;写论文 80% 的时间在和公式打交道，这几条是我踩坑后沉淀下来的规则。&lt;/p&gt;
+&lt;h2 id=&#34;环境选择别再用-&#34;&gt;环境选择：别再用 &lt;code&gt;$$...$$&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;$$&lt;/code&gt; 是 TeX 原语，LaTeX 里间距处理有缺陷。正确对应关系：&lt;/p&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;需求&lt;/th&gt;
+					&lt;th&gt;环境&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;单行无编号&lt;/td&gt;
+					&lt;td&gt;&lt;code&gt;\[ ... \]&lt;/code&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;单行带编号&lt;/td&gt;
+					&lt;td&gt;&lt;code&gt;equation&lt;/code&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;多行对齐&lt;/td&gt;
+					&lt;td&gt;&lt;code&gt;align&lt;/code&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;多行但不都编号&lt;/td&gt;
+					&lt;td&gt;&lt;code&gt;align&lt;/code&gt; + &lt;code&gt;\notag&lt;/code&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;一个主编号多个子式&lt;/td&gt;
+					&lt;td&gt;&lt;code&gt;subequations&lt;/code&gt; + &lt;code&gt;align&lt;/code&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;公式太长拆行&lt;/td&gt;
+					&lt;td&gt;&lt;code&gt;split&lt;/code&gt;（嵌在 equation 里）&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;交叉引用一劳永逸的组合&#34;&gt;交叉引用：一劳永逸的组合&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-latex&#34; data-lang=&#34;latex&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;\usepackage&lt;/span&gt;{amsmath, amssymb, mathtools}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;\usepackage&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;[capitalise]&lt;/span&gt;{cleveref}  &lt;span style=&#34;color:#75715e&#34;&gt;% 放在 hyperref 之后
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;% 正文中
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;如 &lt;span style=&#34;color:#66d9ef&#34;&gt;\cref&lt;/span&gt;{eq:mv} 所示……   &lt;span style=&#34;color:#75715e&#34;&gt;% 自动输出&amp;#34;式 (1)&amp;#34;，不用手写编号
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;cleveref&lt;/code&gt; 自动处理&amp;quot;式/图/表/定理&amp;quot;的前缀和编号，改结构时再也不用全文搜&amp;quot;(3)&amp;quot;。&lt;/p&gt;
+&lt;h2 id=&#34;自定义算子金融学论文高频需求&#34;&gt;自定义算子：金融学论文高频需求&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-latex&#34; data-lang=&#34;latex&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;\DeclareMathOperator&lt;/span&gt;{&lt;span style=&#34;color:#66d9ef&#34;&gt;\E&lt;/span&gt;}{&lt;span style=&#34;color:#66d9ef&#34;&gt;\mathbb&lt;/span&gt;{E}}      &lt;span style=&#34;color:#75715e&#34;&gt;% 期望
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;\DeclareMathOperator&lt;/span&gt;{&lt;span style=&#34;color:#66d9ef&#34;&gt;\Var&lt;/span&gt;}{Var}           &lt;span style=&#34;color:#75715e&#34;&gt;% 方差
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;\DeclareMathOperator&lt;/span&gt;{&lt;span style=&#34;color:#66d9ef&#34;&gt;\Cov&lt;/span&gt;}{Cov}           &lt;span style=&#34;color:#75715e&#34;&gt;% 协方差
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;\DeclareMathOperator*&lt;/span&gt;{&lt;span style=&#34;color:#66d9ef&#34;&gt;\argmin&lt;/span&gt;}{arg&lt;span style=&#34;color:#66d9ef&#34;&gt;\,&lt;/span&gt;min}  &lt;span style=&#34;color:#75715e&#34;&gt;% 带上下标位置的 argmin
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;效果对比：&lt;code&gt;\E[X]&lt;/code&gt; 输出 $\mathbb{E}$ 直立样式，而不是斜体连乘 $E$ 的歧义。&lt;/p&gt;
+&lt;h2 id=&#34;细节规范&#34;&gt;细节规范&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;微分 $\mathrm{d}x$ 用直立 d：&lt;code&gt;\mathrm{d}&lt;/code&gt;，不要直接打 &lt;code&gt;dx&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;向量矩阵统一用 &lt;code&gt;\bm{}&lt;/code&gt;（bm 宏包），别混用 &lt;code&gt;\mathbf&lt;/code&gt; 和 &lt;code&gt;\boldsymbol&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;大公式编号放不下时用 &lt;code&gt;\raisetag&lt;/code&gt; 微调，别硬缩小字号&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
   </channel>

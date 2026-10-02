@@ -5,18 +5,22 @@
     <link>https://songyu0903.github.io/tags/%E6%96%87%E7%8C%AE%E8%B0%83%E7%A0%94/</link>
     <description>Recent content in 文献调研 on songyu0903</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <copyright>© 2026 songyu0903</copyright>
+    <language>zh-cn</language>
     <lastBuildDate>Tue, 15 Sep 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://songyu0903.github.io/tags/%E6%96%87%E7%8C%AE%E8%B0%83%E7%A0%94/index.xml" rel="self" type="application/rss+xml" />
-    
     <item>
       <title>开题准备</title>
-      <link>https://songyu0903.github.io/research/thesis-proposal/</link>
+      <link>https://songyu0903.github.io/posts/thesis-proposal/</link>
       <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
       
-      <guid>https://songyu0903.github.io/research/thesis-proposal/</guid>
-      <description>系统性文献调研与开题报告撰写，工作论文准备中。</description>
-      
+      <guid>https://songyu0903.github.io/posts/thesis-proposal/</guid>
+      <description>&lt;p&gt;当前处于开题前的&lt;strong&gt;文献调研阶段&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;系统梳理均值—方差分析到鲁棒/分布鲁棒组合优化的发展脉络&lt;/li&gt;
+&lt;li&gt;整理经典文献与近年前沿工作，构建文献综述框架&lt;/li&gt;
+&lt;li&gt;撰写开题报告，工作论文准备中&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;工具链：LaTeX（写作）、Python / MATLAB（数值实验）、Obsidian（文献笔记）。&lt;/p&gt;
+</description>
     </item>
     
   </channel>

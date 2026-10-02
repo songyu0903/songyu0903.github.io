@@ -6,17 +6,21 @@
     <description>Recent content in Literature Review on songyu0903</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>© 2026 songyu0903</copyright>
     <lastBuildDate>Tue, 15 Sep 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://songyu0903.github.io/en/tags/literature-review/index.xml" rel="self" type="application/rss+xml" />
-    
     <item>
       <title>Thesis Proposal</title>
-      <link>https://songyu0903.github.io/en/research/thesis-proposal/</link>
+      <link>https://songyu0903.github.io/en/posts/thesis-proposal/</link>
       <pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>
       
-      <guid>https://songyu0903.github.io/en/research/thesis-proposal/</guid>
-      <description>Conducting a systematic literature review and preparing the thesis proposal.</description>
-      
+      <guid>https://songyu0903.github.io/en/posts/thesis-proposal/</guid>
+      <description>&lt;p&gt;I am currently in the &lt;strong&gt;literature review stage&lt;/strong&gt; before my thesis proposal:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Systematically tracing the development from mean-variance analysis to robust / distributionally robust portfolio optimization&lt;/li&gt;
+&lt;li&gt;Organizing classical papers and recent advances into a review framework&lt;/li&gt;
+&lt;li&gt;Drafting the thesis proposal; working papers in preparation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Toolchain: LaTeX (writing), Python / MATLAB (numerical experiments), Obsidian (literature notes).&lt;/p&gt;
+</description>
     </item>
     
   </channel>

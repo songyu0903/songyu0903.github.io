@@ -1,1166 +1,201 @@
-<!doctype html>
-<html
-  lang="zh-CN"
-  dir="ltr"
-  class="scroll-smooth"
-  data-default-appearance="light"
-  data-auto-appearance="true"><head>
-  <meta charset="utf-8">
-  
-    <meta http-equiv="content-language" content="zh-CN">
-  
+<!DOCTYPE html>
+<html lang="zh-cn" style="font-size: 105%">
+
+<head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="theme-color">
+
+  
+  <meta name="author" content="songyu0903">
 
   
   
-    <title>鲁棒优化 &middot; songyu0903</title>
-    <meta name="title" content="鲁棒优化 &middot; songyu0903">
+  <meta name="description" content="数学专业研究生 · 投资组合优化方向">
   
 
   
+  <link rel="apple-touch-icon" sizes="180x180" href="https://songyu0903.github.io//images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://songyu0903.github.io//images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://songyu0903.github.io//images/favicon-16x16.png">
+
   
   
-  
-  
-    
-  
-    
-  
-    
-  
-  
-    <meta name="description" content="数学专业研究生 · 投资组合优化">
-  
-  
-  
-  
-  <link rel="canonical" href="https://songyu0903.github.io/tags/%E9%B2%81%E6%A3%92%E4%BC%98%E5%8C%96/">
-  
-  
-    
-      <link rel="alternate" type="application/rss+xml" href="/tags/%E9%B2%81%E6%A3%92%E4%BC%98%E5%8C%96/index.xml" title="songyu0903" />
-  
+  <meta name="keywords" content='hugo latex theme blog texify texify2 texify3 michael neuper'>
   
 
   
   
-    <meta name="author" content="songyu0903">
+  <link rel="stylesheet" href='/katex/katex.min.css'>
+<script defer defer src='/katex/katex.min.js'></script>
+<script defer src='/katex/contrib/auto-render.min.js'></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          throwOnError : false
+        });
+    });
+</script>
   
+
   
-    
-      
-        
-          <link href="https://github.com/songyu0903" rel="me">
-        
-      
-    
-  
+  <script data-name="BMC-Widget" 
+    data-cfasync="true" 
+    src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" 
+    data-id="michaelneuper" 
+    data-description="Like what I do? Buy me a coffee!" 
+    data-message="" 
+    data-color="#d79921" 
+    data-position="Right" 
+    data-x_margin="18" 
+    data-y_margin="18"
+    crossorigin="anonymous">
+</script>
+
 
   
   <meta property="og:url" content="https://songyu0903.github.io/tags/%E9%B2%81%E6%A3%92%E4%BC%98%E5%8C%96/">
 	<meta property="og:site_name" content="songyu0903">
 	<meta property="og:title" content="鲁棒优化">
-	<meta property="og:description" content="数学专业研究生 · 投资组合优化">
-	<meta property="og:locale" content="zh_CN">
+	<meta property="og:description" content="数学专业研究生 · 投资组合优化方向">
+	<meta property="og:locale" content="zh_cn">
 	<meta property="og:type" content="website">
 
+
+  
+  <link rel="canonical" href="https://songyu0903.github.io/tags/%E9%B2%81%E6%A3%92%E4%BC%98%E5%8C%96/">
+
+  
+  
+  <link rel="alternate" type="application/rss+xml" href="https://songyu0903.github.io/tags/%E9%B2%81%E6%A3%92%E4%BC%98%E5%8C%96/index.xml" title="songyu0903" />
+  
+  
+	<meta itemprop="name" content="鲁棒优化">
+	<meta itemprop="description" content="数学专业研究生 · 投资组合优化方向">
+	<meta itemprop="datePublished" content="2026-10-01T00:00:00+00:00">
+	<meta itemprop="dateModified" content="2026-10-01T00:00:00+00:00">
+
+  
+  
+    <link rel="stylesheet" href="/css/compiled/common.min.0535ea1bd10c220dd0b433245518579f1f17174fc7bffbece54871b9aae1b88f.css" integrity="sha256-BTXqG9EMIg3QtDMkVRhXnx8XF0/Hv/vs5UhxuarhuI8=" crossorigin="anonymous">
+  
+
+  
+    <link rel="stylesheet" href="/css/compiled/content.min.90154405494b216d851cfbd952d65d98b15bacebe13d65e928e30d78a4457f98.css" integrity="sha256-kBVEBUlLIW2FHPvZUtZdmLFbrOvhPWXpKOMNeKRFf5g=" crossorigin="anonymous">
+  
+
+  
+  
+  <title>鲁棒优化 - songyu0903</title>
+  
+
+  
   
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:title" content="鲁棒优化">
-	<meta name="twitter:description" content="数学专业研究生 · 投资组合优化">
+	<meta name="twitter:description" content="数学专业研究生 · 投资组合优化方向">
 
-  
-  
-  
-  
-    
-      
-    
-  
-    
-      
-    
-  
-    
-      
-    
-  
-  
-    
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-    
-  
-  
-  <link
-    type="text/css"
-    rel="stylesheet"
-    href="/css/main.bundle.min.3efa2aad1d2d94e2aff120cbc38955b60765d591512a48edeb6995a83257ea218ae76508e5f550a6767ed778215b3ae81389bb11f15ff35651d40dd7f2891042.css"
-    integrity="sha512-PvoqrR0tlOKv8SDLw4lVtgdl1ZFRKkjt62mVqDJX6iGK52UI5fVQpnZ&#43;13ghWzroE4m7EfFf81ZR1A3X8okQQg==">
-
-  
-  
-  <script
-    type="text/javascript"
-    src="/js/appearance.min.11183536302aa30e374452803c0154673009b5a4995c7f6559d1c935544cc591b599a5f2adfaeda41e1cc865bd62bdace9b0672a75294ce49d185f0f82b98cbe.js"
-    integrity="sha512-ERg1NjAqow43RFKAPAFUZzAJtaSZXH9lWdHJNVRMxZG1maXyrfrtpB4cyGW9Yr2s6bBnKnUpTOSdGF8PgrmMvg=="></script>
-  
-
-
-  
-  
-  
-  
-  
-  
-    
-    <script defer src="/lib/zoom/zoom.min.umd.b4b722fcb5d42f34f52b30a92f3521b69f403ca9d96d0d6179eb537cb870f5d83fdf1fe836688d95d5c99fefbda4170487711006e56051fa67ea00da10521721.js" integrity="sha512-tLci/LXULzT1KzCpLzUhtp9APKnZbQ1heetTfLhw9dg/3x/oNmiNldXJn&#43;&#43;9pBcEh3EQBuVgUfpn6gDaEFIXIQ=="></script>
-    
-    <script defer src="/js/medium-zoom.7f76d937fbb793f3703fedc60ee1e6345259cf2ada403d1876b806fffeaeb2ba6fc594eaccad75c96d5d2425e9fb833748bf1221b4d90d3cf78cf073e104f814.js" integrity="sha512-f3bZN/u3k/NwP&#43;3GDuHmNFJZzyraQD0YdrgG//6usrpvxZTqzK11yW1dJCXp&#43;4M3SL8SIbTZDTz3jPBz4QT4FA=="></script>
-  
-  
-  
-  
-
-  
-  
-  
-    
-  
-  
-    
-    
-    
-  
-  
-    
-  
-  
-  
-  
-  
-  
-  
-    
-    <script
-      defer
-      type="text/javascript"
-      id="script-bundle"
-      src="/js/main.bundle.min.eee20202bf66badfd33b8ccdfeca68b4361999a7c90ccff82ab31d8f4dafdc8e09848344e28bd1bd3cd80fa63d4e109fede339f1decbc06cfa159ba3e479919e.js"
-      integrity="sha512-7uICAr9mut/TO4zN/spotDYZmafJDM/4KrMdj02v3I4JhINE4ovRvTzYD6Y9ThCf7eM58d7LwGz6FZuj5HmRng=="
-      data-copy="复制"
-      data-copied="已复制"></script>
-  
-
-  
-  
-
-
-
-
-
-
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-  
-
-  
-  <script type="application/ld+json">
-  [{
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "articleSection": "Tags",
-    "name": "鲁棒优化",
-    "headline": "鲁棒优化",
-    
-    "inLanguage": "zh-CN",
-    "url" : "https://songyu0903.github.io/tags/%E9%B2%81%E6%A3%92%E4%BC%98%E5%8C%96/",
-    "author" : {
-      "@type": "Person",
-      "name": "songyu0903",
-      "sameAs": ["https://github.com/songyu0903"]
-    },
-    "copyrightYear": "2026",
-    "dateCreated": "2026-10-01T00:00:00\u002b00:00",
-    "datePublished": "2026-10-01T00:00:00\u002b00:00",
-    
-    "dateModified": "2026-10-01T00:00:00\u002b00:00",
-    
-    
-    
-    "mainEntityOfPage": "https://songyu0903.github.io/tags/%E9%B2%81%E6%A3%92%E4%BC%98%E5%8C%96/",
-    "wordCount":  0 
-  }]
-  </script>
-
-
-
-  
-  
-    
-
-
-
-
-  
-
-  
-  
-    
-<style id="fx-style" disabled>
-  #fx-particles {
-    position: fixed;
-    inset: 0;
-    z-index: 40;
-    pointer-events: none;
-  }
-  .tw-cursor {
-    display: inline-block;
-    width: 2px;
-    background: currentColor;
-    margin-left: 2px;
-    animation: tw-blink 0.9s steps(1) infinite;
-  }
-  @keyframes tw-blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-
-   
-  .fx-cards {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1rem;
-    margin-top: 1.5rem;
-    text-align: left;
-  }
-  @media (max-width: 1024px) {
-    .fx-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  }
-  @media (max-width: 640px) {
-    .fx-cards { grid-template-columns: 1fr; }
-  }
-  .fx-card {
-    position: relative;
-    padding: 1.2rem 1.15rem;
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.55);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    backdrop-filter: blur(16px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-    animation: fx-card-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-    animation-delay: var(--d, 0s);
-    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-                box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  html.dark .fx-card {
-    background: rgba(18, 40, 66, 0.55);
-    border: 1px solid rgba(120, 190, 255, 0.16);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
-  }
-  .fx-card:hover {
-    transform: translateY(-6px) scale(1.015);
-    box-shadow: 0 16px 40px rgba(9, 124, 224, 0.18);
-  }
-  html.dark .fx-card:hover {
-    box-shadow: 0 16px 40px rgba(24, 144, 245, 0.28);
-  }
-  .fx-card h3 {
-    margin: 0 0 0.45rem;
-    font-size: 1.02rem;
-    font-weight: 700;
-  }
-  .fx-card p {
-    margin: 0 0 0.35rem;
-    font-size: 0.82rem;
-    line-height: 1.6;
-  }
-  .fx-card-icon {
-    font-size: 1.4rem;
-    line-height: 1;
-    margin-bottom: 0.45rem;
-  }
-  @media (min-width: 641px) {
-    .fx-card { display: flex; flex-direction: column; height: 100%; }
-    .fx-card-link { margin-top: auto; }
-  }
-  .fx-card-link {
-    font-weight: 600;
-    text-decoration: none;
-    color: rgb(var(--color-primary-600));
-  }
-  html.dark .fx-card-link {
-    color: rgb(var(--color-primary-400));
-  }
-  @keyframes fx-card-in {
-    from { opacity: 0; transform: translateY(24px) scale(0.98); }
-    to   { opacity: 1; transform: translateY(0) scale(1); }
-  }
-</style>
-<script src="/js/particles.min.js" defer></script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  
-  var isHome = document.body.classList.contains("home") ||
-               !!document.querySelector("article .prose") &&
-               !!document.querySelector('article header h2') &&
-               !document.querySelector(".breadcrumbs, nav[aria-label='breadcrumb']");
-  
-  var path = window.location.pathname;
-  isHome = (path === "/" || path === "/index.html" || path === "/en/" || path === "/en/index.html");
-  if (!isHome) return;
-
   
-  var st = document.getElementById("fx-style");
-  if (st) st.disabled = false;
 
-  
-  var holder = document.createElement("div");
-  holder.id = "fx-particles";
-  document.body.appendChild(holder);
-  if (window.particlesJS) {
-    particlesJS("fx-particles", {
-      particles: {
-        number: { value: 45, density: { enable: true, value_area: 900 } },
-        color: { value: "#3e8ed0" },
-        shape: { type: "circle" },
-        opacity: { value: 0.32, random: true },
-        size: { value: 2.5, random: true },
-        line_linked: {
-          enable: true, distance: 130,
-          color: "#3e8ed0", opacity: 0.16, width: 1
-        },
-        move: {
-          enable: true, speed: 0.8, direction: "none",
-          random: true, straight: false, out_mode: "out"
-        }
-      },
-      interactivity: {
-        detect_on: "window",
-        events: {
-          onhover: { enable: true, mode: "grab" },
-          onclick: { enable: false },
-          resize: true
-        },
-        modes: { grab: { distance: 160, line_linked: { opacity: 0.35 } } }
-      },
-      retina_detect: true
-    });
-  }
-
-  
-  var el = document.querySelector("article header h2");
-  if (el) {
-    var text = el.textContent.trim();
-    if (text) {
-      var textSpan = document.createElement("span");
-      var cursor = document.createElement("span");
-      cursor.className = "tw-cursor";
-      cursor.innerHTML = "&nbsp;";
-      el.textContent = "";
-      el.appendChild(textSpan);
-      el.appendChild(cursor);
-      var i = 0;
-      (function type() {
-        if (i < text.length) {
-          textSpan.textContent += text.charAt(i);
-          i++;
-          setTimeout(type, 90);
-        } else {
-          setTimeout(function () { cursor.style.display = "none"; }, 3000);
-        }
-      })();
-    }
-  }
-});
-</script>
-
-  
+  <link rel="stylesheet" href="/css/compiled/list.min.4fe2666ede8df111bb84510ced25268bc0528ba415ba5da93fe8ff4bd4e937a9.css" integrity="sha256-T&#43;Jmbt6N8RG7hFEM7SUmi8BSi6QVul2pP&#43;j/S9TpN6k=" crossorigin="anonymous">
 
-  
-  
 
-  
-  
 </head>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <body class="flex flex-col h-screen m-auto leading-7 max-w-7xl px-6 sm:px-14 md:px-24 lg:px-32 text-lg bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral bf-scrollbar">
-    <div id="the-top" class="absolute flex self-center">
-      <a
-        class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600"
-        href="#main-content">
-        <span class="font-bold text-primary-600 pe-2 dark:text-primary-400">&darr;</span>
-        跳过正文
-      </a>
-    </div>
-    <header>
-      
-      
-        <div class="main-menu flex items-center w-full gap-2 p-1 pl-0">
-  
-  
-    <a href="/" class="text-base font-medium truncate min-w-0 shrink">
-      songyu0903
-    </a>
-  
-  <div class="flex items-center ms-auto">
-    <div class="hidden md:flex">
-      <nav aria-label="" class="flex items-center gap-x-5 h-12">
-  
+<body>
+  <div id="wrapper">
     
-      
-  
-    <a
-      href="/"
-      
-      class="flex items-center bf-icon-color-hover"
-      aria-label="主页"
-      title="主页">
-      
-      
-        <span class="text-sm font-medium break-normal">
-          主页
-        </span>
-      
-    </a>
-  
 
-    
-      
-  
-    <a
-      href="/research/"
-      
-      class="flex items-center bf-icon-color-hover"
-      aria-label="研究方向"
-      title="研究方向">
-      
-      
-        <span class="text-sm font-medium break-normal">
-          研究方向
-        </span>
-      
-    </a>
-  
 
-    
-      
-  
-    <a
-      href="/latex/"
-      
-      class="flex items-center bf-icon-color-hover"
-      aria-label="LaTeX 心得"
-      title="LaTeX 心得">
-      
-      
-        <span class="text-sm font-medium break-normal">
-          LaTeX 心得
-        </span>
-      
-    </a>
-  
-
-    
-      
-  
-    <a
-      href="https://github.com/songyu0903"
-      
-        target="_blank"
-      
-      class="flex items-center bf-icon-color-hover"
-      aria-label="GitHub"
-      title="">
-      
-      
-        <span class="text-sm font-medium break-normal">
-          GitHub
-        </span>
-      
-    </a>
-  
-
-    
-  
-
-  
-
-  
-
-  
-    <div class="flex items-center">
-      <button
-        id="appearance-switcher"
-        aria-label="切换为深色模式"
-        type="button"
-        class="text-sm bf-icon-color-hover"
-        title="切换为深色模式">
-        <div class="flex items-center justify-center dark:hidden">
-          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
-</span>
-        </div>
-        <div class="items-center justify-center hidden dark:flex">
-          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
-</span>
-        </div>
-      </button>
-    </div>
-  
-
-  
-    <button
-      id="search-button"
-      aria-label="搜索 (/)"
-      class="flex items-center gap-2 rounded-lg border bf-border-color bf-border-color-hover bg-neutral-100/50 px-2 py-1 text-sm text-neutral-500 transition-colors hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral-400 dark:hover:text-primary-400"
-      title="搜索 (/)">
-      <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
-</span>
-      <kbd
-        id="search-shortcut-hint"
-        class="pointer-events-none font-sans text-xs text-neutral-500 dark:text-neutral-400"
-        aria-hidden="true">
-        ⌘K
-      </kbd>
+<header id="header">
+  <h1>
+    <a href="https://songyu0903.github.io/">songyu0903</a>
+    <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle theme">
+        <svg width="2rem" height="2rem" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 496">
+        <path fill="currentColor" d="M8,256C8,393,119,504,256,504S504,393,504,256,393,8,256,8,8,119,8,256ZM256,440V72a184,184,0,0,1,0,368Z" transform="translate(-8 -8)"/>
+        </svg>
     </button>
-  
-</nav>
+  </h1>
 
-
-
-    </div>
-    <div class="flex md:hidden">
-      
-<div class="mobile-header-row relative flex items-center h-14 gap-4">
-  
+  <nav>
     
-
-  
-
-  
-    <button
-      id="appearance-switcher-mobile"
-      type="button"
-      aria-label="切换为深色模式"
-      title="切换为深色模式"
-      class="flex items-center justify-center text-neutral-900 hover:text-primary-600 dark:text-neutral-200 dark:hover:text-primary-400">
-      <div class="dark:hidden">
-        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
-</span>
-      </div>
-      <div class="hidden dark:block">
-        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
-</span>
-      </div>
-    </button>
-  
-
-  
-    <button
-      id="search-button-mobile"
-      aria-label="搜索 (/)"
-      class="flex items-center justify-center bf-icon-color-hover"
-      title="搜索 (/)">
-      <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
-</span>
-    </button>
-  
-
-  
-    <input type="checkbox" id="mobile-menu-toggle" autocomplete="off" class="hidden peer">
-    <label
-      for="mobile-menu-toggle"
-      tabindex="0"
-      role="button"
-      aria-expanded="false"
-      aria-controls="mobile-menu-dialog"
-      aria-label=""
-      class="flex items-center justify-center cursor-pointer bf-icon-color-hover">
-      <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
-</span>
-    </label>
-
-    <div
-      id="mobile-menu-dialog"
-      role="dialog"
-      aria-modal="true"
-      aria-label=""
-      style="scrollbar-gutter: stable;"
-      class="z-50 invisible overflow-y-auto opacity-0 transition-[opacity,visibility] duration-300 peer-checked:visible peer-checked:opacity-100
+    <span class="nav-bar-item">
       
-        fixed inset-0 px-6 py-20 bg-neutral-50/97 dark:bg-neutral-900/99
-      
-      bf-scrollbar">
-      <label
-        for="mobile-menu-toggle"
-        tabindex="0"
-        role="button"
-        aria-expanded="false"
-        aria-controls="mobile-menu-dialog"
-        class="fixed end-8 top-5 z-50 h-12 w-12 rounded-full flex items-center justify-center cursor-pointer select-none bf-icon-color-hover border bf-border-color bf-border-color-hover bg-neutral-50 dark:bg-neutral-900">
-        <span class="sr-only"></span>
-        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
-</span>
-      </label>
-      <nav
-        aria-label=""
-        class="mx-auto max-w-md space-y-6">
-        
-  
+      <a class="link" href="/posts/">Posts</a>
+    </span>
     
-    <div class="px-2">
-      <div class="flex items-center gap-4">
-        <a
-          href="/"
-          aria-label="主页"
-          
-          class="flex grow items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
-          
-          <span title="主页" class="text-2xl font-bold tracking-tight">
-            主页
-          </span>
+    <span class="nav-bar-item">
+      
+      <a class="link" href="/categories/">Categories</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      
+      <a class="link" href="/tags/">Tags</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      
+      <a class="link" href="https://github.com/songyu0903">GitHub</a>
+    </span>
+    
+    
+  </nav>
+</header>
+<hr class="head-rule"></hr>
+    
+<main id="main" class="archive">
+    
+  
+  
+  <div class="post-group">
+    <h3>October 2026</h3>
+    <ul>
+      
+      <li>
+        <a class="post-link" href="/posts/portfolio-optimization/">
+          <span>投资组合优化</span>
+          <time>1 October 2026</time>
         </a>
-        
-      </div>
-
+      </li>
       
-    </div>
-  
-    
-    <div class="px-2">
-      <div class="flex items-center gap-4">
-        <a
-          href="/research/"
-          aria-label="研究方向"
-          
-          class="flex grow items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
-          
-          <span title="研究方向" class="text-2xl font-bold tracking-tight">
-            研究方向
-          </span>
-        </a>
-        
-      </div>
-
-      
-    </div>
-  
-    
-    <div class="px-2">
-      <div class="flex items-center gap-4">
-        <a
-          href="/latex/"
-          aria-label="LaTeX 心得"
-          
-          class="flex grow items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
-          
-          <span title="LaTeX 心得" class="text-2xl font-bold tracking-tight">
-            LaTeX 心得
-          </span>
-        </a>
-        
-      </div>
-
-      
-    </div>
-  
-    
-    <div class="px-2">
-      <div class="flex items-center gap-4">
-        <a
-          href="https://github.com/songyu0903"
-          aria-label="GitHub"
-          
-            target="_blank"
-          
-          class="flex grow items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
-          
-          <span title="" class="text-2xl font-bold tracking-tight">
-            GitHub
-          </span>
-        </a>
-        
-      </div>
-
-      
-    </div>
-  
-
-        
-  
-
-        
-  
-
-      </nav>
-    </div>
-  
-</div>
-
-
-
-
-
-
-
-    </div>
-  </div>
-</div>
-
-
-
-
-
-      
-    </header>
-    <div class="relative flex flex-col grow">
-      <main id="main-content" class="grow">
-        
-  
-  
-  <header class="mt-5">
-    
-    <h1 class="mt-5 text-4xl font-extrabold text-neutral-900 dark:text-neutral">鲁棒优化</h1>
-    <div class="mt-1 mb-2 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
-      
-
-
-
-
-
-  
-  
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  <div class="flex flex-row flex-wrap items-center">
-    
-    
-  </div>
-
-
-    </div>
-  </header>
-
-  <section class="flex flex-col max-w-full mt-0 mb-5 prose dark:prose-invert lg:flex-row">
-    
-  </section>
-
-  
-    
-    
-    
-
-    
-
-      <section class="space-y-10 w-full">
-        
-          
-          
-            
-
-
-
-
-
-
-
-
-  
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-    
-
-    
-    
-      
-      
-        
-      
-        
-      
-        
-      
-    
-
-    
-    
-      
-      
-    
-
-    
-    
-      
-    
-  
-
-
-
-<article class="article-link--simple group flex flex-col md:flex-row relative">
-  
-  <div class=" mt-3 md:mt-0">
-    <header class="items-center text-start text-xl font-semibold">
-      <a
-        
-          href="/research/portfolio-optimization/"
-        
-        class="not-prose before:absolute before:inset-0 decoration-primary-500 dark:text-neutral text-xl font-bold text-neutral-800 hover:underline hover:underline-offset-2">
-        <h2>
-          投资组合优化
-          
-        </h2>
-      </a>
-      
-      
-    </header>
-    <div class="text-sm text-neutral-500 dark:text-neutral-400">
-      
-
-
-
-
-
-
-
-  
-
-  
-  
-  
-    
-  
-
-  
-
-  
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  <div class="flex flex-row flex-wrap items-center">
-    
-    
-      <time datetime="2026-10-01T00:00:00&#43;00:00">2026年10月1日</time>
-    
-
-    
-    
-  </div>
-
-  
-
-  
-  
-    <div class="flex flex-row flex-wrap items-center">
-      
-        
-      
-        
-      
-        
-      
-        
-          
-            
-              
-                <a class="relative mt-[0.5rem] me-2" href="/tags/%E5%87%B8%E4%BC%98%E5%8C%96/">
-                  <span class="flex cursor-pointer">
-  
-  
-  
-  
-    <span
-      class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-  
-    凸优化
-  </span>
-</span>
-
-                </a>
-              
-            
-          
-            
-              
-                <a class="relative mt-[0.5rem] me-2" href="/tags/%E9%B2%81%E6%A3%92%E4%BC%98%E5%8C%96/">
-                  <span class="flex cursor-pointer">
-  
-  
-  
-  
-    <span
-      class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-  
-    鲁棒优化
-  </span>
-</span>
-
-                </a>
-              
-            
-          
-            
-              
-                <a class="relative mt-[0.5rem] me-2" href="/tags/%E9%87%8F%E5%8C%96%E9%87%91%E8%9E%8D/">
-                  <span class="flex cursor-pointer">
-  
-  
-  
-  
-    <span
-      class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-  
-    量化金融
-  </span>
-</span>
-
-                </a>
-              
-            
-          
-        
-      
-    </div>
-  
-
-
-    </div>
-    
-      <div class="article-link__summary prose dark:prose-invert max-w-fit mt-1 line-clamp-3">
-        从经典均值—方差框架出发，关注鲁棒优化与分布鲁棒优化在现代组合选择中的应用。
-      </div>
-    
-  </div>
-  <div class="px-6 pt-4 pb-2"></div>
-</article>
-
-          
-        
-      </section>
-    
-
-  
-
-  
-
-        
-
-
-  
-
-
-
-
-
-
-<div
-  id="scroll-to-top"
-  class="fixed bottom-6 end-6 z-50 transform translate-y-4 opacity-0 duration-200">
-  <a
-    href="#the-top"
-    class="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
-    aria-label="返回顶部"
-    title="返回顶部">
-    &uarr;
-  </a>
-</div>
-
-      </main><footer id="site-footer" class="py-10 print:hidden">
-  
-  
-    
-  
-  <div class="flex items-center justify-between">
-    
-    
-      <p class="text-sm text-neutral-500 dark:text-neutral-400">
-          &copy;
-          2026
-          songyu0903
-      </p>
-    
-
-    
-    
-      <p class="text-xs text-neutral-500 dark:text-neutral-400">
-        
-        
-        由 <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
-          href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
-          href="https://blowfish.page/" target="_blank" rel="noopener noreferrer">Blowfish</a> 强力驱动
-      </p>
-    
+    </ul>
   </div>
   
-  
+  <div class="post-group">
+    <h3>...</h3>
+  </div>
+</main>
+
+    <footer id="footer">
+  <div>
+    <span>© songyu0903 · Powered by <a class="link" href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a> · Theme <a class="link" href="https://github.com/michaelneuper/hugo-texify3" target="_blank" rel="noopener">TeXify3</a></span>
+  </div>
+  <div>
+    <span>Copyright © 2026 songyu0903</span>
+  </div>
 </footer>
-<div
-  id="search-wrapper"
-  role="dialog"
-  aria-modal="true"
-  aria-label="搜索"
-  class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh] z-500"
-  data-url="/">
-  <div
-    id="search-modal"
-    class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800">
-    <header class="relative z-10 flex items-center justify-between flex-none px-2">
-      <form class="flex items-center flex-auto min-w-0">
-        <div class="flex items-center justify-center w-8 h-8 text-neutral-400">
-          <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
-</span>
-        </div>
-        <input
-          type="search"
-          id="search-query"
-          aria-label="搜索"
-          class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent"
-          placeholder="搜索"
-          tabindex="0">
-      </form>
-      <button
-        id="close-search-button"
-        class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
-        title="关闭 (Esc)">
-        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
-</span>
-      </button>
-    </header>
-    <section class="flex-auto px-2 overflow-auto">
-      <ul id="search-results">
-        
-      </ul>
-    </section>
-  </div>
-</div>
 
-    </div>
-    
-    
-  </body>
+  </div>
+
   
+  <script src='https://songyu0903.github.io/js/script.js' defer></script>
+
+  
+  
+
+  
+  
+
+  
+  
+
+</body>
+
 </html>

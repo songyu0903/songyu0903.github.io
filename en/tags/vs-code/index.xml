@@ -6,17 +6,37 @@
     <description>Recent content in VS Code on songyu0903</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>© 2026 songyu0903</copyright>
     <lastBuildDate>Thu, 01 Oct 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://songyu0903.github.io/en/tags/vs-code/index.xml" rel="self" type="application/rss+xml" />
-    
     <item>
       <title>LaTeX Setup: TeX Live &#43; VS Code Workflow</title>
-      <link>https://songyu0903.github.io/en/latex/vscode-setup/</link>
+      <link>https://songyu0903.github.io/en/posts/vscode-setup/</link>
       <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
       
-      <guid>https://songyu0903.github.io/en/latex/vscode-setup/</guid>
-      <description>Ditch the bloated dedicated editors — a lightweight, efficient local writing environment with TeX Live + VS Code + LaTeX Workshop.</description>
-      
+      <guid>https://songyu0903.github.io/en/posts/vscode-setup/</guid>
+      <description>&lt;p&gt;Many tutorials still recommend TeXstudio or WinEdt, but &lt;strong&gt;VS Code + LaTeX Workshop&lt;/strong&gt; is currently the best experience: one editor for code, notes, and papers.&lt;/p&gt;
+&lt;h2 id=&#34;the-setup&#34;&gt;The Setup&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;TeX Live&lt;/strong&gt; (distribution): cross-platform with complete packages&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;VS Code + LaTeX Workshop extension&lt;/strong&gt;: compilation, preview, and navigation in one place&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;essential-settings&#34;&gt;Essential Settings&lt;/h2&gt;
+&lt;p&gt;Add to VS Code &lt;code&gt;settings.json&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;latex-workshop.latex.recipe.default&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;latexmk (xelatex)&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;latex-workshop.latex.autoBuild.run&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;onSave&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;latex-workshop.view.pdf.viewer&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;tab&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;latex-workshop.latex.clean.subfolder.enabled&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;latex-workshop.latexindent.path&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;latexindent&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;three-tips&#34;&gt;Three Tips&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Chinese documents&lt;/strong&gt;: use &lt;code&gt;xelatex&lt;/code&gt; + the &lt;code&gt;ctex&lt;/code&gt; package; fighting CJK with pdflatex is a minefield&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SyncTeX forward/backward search&lt;/strong&gt;: &lt;code&gt;Ctrl+Click&lt;/code&gt; jumps between source and PDF — a lifesaver when editing long formulas&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Auto-clean auxiliary files&lt;/strong&gt;: enable &lt;code&gt;clean.subfolder&lt;/code&gt;, otherwise &lt;code&gt;.aux/.log/.out&lt;/code&gt; files clutter your directory&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;overleaf-or-local&#34;&gt;Overleaf or Local?&lt;/h2&gt;
+&lt;p&gt;Overleaf for collaboration (real-time co-editing is unbeatable), local for solo writing (fast compilation, offline, Git version control). My approach: &lt;strong&gt;local by default, push to Overleaf for final review with collaborators&lt;/strong&gt;.&lt;/p&gt;
+</description>
     </item>
     
   </channel>
