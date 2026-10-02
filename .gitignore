@@ -2,3 +2,6 @@ public/
 resources/
 .hugo_build.lock
 public-gh/
+
+# 主题不入库（2500 个文件），用 README 里的命令获取即可
+themes/

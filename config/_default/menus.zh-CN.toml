@@ -1,0 +1,19 @@
+[[menus.main]]
+  name = "主页"
+  pageRef = "/"
+  weight = 10
+
+[[menus.main]]
+  name = "研究方向"
+  pageRef = "research"
+  weight = 20
+
+[[menus.main]]
+  name = "LaTeX 心得"
+  pageRef = "latex"
+  weight = 25
+
+[[menus.main]]
+  name = "GitHub"
+  url = "https://github.com/songyu0903"
+  weight = 30
