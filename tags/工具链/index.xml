@@ -1,43 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>工具链 on songyu0903</title>
-    <link>https://songyu0903.github.io/tags/%E5%B7%A5%E5%85%B7%E9%93%BE/</link>
-    <description>Recent content in 工具链 on songyu0903</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Thu, 01 Oct 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://songyu0903.github.io/tags/%E5%B7%A5%E5%85%B7%E9%93%BE/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>LaTeX 环境配置：TeX Live &#43; VS Code 工作流</title>
-      <link>https://songyu0903.github.io/posts/vscode-setup/</link>
-      <pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://songyu0903.github.io/posts/vscode-setup/</guid>
-      <description>&lt;p&gt;网上很多教程还在推荐 TeXstudio、WinEdt 这类专用编辑器，其实 &lt;strong&gt;VS Code + LaTeX Workshop&lt;/strong&gt; 才是目前体验最好的方案：一个编辑器搞定代码、笔记、论文三件事。&lt;/p&gt;
-&lt;h2 id=&#34;安装组合&#34;&gt;安装组合&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>工具链 | songyu0903</title><link>https://songyu0903.github.io/tags/%E5%B7%A5%E5%85%B7%E9%93%BE/</link><atom:link href="https://songyu0903.github.io/tags/%E5%B7%A5%E5%85%B7%E9%93%BE/index.xml" rel="self" type="application/rss+xml"/><description>工具链</description><generator>HugoBlox Kit (https://hugoblox.com)</generator><language>zh-Hans</language><lastBuildDate>Thu, 01 Oct 2026 00:00:00 +0000</lastBuildDate><image><url>https://songyu0903.github.io/media/icon_hu_cd51c91342a84ed6.png</url><title>工具链</title><link>https://songyu0903.github.io/tags/%E5%B7%A5%E5%85%B7%E9%93%BE/</link></image><item><title>LaTeX 环境配置：TeX Live + VS Code 工作流</title><link>https://songyu0903.github.io/blog/vscode-setup/</link><pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/blog/vscode-setup/</guid><description>&lt;p&gt;网上很多教程还在推荐 TeXstudio、WinEdt 这类专用编辑器，其实 &lt;strong&gt;VS Code + LaTeX Workshop&lt;/strong&gt; 才是目前体验最好的方案：一个编辑器搞定代码、笔记、论文三件事。&lt;/p&gt;
+&lt;h2 id="安装组合"&gt;安装组合&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;TeX Live&lt;/strong&gt;（发行版）：跨平台、宏包全。国内建议用清华镜像安装：&lt;code&gt;https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;VS Code + LaTeX Workshop 插件&lt;/strong&gt;：编译、预览、跳转全包&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&#34;必调配置&#34;&gt;必调配置&lt;/h2&gt;
+&lt;h2 id="必调配置"&gt;必调配置&lt;/h2&gt;
 &lt;p&gt;在 VS Code &lt;code&gt;settings.json&lt;/code&gt; 中加入：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;latex-workshop.latex.recipe.default&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;latexmk (xelatex)&amp;#34;&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;latex-workshop.latex.autoBuild.run&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;onSave&amp;#34;&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;latex-workshop.view.pdf.viewer&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;tab&amp;#34;&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;latex-workshop.latex.clean.subfolder.enabled&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;latex-workshop.latexindent.path&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;latexindent&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;三条心得&#34;&gt;三条心得&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;latex-workshop.latex.recipe.default&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;latexmk (xelatex)&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;latex-workshop.latex.autoBuild.run&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;onSave&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;latex-workshop.view.pdf.viewer&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;tab&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;latex-workshop.latex.clean.subfolder.enabled&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;#34;latex-workshop.latexindent.path&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;latexindent&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="三条心得"&gt;三条心得&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;中文论文用 &lt;code&gt;xelatex&lt;/code&gt; + &lt;code&gt;ctex&lt;/code&gt; 宏包&lt;/strong&gt;，不要用 pdflatex 硬刚 CJK，坑太多&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;正反向跳转&lt;/strong&gt;（SyncTeX）：&lt;code&gt;Ctrl+点击&lt;/code&gt; 源码 ↔ PDF 互跳，改长公式时救命&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;自动清理中间文件&lt;/strong&gt;：开 &lt;code&gt;clean.subfolder&lt;/code&gt;，否则 &lt;code&gt;.aux/.log/.out&lt;/code&gt; 会把目录弄得很脏&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;overleaf-还是本地&#34;&gt;Overleaf 还是本地？&lt;/h2&gt;
-&lt;p&gt;协作写作用 Overleaf（实时共同编辑无敌），自己写作用本地（编译快、可离线、能进 Git 版本管理）。我的做法是&lt;strong&gt;本地为主，投稿前传 Overleaf 与合作者过 final&lt;/strong&gt;。&lt;/p&gt;
-</description>
-    </item>
-    
-  </channel>
-</rss>
+&lt;h2 id="overleaf-还是本地"&gt;Overleaf 还是本地？&lt;/h2&gt;
+&lt;p&gt;协作写作用 Overleaf（实时共同编辑无敌），自己写作用本地（编译快、可离线、能进 Git 版本管理）。我的做法是&lt;strong&gt;本地为主，投稿前传 Overleaf 与合作者过 final&lt;/strong&gt;。&lt;/p&gt;</description></item></channel></rss>
