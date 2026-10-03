@@ -1,11 +1,14 @@
 {
-  "dependencies": {
-    "autoprefixer": "^10.4.16",
-    "postcss-import": "^15.1.0",
-    "sass-embedded": "^1.70.0"
+  "name": "hugo-blox-academic-cv-starter",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Academic CV site for songyu0903 with Tailwind CSS v4",
+  "scripts": {
+    "build": "hugo --minify"
   },
-  "devDependencies": {
-    "postcss": "^8.4.31",
-    "postcss-cli": "^10.1.0"
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.12",
+    "@tailwindcss/typography": "^0.5.10",
+    "tailwindcss": "^4.1.12"
   }
 }

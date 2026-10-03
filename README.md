@@ -1,61 +1,67 @@
-# Hugo Academic Homepage — 源码说明
+# 个人学术主页 — 源码说明（Hugo Blox Academic CV）
 
 个人学术主页的 Hugo 源码。线上地址：https://songyu0903.github.io/
+
+主题：**[Hugo Blox / Academic CV](https://github.com/HugoBlox/hugo-theme-academic-cv)**（基于 Hugo Blox Kit 0.12，Tailwind CSS v4，原生 KaTeX 数学渲染）。
 
 ## 目录结构
 
 ```
 .
-├── config/_default/     # 站点配置（hugo / languages / menus / params / markup）
-├── content/zh-CN/       # 中文内容（首页 + research + latex 栏目）
-├── content/en/          # 英文内容（与中文一一对应）
-├── layouts/partials/    # 站点级模板覆盖（extend-head.html：粒子背景 + 打字机 + 毛玻璃卡片）
-├── assets/css/schemes/  # 自定义配色方案（azureblue 浅蓝）
-├── static/js/           # 自托管 particles.js（不依赖外部 CDN）
-└── themes/blowfish/     # 主题（需自行获取，见下）
+├── config/_default/    # 站点配置（hugo / languages / menus / params / module）
+├── content/            # 内容：_index.md（首页区块）+ blog/（笔记文章）+ authors/
+├── data/authors/       # 作者档案（me.yaml）
+├── assets/media/       # 头像、媒体资源
+├── layouts/            # 站点级模板覆盖（少量）
+├── static/uploads/     # 可下载文件（如简历 PDF）
+├── go.mod / go.sum     # Hugo 模块依赖（HugoBlox Kit）
+└── package.json        # Tailwind CSS 构建依赖
 ```
 
-## 获取主题
+## 构建环境要求
 
-主题目录**不在版本控制里**（2500 个文件，会让仓库臃肿且推送极慢）。
-首次使用请先执行：
-
-```bash
-git clone --depth 1 https://github.com/nunocoracao/blowfish themes/blowfish
-```
-
-或使用国内加速镜像：
-
-```bash
-git clone --depth 1 https://ghfast.top/https://github.com/nunocoracao/blowfish themes/blowfish
-```
+1. **Hugo extended**（0.162+，本项目用 0.167.0，位于 `../tools/hugo/hugo.exe`）
+2. **Go**（Hugo 模块解析需要，本项目用 `../tools/go/go/bin/go.exe`）
+3. **Node.js**（Tailwind CSS v4 需要，`npm install` 安装依赖）
 
 ## 本地构建
 
-需要 Hugo **extended** 版本（SCSS 需要）：
-
 ```bash
-hugo server            # 本地预览 http://localhost:1313/
-hugo --minify          # 构建到 public/
-hugo --baseURL "https://songyu0903.github.io/" -d public-gh   # 构建 GitHub Pages 产物
+# 1. 安装 npm 依赖（首次）
+npm install --registry=https://registry.npmmirror.com
+
+# 2. 下载 Hugo 模块（首次；需 go 在 PATH，且设置好 GOPROXY）
+export GOPROXY=https://goproxy.cn
+hugo mod tidy
+
+# 3. 构建到 public/
+hugo --minify
+
+# 4. 本地预览
+hugo server
 ```
+
+> 首次构建前需完成 1、2 两步；之后只需第 3 步。
 
 ## 部署方式
 
-`main` 分支存放**构建产物**（GitHub Pages 直接托管，不需要 Actions），
-`source` 分支存放本源码作为备份。
+`main` 分支存放**构建产物**（GitHub Pages 直接托管），`source` 分支存放本源码作为备份。
 
 ```bash
-hugo --baseURL "https://songyu0903.github.io/" -d public-gh
+hugo --minify -d public-gh
 cd public-gh && git add -A && git commit -m "update" && git push
 ```
+
+> 本机 git push 走代理常失败，实际推送用 `../tools/gh_api_push.py`（走 GitHub REST API）。
 
 ## 自定义点
 
 | 想改什么 | 改哪里 |
 |---|---|
-| 配色方案 | `assets/css/schemes/azureblue.css` + `config/_default/params.toml` 的 `colorScheme` |
-| 首页内容 | `content/zh-CN/_index.md` / `content/en/_index.md` |
-| 导航菜单 | `config/_default/menus.*.toml` |
-| 粒子/卡片动效 | `layouts/partials/extend-head.html` |
-| 公式渲染定界符 | `config/_default/markup.toml` |
+| 姓名 / 身份 / 经历 / 技能 | `data/authors/me.yaml` |
+| 首页区块（个人简介、研究方向、笔记） | `content/_index.md` |
+| 站点名称 / 简介 | `config/_default/params.yaml`（`hugoblox.identity`） |
+| 导航菜单 | `config/_default/menus.yaml` |
+| 文章（笔记） | `content/blog/<slug>/index.md` |
+| 主题配色 / 深色模式 | `config/_default/params.yaml`（`hugoblox.theme`） |
+| 头像 | `assets/media/authors/me.png` |
