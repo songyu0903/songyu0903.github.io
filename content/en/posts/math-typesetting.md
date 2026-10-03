@@ -1,12 +1,13 @@
-+++
-title = "Math Typesetting: Professional and Maintainable Formulas"
-date = 2026-09-20
-summary = "How to choose amsmath environments, proper numbering and cross-referencing, and the essential package list for math students."
-tags = ["LaTeX", "Math", "Typesetting"]
-math = true
-+++
-
-{{< katex >}}
+---
+title: "Math Typesetting: Professional and Maintainable Formulas"
+date: 2026-09-20
+description: "How to choose amsmath environments, proper numbering and cross-referencing, and the essential package list for math students."
+categories: ["LaTeX Notes"]
+tags: ["LaTeX", "Math", "Typesetting"]
+toc: true
+math: true
+draft: false
+---
 
 Eighty percent of paper writing is wrestling with formulas. These are the rules I settled on after stepping on every rake.
 

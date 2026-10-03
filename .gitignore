@@ -5,3 +5,6 @@ public-gh/
 
 # 主题不入库（2500 个文件），用 README 里的命令获取即可
 themes/
+
+# npm 依赖（dart-sass 预编译用），npm install 即可恢复
+node_modules/

@@ -1,9 +1,13 @@
-+++
-title = "Thesis Proposal"
-date = 2026-09-15
-summary = "Conducting a systematic literature review and preparing the thesis proposal."
-tags = ["Literature Review", "LaTeX"]
-+++
+---
+title: "Thesis Proposal"
+date: 2026-09-15
+description: "Conducting a systematic literature review and preparing the thesis proposal."
+categories: ["Research"]
+tags: ["Literature Review", "LaTeX"]
+toc: true
+math: false
+draft: false
+---
 
 I am currently in the **literature review stage** before my thesis proposal:
 

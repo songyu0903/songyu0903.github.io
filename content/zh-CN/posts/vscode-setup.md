@@ -1,9 +1,13 @@
-+++
-title = "LaTeX 环境配置：TeX Live + VS Code 工作流"
-date = 2026-10-01
-summary = "抛弃臃肿的专用编辑器，用 TeX Live + VS Code + LaTeX Workshop 搭一套轻量高效的本地写作环境。"
-tags = ["LaTeX", "工具链", "VS Code"]
-+++
+---
+title: "LaTeX 环境配置：TeX Live + VS Code 工作流"
+date: 2026-10-01
+description: "抛弃臃肿的专用编辑器，用 TeX Live + VS Code + LaTeX Workshop 搭一套轻量高效的本地写作环境。"
+categories: ["LaTeX 心得"]
+tags: ["LaTeX", "工具链", "VS Code"]
+toc: true
+math: false
+draft: false
+---
 
 网上很多教程还在推荐 TeXstudio、WinEdt 这类专用编辑器，其实 **VS Code + LaTeX Workshop** 才是目前体验最好的方案：一个编辑器搞定代码、笔记、论文三件事。
 

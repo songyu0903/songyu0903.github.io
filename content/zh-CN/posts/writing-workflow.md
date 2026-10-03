@@ -1,9 +1,13 @@
-+++
-title = "学术写作工作流：文献管理、模板与版本控制"
-date = 2026-09-01
-summary = "Zotero + BibTeX 的自动化文献流，Git 管理论文版本，以及投稿前的检查清单。"
-tags = ["LaTeX", "学术写作", "工作流"]
-+++
+---
+title: "学术写作工作流：文献管理、模板与版本控制"
+date: 2026-09-01
+description: "Zotero + BibTeX 的自动化文献流，Git 管理论文版本，以及投稿前的检查清单。"
+categories: ["LaTeX 心得"]
+tags: ["LaTeX", "学术写作", "工作流"]
+toc: true
+math: false
+draft: false
+---
 
 论文写到一半文献库乱掉、改崩了找不回上一版 —— 这两个坑我都踩过，现在的工作流专门防这两点。
 

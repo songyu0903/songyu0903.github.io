@@ -1,4 +1,0 @@
-+++
-title = "Research"
-showSummary = false
-+++

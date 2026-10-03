@@ -1,12 +1,13 @@
-+++
-title = "数学公式排版心得：让公式既专业又好维护"
-date = 2026-09-20
-summary = "amsmath 环境怎么选、编号与交叉引用的正确姿势、数学生必备的宏包清单。"
-tags = ["LaTeX", "数学公式", "排版"]
-math = true
-+++
-
-{{< katex >}}
+---
+title: "数学公式排版心得：让公式既专业又好维护"
+date: 2026-09-20
+description: "amsmath 环境怎么选、编号与交叉引用的正确姿势、数学生必备的宏包清单。"
+categories: ["LaTeX 心得"]
+tags: ["LaTeX", "数学公式", "排版"]
+toc: true
+math: true
+draft: false
+---
 
 写论文 80% 的时间在和公式打交道，这几条是我踩坑后沉淀下来的规则。
 

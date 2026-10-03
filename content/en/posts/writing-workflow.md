@@ -1,9 +1,13 @@
-+++
-title = "Academic Writing Workflow: References, Templates & Version Control"
-date = 2026-09-01
-summary = "Automated Zotero-to-BibTeX pipeline, Git-managed paper versions, and a pre-submission checklist."
-tags = ["LaTeX", "Academic Writing", "Workflow"]
-+++
+---
+title: "Academic Writing Workflow: References, Templates & Version Control"
+date: 2026-09-01
+description: "Automated Zotero-to-BibTeX pipeline, Git-managed paper versions, and a pre-submission checklist."
+categories: ["LaTeX Notes"]
+tags: ["LaTeX", "Academic Writing", "Workflow"]
+toc: true
+math: false
+draft: false
+---
 
 Losing your bibliography mid-paper and being unable to recover the last good version — I've hit both walls. This workflow prevents them.
 

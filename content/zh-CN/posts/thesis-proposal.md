@@ -1,9 +1,13 @@
-+++
-title = "开题准备"
-date = 2026-09-15
-summary = "系统性文献调研与开题报告撰写，工作论文准备中。"
-tags = ["文献调研", "LaTeX"]
-+++
+---
+title: "开题准备"
+date: 2026-09-15
+description: "系统性文献调研与开题报告撰写，工作论文准备中。"
+categories: ["研究方向"]
+tags: ["文献调研", "LaTeX"]
+toc: true
+math: false
+draft: false
+---
 
 当前处于开题前的**文献调研阶段**：
 

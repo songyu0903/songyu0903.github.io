@@ -1,9 +1,13 @@
-+++
-title = "LaTeX Setup: TeX Live + VS Code Workflow"
-date = 2026-10-01
-summary = "Ditch the bloated dedicated editors — a lightweight, efficient local writing environment with TeX Live + VS Code + LaTeX Workshop."
-tags = ["LaTeX", "Toolchain", "VS Code"]
-+++
+---
+title: "LaTeX Setup: TeX Live + VS Code Workflow"
+date: 2026-10-01
+description: "Ditch the bloated dedicated editors — a lightweight, efficient local writing environment with TeX Live + VS Code + LaTeX Workshop."
+categories: ["LaTeX Notes"]
+tags: ["LaTeX", "Toolchain", "VS Code"]
+toc: true
+math: false
+draft: false
+---
 
 Many tutorials still recommend TeXstudio or WinEdt, but **VS Code + LaTeX Workshop** is currently the best experience: one editor for code, notes, and papers.
 

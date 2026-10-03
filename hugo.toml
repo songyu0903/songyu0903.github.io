@@ -1,0 +1,78 @@
+baseURL = "https://songyu0903.github.io/"
+title = "songyu0903"
+theme = "texify3"
+
+enableRobotsTXT = true
+hasCJKLanguage = true
+rssLimit = 10
+defaultContentLanguage = "zh-CN"
+defaultContentLanguageInSubdir = false
+
+[pagination]
+  pagerSize = 5
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+# -- 中文（默认）--
+[languages]
+  [languages."zh-CN"]
+    weight = 1
+    contentDir = "content/zh-CN"
+    [languages."zh-CN".params]
+      title = "songyu0903"
+      author = "songyu0903"
+      description = "数学专业研究生 · 投资组合优化方向"
+      footnote = "© songyu0903 · Powered by <a class=\"link\" href=\"https://gohugo.io\" target=\"_blank\" rel=\"noopener\">Hugo</a> · Theme <a class=\"link\" href=\"https://github.com/michaelneuper/hugo-texify3\" target=\"_blank\" rel=\"noopener\">TeXify3</a>"
+
+  [languages.en]
+    weight = 2
+    contentDir = "content/en"
+    [languages.en.params]
+      title = "songyu0903"
+      author = "songyu0903"
+      description = "Graduate student in mathematics · Portfolio optimization"
+      footnote = "© songyu0903 · Powered by <a class=\"link\" href=\"https://gohugo.io\" target=\"_blank\" rel=\"noopener\">Hugo</a> · Theme <a class=\"link\" href=\"https://github.com/michaelneuper/hugo-texify3\" target=\"_blank\" rel=\"noopener\">TeXify3</a>"
+
+[params]
+  customCSS = []
+  customJS = []
+  emphasisWithDots = true
+  toc = true
+  rootFontSize = "105%"
+  math = true
+  enableDuckDuckGoSearchBox = false
+  numberedSubtitles = true
+  [params.sharingbuttons]
+    facebook = false
+    twitter = false
+    email = false
+    linkedin = false
+    reddit = false
+    whatsapp = false
+    hackernews = false
+    telegram = false
+
+[[menus.main]]
+  name = "Posts"
+  pageRef = "/posts"
+  weight = 10
+
+[[menus.main]]
+  name = "Categories"
+  pageRef = "/categories"
+  weight = 20
+
+[[menus.main]]
+  name = "Tags"
+  pageRef = "/tags"
+  weight = 30
+
+[[menus.main]]
+  name = "GitHub"
+  url = "https://github.com/songyu0903"
+  weight = 40
