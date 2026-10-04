@@ -1,13 +1,6 @@
 /* 站点自定义样式（主题 styles/index.yaml 中最后加载，可覆盖主题样式） */
 
-/* 落地页（首页）正文：居中并限制行宽 */
-.book-layout-landing .book-article {
-  max-width: 46rem;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 2rem;
-  padding-bottom: 4rem;
-}
+/* 首页与普通页统一使用 Book 标准版式（左侧目录树 + 正文），无需额外覆盖 */
 
 /* 笔记页标题与日期 */
 .book-article > h1 {

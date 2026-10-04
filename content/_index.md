@@ -1,5 +1,4 @@
 ---
-layout: landing
 title: "🏠 首页"
 ---
 

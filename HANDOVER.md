@@ -117,7 +117,7 @@ Copy-Item "$env:TEMP\hugo-book\hugo-book-main" "$site\themes\hugo-book" -Recurse
 | 想改什么 | 改哪个文件 | 说明 |
 |---|---|---|
 | 站点名 / 菜单 / 主题外观 / 搜索 / 目录树根 | `hugo.toml` | `title`、`[[menu.home]]`（首页顶部导航）、`[[menu.after]]`（侧栏底部链接）、`[params] BookTheme=light|dark|auto`、`BookSection="blog"`（侧栏目录树渲染哪个章节） |
-| 首页文案（研究方向、笔记导览） | `content/_index.md` | front matter 必须是 `layout: landing`（否则顶部导航不显示） |
+| 首页文案（研究方向、笔记导览） | `content/_index.md` + `layouts/index.html` | 首页与其它页**统一使用 Book 标准版式**（左侧目录树 + 正文）；若想用主题的 landing 版式，给 front matter 加 `layout: landing`，但那会**隐藏左侧目录** |
 | 个人简介 / 教育 / 研究兴趣 / 技能 / 语言 / 链接 | `content/about.md` | 原先由 `data/authors/me.yaml` 渲染，现已写成正文；`data/authors/me.yaml` 仅作留档 |
 | 新增/修改一篇笔记 | `content/blog/<slug>/index.md` | front matter：`title / date / summary / tags / weight`；**正文不要写 H1**（`layouts/single.html` 已用 title 渲染标题） |
 | 笔记在侧栏与列表中的顺序 | 各笔记 front matter 的 `weight` | 数值越小越靠前；当前 1–17 |
@@ -221,7 +221,7 @@ curl.exe -s -o NUL -w "bak:%{http_code}`n"  "https://songyu-academic-home.app.wo
 | 主题不入库 | 换机器/清目录后构建报找不到主题 | 按 §4 下载 Hugo Book 到 `themes\hugo-book` |
 | GitHub Releases 资产域名被墙 | 下载 `katex.zip` 得到 **0 字节** | 改用 `codeload`（主题）/腾讯 npm 镜像（KaTeX） |
 | 主题默认不渲染 H1 | 笔记页没有标题 | 站点 `layouts/single.html` 覆盖，用 `{{ partial "docs/title" . }}` 渲染 front matter 标题 |
-| 首页导航不显示 | landing 顶部空白 | `content/_index.md` 必须写 `layout: landing`（体 class 才带 `book-layout-landing`） |
+| 首页没有左侧目录 | 首页用了主题 landing 版式（`landing.html` 清空 `menu-container`） | 去掉 `content/_index.md` 的 `layout: landing`，改用站点 `layouts/index.html`（默认 Book 版式，自带左侧目录树） |
 | 侧栏目录为空 | 左侧只有站名 | `hugo.toml` 的 `BookSection="blog"` 必须指向 `content/blog`（否则主题 `errorf` 或渲染空树） |
 | KaTeX 只显示源码 | 页面上是 `$…$` 原文 | 主题不带 `katex.min.js`：需 `static/katex/katex.min.js` + `inject/head.html` 里的 auto-render |
 | LaTeX 转义被吃掉 | `\max\{p,2\}` 变成 `\max{p,2}` | `hugo.toml` 开 `[markup.goldmark.extensions.passthrough]`（block/inline 定界符） |
@@ -262,7 +262,7 @@ PDF 放 `static/uploads/` → 在 `_index.md`、`about.md` 或笔记里加 `[PDF
 ## 9. 当前状态快照（2026-10-04）
 
 - **主题**：**Hugo Book**（`github.com/alex-shpak/hugo-book`，min_version 0.158.0，本机 Hugo v0.167.0+extended；主题不入库，vendored 于 `themes/hugo-book`）
-- **版式**：首页 = `layout: landing`（hero + 研究方向 + 笔记导览）；侧边栏 = `BookSection="blog"` 的 17 篇笔记目录树（按 `weight` 1–17）；`/about/` = 关于页；`/blog/` 列表分页 10/页 + `/blog/page/2/` 7 篇；KaTeX 前端渲染；搜索框（MiniSearch）；深色/浅色自动（`BookTheme="auto"`）
+- **版式**：首页 = Book 标准版式（**左侧目录树** + hero「songyu0903」+ 研究方向 + 笔记导览），与笔记页/关于页一致；侧边栏 = `BookSection="blog"` 的 17 篇笔记目录树（按 `weight` 1–17）+ `menu.after`（关于/GitHub）；`/about/` = 关于页；`/blog/` 列表分页 10/页 + `/blog/page/2/` 7 篇；KaTeX 前端渲染；搜索框（MiniSearch）；深色/浅色自动（`BookTheme="auto"`）
 - **源码仓库最新提交**：`ecd0d87 Switch site theme to Hugo Book (content unchanged; landing home + about page; KaTeX front-end)` → 已推送 `PUSH_OK 8d2dfdb`（source 分支）
 - **产物仓库最新提交**：`2df239e Rebuild with Hugo Book theme` → 已推送 `PUSH_OK 4a77dcc`（main 分支，160 changed / 133 deleted）
 - **构建**：`Pages 125`、`Static files 31`、73 个 HTML、`public/` ≈1.65 MB、无 localhost/livereload 污染
