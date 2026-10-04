@@ -1,3 +1,22 @@
-User-agent: *
+songyu0903
 
-Sitemap: https://songyu0903.github.io/sitemap.xml
+- 📝 笔记: https://songyu0903.github.io/blog/
+- Wasserstein 分布鲁棒投资组合：对偶结构、半径校准与有限样本保证: https://songyu0903.github.io/blog/wasserstein-dro-portfolio/
+- 鲁棒投资组合的不确定集设计：从预算参数 Γ 到数据驱动校准: https://songyu0903.github.io/blog/robust-portfolio-uncertainty-sets/
+- 高维协方差估计与组合稳定性：收缩、随机矩阵与图方法: https://songyu0903.github.io/blog/high-dim-covariance-estimation/
+- 端到端学习与决策聚焦的组合优化：预测—优化错配及其修正: https://songyu0903.github.io/blog/end-to-end-portfolio-learning/
+- 风险度量与凸化：从 VaR 的非次可加性到 CVaR、谱风险与回撤: https://songyu0903.github.io/blog/risk-measures-cvar-spectral-drawdown/
+- 因子结构与稀疏性：从 POET 到基数约束的可证最优: https://songyu0903.github.io/blog/factor-models-sparsity-cardinality/
+- 均值估计误差与 1/N 悖论：误差最大化、收缩修正与决策损失传递: https://songyu0903.github.io/blog/mean-estimation-error-and-1n-paradox/
+- 多期组合与交易成本：从 Merton 的对冲项到目标组合反馈律: https://songyu0903.github.io/blog/multiperiod-portfolio-and-transaction-costs/
+- 回测过拟合与策略评估统计：从 Reality Check 到搜索感知的绩效推断: https://songyu0903.github.io/blog/backtest-overfitting-and-strategy-evaluation/
+- 大规模组合优化的一阶算法与可微优化：从 ADMM 到可微的求解层: https://songyu0903.github.io/blog/large-scale-portfolio-optimization-algorithms/
+- 动态风险度量与时间一致性：多期分布鲁棒优化的结构性障碍: https://songyu0903.github.io/blog/dynamic-risk-measures-time-consistency/
+- 风险平价与风险预算：欧拉分解、存在唯一性与稳健化路线: https://songyu0903.github.io/blog/risk-parity-and-risk-budgeting/
+- 投资组合优化: https://songyu0903.github.io/blog/portfolio-optimization/
+- 开题准备: https://songyu0903.github.io/blog/thesis-proposal/
+- 数学公式排版心得：让公式既专业又好维护: https://songyu0903.github.io/blog/math-typesetting/
+- LaTeX 环境配置：TeX Live + VS Code 工作流: https://songyu0903.github.io/blog/vscode-setup/
+- 学术写作工作流：文献管理、模板与版本控制: https://songyu0903.github.io/blog/writing-workflow/
+
+

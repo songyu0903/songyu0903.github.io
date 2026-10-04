@@ -1,16 +1,1 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>研究方向 | songyu0903</title><link>https://songyu0903.github.io/tags/%E7%A0%94%E7%A9%B6%E6%96%B9%E5%90%91/</link><atom:link href="https://songyu0903.github.io/tags/%E7%A0%94%E7%A9%B6%E6%96%B9%E5%90%91/index.xml" rel="self" type="application/rss+xml"/><description>研究方向</description><generator>HugoBlox Kit (https://hugoblox.com)</generator><language>zh-Hans</language><lastBuildDate>Thu, 01 Oct 2026 00:00:00 +0000</lastBuildDate><image><url>https://songyu0903.github.io/media/icon_hu_cd51c91342a84ed6.png</url><title>研究方向</title><link>https://songyu0903.github.io/tags/%E7%A0%94%E7%A9%B6%E6%96%B9%E5%90%91/</link></image><item><title>投资组合优化</title><link>https://songyu0903.github.io/blog/portfolio-optimization/</link><pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/blog/portfolio-optimization/</guid><description>&lt;p&gt;我的核心研究方向是&lt;strong&gt;投资组合优化&lt;/strong&gt;（Portfolio Optimization）。&lt;/p&gt;
-&lt;p&gt;一切始于 Markowitz (1952) 的均值—方差框架：在给定预期收益下最小化组合风险，&lt;/p&gt;
-$$\min_{w}\ w^{\top}\Sigma w \quad \text{s.t.}\quad w^{\top}\mu \geq r_{\text{target}},\ \mathbf{1}^{\top}w = 1,\ w \geq 0$$&lt;p&gt;经典框架在实际应用中面临估计误差敏感、协方差矩阵病态等问题，我的关注点包括：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;鲁棒优化&lt;/strong&gt;（Robust Optimization）：在最坏情形扰动集下保证解的稳健性&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;分布鲁棒优化&lt;/strong&gt;（DRO）：在模糊概率集合（如 Wasserstein 球）上优化期望目标&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;参数不确定性&lt;/strong&gt;下的组合选择与正则化方法&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;相关代码与实验笔记会陆续整理到
-。&lt;/p&gt;</description></item><item><title>开题准备</title><link>https://songyu0903.github.io/blog/thesis-proposal/</link><pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/blog/thesis-proposal/</guid><description>&lt;p&gt;当前处于开题前的&lt;strong&gt;文献调研阶段&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;系统梳理均值—方差分析到鲁棒/分布鲁棒组合优化的发展脉络&lt;/li&gt;
-&lt;li&gt;整理经典文献与近年前沿工作，构建文献综述框架&lt;/li&gt;
-&lt;li&gt;撰写开题报告，工作论文准备中&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;工具链：LaTeX（写作）、Python / MATLAB（数值实验）、Obsidian（文献笔记）。&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>研究方向 on songyu0903</title><link>https://songyu0903.github.io/tags/%E7%A0%94%E7%A9%B6%E6%96%B9%E5%90%91/</link><description>Recent content in 研究方向 on songyu0903</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Thu, 01 Oct 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://songyu0903.github.io/tags/%E7%A0%94%E7%A9%B6%E6%96%B9%E5%90%91/index.xml" rel="self" type="application/rss+xml"/><item><title>投资组合优化</title><link>https://songyu0903.github.io/blog/portfolio-optimization/</link><pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/blog/portfolio-optimization/</guid><description>从经典均值—方差框架出发，关注鲁棒优化与分布鲁棒优化在现代组合选择中的应用。</description></item><item><title>开题准备</title><link>https://songyu0903.github.io/blog/thesis-proposal/</link><pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/blog/thesis-proposal/</guid><description>系统性文献调研与开题报告撰写，工作论文准备中。</description></item></channel></rss>
