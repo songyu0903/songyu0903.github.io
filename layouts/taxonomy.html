@@ -1,0 +1,11 @@
+{{ define "main" }}
+<article class="markdown book-article">
+  <h1>{{ partial "docs/title" . }}</h1>
+  {{ .Content }}
+  <ul>
+  {{- range .Pages }}
+    <li><a href="{{ .RelPermalink }}">{{ partial "docs/title" . }}</a> <span class="note-meta">（{{ len .Pages }}）</span></li>
+  {{- end }}
+  </ul>
+</article>
+{{ end }}

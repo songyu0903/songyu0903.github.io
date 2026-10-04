@@ -1,8 +1,0 @@
-# Languages
-#   Create a section for each of your site's languages.
-#   Documentation: https://docs.hugoblox.com/reference/language/
-
-# Default language
-zh:
-  locale: zh-Hans
-  weight: 1

@@ -1,0 +1,30 @@
+/* 站点自定义样式（主题 styles/index.yaml 中最后加载，可覆盖主题样式） */
+
+/* 落地页（首页）正文：居中并限制行宽 */
+.book-layout-landing .book-article {
+  max-width: 46rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+/* 笔记页标题与日期 */
+.book-article > h1 {
+  margin-bottom: 0.25em;
+}
+
+.note-meta {
+  font-size: 0.875rem;
+  opacity: 0.65;
+}
+
+/* 关于页头像 */
+.book-article img.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 1rem;
+}

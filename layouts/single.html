@@ -1,0 +1,9 @@
+{{ define "main" }}
+<article class="markdown book-article">
+  <h1>{{ partial "docs/title" . }}</h1>
+  {{- with .Date }}
+  <p class="note-meta">{{ .Format "2006-01-02" }}</p>
+  {{- end }}
+  {{ .Content }}
+</article>
+{{ end }}

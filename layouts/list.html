@@ -1,0 +1,17 @@
+{{ define "main" }}
+<article class="markdown book-article">
+  <h1>{{ partial "docs/title" . }}</h1>
+  {{ .Content }}
+  {{- $pages := .Paginator.Pages -}}
+  {{- range $pages }}
+  <article class="book-post markdown">
+    <h2><a href="{{ .RelPermalink }}">{{ partial "docs/title" . }}</a></h2>
+    {{- with .Date }}
+    <p class="note-meta">{{ .Format "2006-01-02" }}</p>
+    {{- end }}
+    <p>{{ .Summary | plainify | truncate 200 }}</p>
+  </article>
+  {{- end }}
+  {{ partial "docs/pagination" . }}
+</article>
+{{ end }}

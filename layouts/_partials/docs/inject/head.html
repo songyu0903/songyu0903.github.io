@@ -1,0 +1,17 @@
+{{- /*
+  KaTeX 前端渲染（覆盖 $...$ 与 $$...$$）。
+  资源位于站点 static/katex/：katex.min.js、contrib/auto-render.min.js 由本仓库提供，
+  katex.min.css 与字体由主题自带（同名时站点资源优先）。
+*/ -}}
+<link rel="stylesheet" href="{{ "katex/katex.min.css" | relURL }}" />
+<script defer src="{{ "katex/katex.min.js" | relURL }}"></script>
+<script defer src="{{ "katex/contrib/auto-render.min.js" | relURL }}" onload="renderMathInElement(document.body,{
+  delimiters:[
+    {left:'$$',right:'$$',display:true},
+    {left:'\\[',right:'\\]',display:true},
+    {left:'$',right:'$',display:false},
+    {left:'\\(',right:'\\)',display:false}
+  ],
+  throwOnError:false,
+  ignoredTags:['script','noscript','style','textarea','pre','code','option']
+});"></script>

@@ -4,8 +4,11 @@ resources/
 public-gh/
 hugo_stats.json
 
-# 主题不入库，用 README 里的命令获取即可
+# 主题不入库：Hugo Book（获取方式见 HANDOVER.md §4）
 themes/
 
-# npm 依赖（Tailwind CSS 构建用），npm install 即可恢复
+# npm 依赖（旧 HugoBlox/Tailwind 构建用）
 node_modules/
+
+# 旧 HugoBlox 配置备份
+_blox-backup/
