@@ -1,5 +1,5 @@
 # 站点配置：Hugo Book 主题（https://themes.gohugo.io/themes/hugo-book/）
-# 2026-10-04 由 HugoBlox 迁移至 Hugo Book；旧配置备份见 _blox-backup/
+# 2026-10-04 由 HugoBlox 迁移至 Hugo Book（旧主题的配置、依赖与缓存已于同日清理）
 
 baseURL = "https://songyu0903.github.io/"
 title = "songyu0903"

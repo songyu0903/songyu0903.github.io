@@ -63,13 +63,11 @@ C:/Users/eiegant/WorkBuddy/2026-10-01-16-16-12/
 │   │   ├── media/authors/me.jpg# 头像（URL /media/authors/me.jpg）
 │   │   └── uploads/resume.pdf
 │   ├── themes/hugo-book/       # Hugo Book 主题（**不入库**，获取方式见 §4）
-│   ├── _blox-backup/           # 旧 HugoBlox 配置备份（不入库，仅本机留档）
 │   ├── public/                 # 构建产物 A（→ 备用链接）
 │   └── public-gh/              # 构建产物 B（独立 git 仓库 → main 分支）
 ├── tools/
 │   ├── hugo/hugo.exe           # Hugo extended v0.167.0（★ 不在 PATH，必须用全路径）
-│   ├── gh_api_push.py          # 走 REST API 推送（git push 走代理基本必失败）
-│   └── build.sh                # 旧 HugoBlox 构建脚本（**已失效，勿用**）
+│   └── gh_api_push.py          # 走 REST API 推送（git push 走代理基本必失败）
 └── HANDOVER.md                 # 本文档（与 academic-homepage/HANDOVER.md 同内容）
 ```
 
@@ -120,7 +118,7 @@ Copy-Item "$env:TEMP\hugo-book\hugo-book-main" "$site\themes\hugo-book" -Recurse
 |---|---|---|
 | 站点名 / 菜单 / 主题外观 / 搜索 / 目录树根 | `hugo.toml` | `title`、`[[menu.home]]`（仅 landing 版式用）、`[[menu.after]]`（侧栏底部链接）、`[params] BookTheme=light|dark|auto`、`BookSection="*"`（侧栏目录树以**站点顶层**为根 → 只显示「关于」+「笔记专题」两个大目录） |
 | 首页文案（研究方向、笔记导览） | `content/_index.md` + `layouts/index.html` | 首页与其它页**统一使用 Book 标准版式**（左侧目录树 + 正文）；若想用主题的 landing 版式，给 front matter 加 `layout: landing`，但那会**隐藏左侧目录** |
-| 个人简介 / 教育 / 研究兴趣 / 技能 / 语言 / 链接 | `content/about.md` | 原先由 `data/authors/me.yaml` 渲染，现已写成正文；`data/authors/me.yaml` 仅作留档 |
+| 个人简介 / 教育 / 研究兴趣 / 技能 / 语言 / 链接 | `content/about.md` | 原先由 HugoBlox 的 `data/authors/me.yaml` 渲染，现已写成正文（该 yaml 已于 2026-10-04 清理删除） |
 | 新增/修改一篇笔记 | `content/blog/<slug>/index.md` | front matter：`title / date / summary / tags / weight`；**正文不要写 H1**（`layouts/single.html` 已用 title 渲染标题）；**写完还要把 slug 加进对应专题页的 `notes:` 列表**，否则专题页不显示它 |
 | 笔记在「全部笔记」列表里的顺序 | 各笔记 front matter 的 `weight` | 数值越小越靠前；当前 1–17（侧栏**不**列单篇笔记） |
 | 侧栏大目录（专题分组） | `content/topics/<topic>/_index.md` | `weight`（1–6）定侧栏顺序、`notes: [笔记 slug…]` 定该专题收录哪些笔记；`content/topics/_index.md` 是目录树的根 |
@@ -235,7 +233,7 @@ curl.exe -s -o NUL -w "bak:%{http_code}`n"  "https://songyu-academic-home.app.wo
 | 本机 pwsh 实为 Windows PowerShell 5.1 | `Set-Content -Encoding utf8NoBOM` 报"无法将标识符名称 utf8NoBOM 与有效的枚举器名称相匹配" | 写无 BOM UTF-8 用 `[System.IO.File]::WriteAllText($f,$t,(New-Object System.Text.UTF8Encoding($false)))` |
 | 沙箱拦网络/写工作区外 | `curl: (35) schannel: AcquireCredentialsHandle failed: SEC_NO_CREDENTIALS`、`[sandbox: file access denied]` | 需要网络或写站点目录时申请放宽权限 |
 | DSH 沙箱内 bash 不可用 | MSYS bash 启动即 `fatal error - NtCreateDirectoryObject(\BaseNamedObjects\msys-2.0S5-…): 0xC0000022` | 用 PowerShell 等价命令，别调 `bash tools/build.sh` |
-| HugoBlox 时代的 `tools/build.sh` | 已失效（要 Go 模块 + Tailwind） | 直接用 §4 的 PowerShell 命令 |
+| HugoBlox 时代的 `tools/build.sh` | 已于 2026-10-04 删除；若在旧笔记/旧终端里见到它，勿用（要 Go 模块 + Tailwind） | 直接用 §4 的 PowerShell 命令 |
 | 删了 public-gh 的 .git | 远端历史丢失、推送异常 | 永远用 `git rm -rfq .`，不要 `rm -rf public-gh` |
 | git push 失败 | 代理超时/中断 | 用 `tools/gh_api_push.py` |
 | 推送脚本报 up-to-date 但没生效 | 忘了 commit | 先 `git status` 确认干净再推 |
@@ -273,6 +271,7 @@ PDF 放 `static/uploads/` → 在 `_index.md`、`about.md` 或笔记里加 `[PDF
 - **头像**：`static/media/authors/me.jpg`（用户提供的 logo.jpg，19 059 字节，URL `/media/authors/me.jpg`）
 - **已发布文章**（`content/blog/`，共 **17 篇**）：原有 5 篇 `portfolio-optimization`、`thesis-proposal`、`vscode-setup`、`math-typesetting`、`writing-workflow`；2026-10-04 新增 12 篇文献调研笔记 —— `wasserstein-dro-portfolio`、`robust-portfolio-uncertainty-sets`、`high-dim-covariance-estimation`、`end-to-end-portfolio-learning`、`risk-measures-cvar-spectral-drawdown`、`factor-models-sparsity-cardinality`、`mean-estimation-error-and-1n-paradox`、`multiperiod-portfolio-and-transaction-costs`、`backtest-overfitting-and-strategy-evaluation`、`large-scale-portfolio-optimization-algorithms`、`dynamic-risk-measures-time-consistency`、`risk-parity-and-risk-budgeting`
 - **侧栏专题分组**（`content/topics/`，侧栏顺序按 weight 1–6）：`dro-robust` ← wasserstein-dro-portfolio, robust-portfolio-uncertainty-sets；`estimation-highdim` ← mean-estimation-error-and-1n-paradox, high-dim-covariance-estimation；`risk-structure` ← risk-measures-cvar-spectral-drawdown, factor-models-sparsity-cardinality, risk-parity-and-risk-budgeting；`dynamic-compute` ← multiperiod-portfolio-and-transaction-costs, dynamic-risk-measures-time-consistency, large-scale-portfolio-optimization-algorithms；`evaluation-learning` ← backtest-overfitting-and-strategy-evaluation, end-to-end-portfolio-learning；`research-writing` ← portfolio-optimization, thesis-proposal, math-typesetting, vscode-setup, writing-workflow
+- **2026-10-04 本地清理（旧主题残留与缓存，共约 45.9 MB）**：已删 `node_modules/`(18.5MB，HugoBlox/Tailwind)、`resources/`(5.3MB，Hugo 资源缓存)、`_blox-backup/`、`data/authors/me.yaml`(HugoBlox 作者档案)、`assets/media/`(含 421KB slides-logo.svg)、`assets/jsconfig.json`、`.github/workflows/hugo.yml`(旧 Actions 工作流，本就只在 source 分支、不影响 main 的 Pages 部署)、`.hugo_build.lock`、`%TEMP%\hb`(19.4MB 主题/KaTeX 下载暂存)、`%LOCALAPPDATA%\hugo_cache`(2.6MB Hugo Modules 缓存)、`tools/build.sh`、`hugo_gh.txt`/`hugo_out.txt`(旧构建日志)。清理后重建输出与清理前逐字节一致（`Pages 139`、81 个 HTML），`README.md` 已改写为 Hugo Book 版
 - **GitHub Pages 已同步并逐页验证**：`/`、`/about/`、`/blog/`、`/blog/page/2/`、`/tags/`、`/index.xml`、`/sitemap.xml`、`/robots.txt`、`/404.html` 及 **17/17 篇笔记详情页全部 200**；`/katex/katex.min.js`、`/katex/katex.min.css`、`/katex/contrib/auto-render.min.js`、`/katex/fonts/KaTeX_Main-Regular.woff2`、`/minisearch.min.js`、`/favicon.ico`、`/media/authors/me.jpg`、`/uploads/resume.pdf` 均 200；旧 HugoBlox 资源（`/backlinks.json`、`/_headers`、`/_redirects`、`/css/_entry.*.css`、`/js/hb-*.js`、`/publication_types/`）**全部 404**
 - **备用链接 https://songyu-academic-home.app.workbuddy.host/ 仍为旧版**（仍含 `css/_entry.*.css`）—— DSH 侧没有 `workbuddy_sites_deploy` 工具，只能由用户在 WorkBuddy 里点部署
 
