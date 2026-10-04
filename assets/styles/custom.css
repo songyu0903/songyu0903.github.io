@@ -46,3 +46,20 @@
   max-width: 100%;
   height: auto;
 }
+
+/* 首页访客计数：唯一的对外部服务的依赖；服务不可达时由 onerror 整块隐藏 */
+.visitors {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  margin: 1.5rem 0 0.25rem;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+.visitors img {
+  height: 20px;
+  width: auto;
+  vertical-align: middle;
+}

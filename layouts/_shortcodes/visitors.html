@@ -1,0 +1,13 @@
+{{- /* 访客计数徽章（首页底部）
+     服务：https://visitor-badge.laobi.icu —— 实测国内直连约 1s、响应头 Cache-Control: no-cache
+     （每次加载都会真实 +1，不会被浏览器缓存吞掉计数）。page_id 固定为站点域名，
+     因此正式站与备用站共用同一个计数器（即“总访问量”）。
+     如该服务失效：onerror 会把整块隐藏，页面不会出现破图；换服务只需改下面这一行 URL
+     （备选：https://komarev.com/ghpvc/?username=songyu0903&label=Views&color=0e75b6&style=flat）。
+     说明同步记录在 HANDOVER.md §5。 */ -}}
+<div class="visitors">
+  <span class="visitors-label">👀 访问量</span>
+  <img src="https://visitor-badge.laobi.icu/badge?page_id=songyu0903.github.io&amp;left_text=visits"
+       alt="访问量" height="20"
+       onerror="var b=this.closest('.visitors');if(b){b.style.display='none';}" />
+</div>

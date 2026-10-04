@@ -42,3 +42,5 @@ $$\min_{w}\ w^{\top}\Sigma w \quad \text{s.t.}\quad w^{\top}\mu \geq r_{\text{ta
 - **[动态与计算](/topics/dynamic-compute/)**：多期组合与交易成本、时间一致性、一阶算法与可微优化
 - **[策略评估与决策聚焦学习](/topics/evaluation-learning/)**：回测过拟合与搜索感知的绩效推断
 - **[研究入门与写作工具](/topics/research-writing/)**：研究方向综述、开题报告、排版与写作工作流
+
+{{< visitors >}}
