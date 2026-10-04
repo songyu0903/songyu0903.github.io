@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>可调鲁棒 | songyu0903</title><link>https://songyu0903.github.io/tags/%E5%8F%AF%E8%B0%83%E9%B2%81%E6%A3%92/</link><atom:link href="https://songyu0903.github.io/tags/%E5%8F%AF%E8%B0%83%E9%B2%81%E6%A3%92/index.xml" rel="self" type="application/rss+xml"/><description>可调鲁棒</description><generator>HugoBlox Kit (https://hugoblox.com)</generator><language>zh-Hans</language><lastBuildDate>Sun, 04 Oct 2026 00:00:00 +0000</lastBuildDate><image><url>https://songyu0903.github.io/media/icon_hu_cd51c91342a84ed6.png</url><title>可调鲁棒</title><link>https://songyu0903.github.io/tags/%E5%8F%AF%E8%B0%83%E9%B2%81%E6%A3%92/</link></image><item><title>鲁棒投资组合的不确定集设计：从预算参数 Γ 到数据驱动校准</title><link>https://songyu0903.github.io/blog/robust-portfolio-uncertainty-sets/</link><pubDate>Sun, 04 Oct 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/blog/robust-portfolio-uncertainty-sets/</guid><description>&lt;p&gt;&lt;strong&gt;问题定位&lt;/strong&gt;：鲁棒组合解的保守性完全由不确定集决定，而「集从哪来」长期是一个建模判断而非统计结论。本文记录这条线索上被反复引用的结果：预算参数 $\Gamma$ 的可解释性、仿射决策规则带来的结构性保守，以及把 $\Gamma$（或模糊集大小）当作统计量校准的近期工作。&lt;/p&gt;
+&lt;h2 id="一预算不确定集-的语义与代价"&gt;一、预算不确定集：$\Gamma$ 的语义与代价&lt;/h2&gt;
+&lt;p&gt;设名义问题含约束 $\sum_j \tilde a_{ij}w_j\le b_i$，其中系数独立地在区间 $[\bar a_{ij}-\hat a_{ij},\ \bar a_{ij}+\hat a_{ij}]$ 内扰动。Bertsimas &amp;amp; Sim（&lt;em&gt;Operations Research&lt;/em&gt; 52(1):35–53, 2004）引入&lt;strong&gt;至多 $\Gamma_i$ 个系数同时取到最坏值&lt;/strong&gt;的预算不确定集，其鲁棒对应式为线性规划：&lt;/p&gt;
+$$
+\sum_j \bar a_{ij}w_j+\Gamma_i z_i+\sum_j p_{ij}\le b_i,\qquad
+z_i+p_{ij}\ge \hat a_{ij}\,y_j,\quad p_{ij}\ge 0,\quad y_j\ge |w_j| .
+$$&lt;p&gt;$\Gamma=0$ 退化为名义问题，$\Gamma=|J_i|$ 退化为 Soyster 盒式鲁棒；中间取值在两者之间&lt;strong&gt;连续调节保守度&lt;/strong&gt;。更重要的是它给出显式的&lt;strong&gt;违反概率界&lt;/strong&gt;：&lt;/p&gt;
+$$
+\Pr\Big[\textstyle\sum_j \tilde a_{ij}w_j&gt; b_i\Big]\ \le\ \exp\Big(-\frac{\Gamma_i^{2}}{2|J_i|}\Big),
+$$&lt;p&gt;即 $\Gamma$ 可以直接翻译成置信水平——这是该模型被高频引用的真正原因。后续 Bertsimas, den Hertog &amp;amp; Pauphilet（&lt;em&gt;SIAM Journal on Optimization&lt;/em&gt; 31:2893–2920, 2021）把「$\Gamma$ ↔ 违反概率」做成可用的概率保证与校准工具。&lt;/p&gt;
+&lt;blockquote class="border-l-4 border-neutral-300 dark:border-neutral-600 pl-4 italic text-neutral-600 dark:text-neutral-400 my-6"&gt;
+&lt;p&gt;&lt;strong&gt;引用核对提醒&lt;/strong&gt;：本方向常有文献引用「Bertsimas &amp;amp; Sim (2009), &lt;em&gt;Theory and Practice of Robust Optimization&lt;/em&gt;, &lt;em&gt;Operations Research&lt;/em&gt; 57:1485–1506」，该条目在 Crossref 中查无记录（DOI &lt;code&gt;10.1287/opre.1080.0628&lt;/code&gt; 实为 Guide &amp;amp; Van Wassenhove 的闭环供应链论文）。引用预算不确定集时请核对 DOI &lt;code&gt;10.1287/opre.1030.0065&lt;/code&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="二结构性保守可调鲁棒与决策规则"&gt;二、结构性保守：可调鲁棒与决策规则&lt;/h2&gt;
+&lt;p&gt;单阶段鲁棒把全部决策压成「事前」变量，必然保守。Ben-Tal, Goryashko, Guslitzer &amp;amp; Nemirovski（&lt;em&gt;Mathematical Programming&lt;/em&gt; 99(2):351–376, 2004）区分事前决策（here-and-now）与追索决策（wait-and-see），用&lt;strong&gt;仿射决策规则&lt;/strong&gt;（ADR）近似后者，把两阶段问题压成多项式规模凸规划，并给出近似最优性界。&lt;/p&gt;
+&lt;p&gt;对多期组合而言，这一框架的意义在于：&lt;strong&gt;再平衡本身就是一个可调变量&lt;/strong&gt;。多期情形下「先预测后优化」的偏差，一部分来自预测误差，另一部分来自决策规则的限制——把二者分开需要 ADR 这样的显式函数类。&lt;/p&gt;
+&lt;h2 id="三数据驱动校准从--到模糊集大小"&gt;三、数据驱动校准：从 $\Gamma$ 到模糊集大小&lt;/h2&gt;
+&lt;p&gt;不确定集的大小既是保守性旋钮，也是统计量。三条近期路线：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;广义经验似然视角&lt;/strong&gt;：Duchi, Glynn &amp;amp; Namkoong（&lt;em&gt;Mathematics of Operations Research&lt;/em&gt; 46(3), 2021）把 DRO 半径与置信水平的对应关系系统化，为「半径 = 由数据校准的量」提供理论基石。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;中心与半径的联合学习&lt;/strong&gt;：Guo（
+, 2026）让预测模型确定名义分布、另一个模型估计数据依赖的半径，对&lt;strong&gt;任意学习得到的中心&lt;/strong&gt;给出有限样本保证，并用 split-conformal 做有限样本边际校准。其结论值得原文引用：学习加校准提升的是&lt;strong&gt;可靠性&lt;/strong&gt;，并不自动导致更小的半径或更好的决策。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;乐观—悲观的连续插值&lt;/strong&gt;：Tsang &amp;amp; Shehadeh（
+）用「size 参数 = 乐观程度、shape 参数 = 模糊度」的模糊集族连接乐观与悲观极端；证明星形 shape、以经验分布为星中心是层级结构的&lt;strong&gt;充要条件&lt;/strong&gt;，并给出最优值与解集的几乎必然收敛性。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;综述入口&lt;/strong&gt;：Ghahtarani, Saif &amp;amp; Ghasemi（&lt;em&gt;Operational Research&lt;/em&gt; 22(4):3203–3264, 2022）按「金融问题 × 不确定集类型（盒/椭球/预算 $\Gamma$/多面体/数据驱动）× 方法（静态/可调/分布鲁棒）」四维分类，并列出不确定集校准、情景内生化等开放问题。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="四前沿决策依赖的不确定性与-esg-约束"&gt;四、前沿：决策依赖的不确定性与 ESG 约束&lt;/h2&gt;
+&lt;p&gt;更具张力的一类设定是&lt;strong&gt;不确定性本身依赖于决策&lt;/strong&gt;（内生不确定性）。Liu &amp;amp; Zhao（&lt;em&gt;Mathematics&lt;/em&gt; 14(15):2793, 2026）在 ESG 感知组合中构造收益与 ESG 得分的联合多面体不确定集，其中收益边界依赖第一阶段权重（通过 ESG 相关持仓），并采用两阶段可调鲁棒 + 追索再平衡 + 比例交易成本，CVaR 约束经 Rockafellar–Uryasev 线性化后嵌入 column-and-constraint generation 求解。该文为 2026 年新刊文、引用量极低，出版商站点直连受限，实验细节尚未核对，引用时应保持审慎。&lt;/p&gt;
+&lt;p&gt;另一条路径是把鲁棒程度交给学习：Costa &amp;amp; Iyengar（
+）把预测层与鲁棒决策层&lt;strong&gt;联合训练&lt;/strong&gt;，用凸对偶把 minimax 结构化为可反向传播的形式，风险容忍度与鲁棒程度直接从数据学习而非人工设定。&lt;/p&gt;
+&lt;h2 id="五适用边界"&gt;五、适用边界&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;$\Gamma$ 的概率界建立在&lt;strong&gt;系数独立、对称分布&lt;/strong&gt;的假设上；相关性、厚尾或结构性漂移会显著改变实际的违反概率。&lt;/li&gt;
+&lt;li&gt;椭球不确定集下的稳健组合等价于在均值—方差目标上加 $\ell_2$ 惩罚（「稳健化即正则化」）；这一等价说明&lt;strong&gt;保守性可以直接定价&lt;/strong&gt;，但也意味着鲁棒模型的能力上限受限于该惩罚的形式。&lt;/li&gt;
+&lt;li&gt;ADR 是近似：它把追索限制在参数的仿射函数类内，其保守性来源与预测误差不同，二者需分别度量。&lt;/li&gt;
+&lt;li&gt;由数据校准半径的方法（RWPI、共形预测）给出的保证多为&lt;strong&gt;边际&lt;/strong&gt;或渐近保证；条件性的有限样本保证在组合问题上仍稀缺。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="六对本人研究方向的启发"&gt;六、对本人研究方向的启发&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;把 $\Gamma$ 的语义从约束层面转到决策层面&lt;/strong&gt;：现有概率界刻画的是「约束被违反的概率」，而组合优化关心的是「决策质量的损失」。把违反概率界改造成&lt;strong&gt;决策质量的下界&lt;/strong&gt;，是一个表述自然、工具成熟（概率界 + 对偶）的切口。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;内生不确定性 + 组合约束&lt;/strong&gt;：ESG、流动性、容量约束都会让不确定性依赖持仓；这类问题的可调鲁棒重构与求解仍不成熟。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;校准与保守性的联合度量&lt;/strong&gt;：把「校准后半径」与「组合层面的决策损失」放进同一评价框架，可以比较不同模糊集构造（矩约束 / $\phi$-散度 / Wasserstein / 预算 $\Gamma$）的真实代价，而不依赖个案的样本外胜负。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="参考文献"&gt;参考文献&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Bertsimas, D., &amp;amp; Sim, M. (2004). The price of robustness. &lt;em&gt;Operations Research&lt;/em&gt;, 52(1), 35–53.
+&lt;/li&gt;
+&lt;li&gt;Ben-Tal, A., Goryashko, A., Guslitzer, E., &amp;amp; Nemirovski, A. (2004). Adjustable robust solutions of uncertain linear programs. &lt;em&gt;Mathematical Programming&lt;/em&gt;, 99(2), 351–376.
+&lt;/li&gt;
+&lt;li&gt;Bertsimas, D., den Hertog, D., &amp;amp; Pauphilet, J. (2021). Probabilistic guarantees in robust optimization. &lt;em&gt;SIAM Journal on Optimization&lt;/em&gt;, 31, 2893–2920.
+&lt;/li&gt;
+&lt;li&gt;Duchi, J., Glynn, P., &amp;amp; Namkoong, H. (2021). Statistics of robust optimization: A generalized empirical likelihood approach. &lt;em&gt;Mathematics of Operations Research&lt;/em&gt;, 46(3).
+&lt;/li&gt;
+&lt;li&gt;Ghahtarani, A., Saif, A., &amp;amp; Ghasemi, A. (2022). Robust portfolio selection problems: A comprehensive review. &lt;em&gt;Operational Research&lt;/em&gt;, 22(4), 3203–3264.
+&lt;/li&gt;
+&lt;li&gt;Liu, Y., &amp;amp; Zhao, L. (2026). An adjustable robust approach for ESG-aware portfolio optimization under decision-dependent return uncertainty. &lt;em&gt;Mathematics&lt;/em&gt;, 14(15), 2793.
+&lt;/li&gt;
+&lt;li&gt;Tsang, M. Y., &amp;amp; Shehadeh, K. S. (2024/2025).
+（预印本）&lt;/li&gt;
+&lt;li&gt;Guo, Z. (2026).
+（预印本）&lt;/li&gt;
+&lt;li&gt;Costa, G., &amp;amp; Iyengar, G. N. (2022).
+（预印本）&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

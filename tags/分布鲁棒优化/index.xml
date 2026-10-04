@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>分布鲁棒优化 | songyu0903</title><link>https://songyu0903.github.io/tags/%E5%88%86%E5%B8%83%E9%B2%81%E6%A3%92%E4%BC%98%E5%8C%96/</link><atom:link href="https://songyu0903.github.io/tags/%E5%88%86%E5%B8%83%E9%B2%81%E6%A3%92%E4%BC%98%E5%8C%96/index.xml" rel="self" type="application/rss+xml"/><description>分布鲁棒优化</description><generator>HugoBlox Kit (https://hugoblox.com)</generator><language>zh-Hans</language><lastBuildDate>Sun, 04 Oct 2026 00:00:00 +0000</lastBuildDate><image><url>https://songyu0903.github.io/media/icon_hu_cd51c91342a84ed6.png</url><title>分布鲁棒优化</title><link>https://songyu0903.github.io/tags/%E5%88%86%E5%B8%83%E9%B2%81%E6%A3%92%E4%BC%98%E5%8C%96/</link></image><item><title>Wasserstein 分布鲁棒投资组合：对偶结构、半径校准与有限样本保证</title><link>https://songyu0903.github.io/blog/wasserstein-dro-portfolio/</link><pubDate>Sun, 04 Oct 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/blog/wasserstein-dro-portfolio/</guid><description>&lt;p&gt;&lt;strong&gt;问题定位&lt;/strong&gt;：分布鲁棒优化（DRO）处理的是「分布本身不可信」这一比参数不确定更弱的先验。本文记录该方向上以 Wasserstein 球为模糊集的主线文献：对偶如何把无穷维问题压成有限维、半径 $\varepsilon$ 如何被统计地校准、以及有限样本保证在什么条件下失效。&lt;/p&gt;
+&lt;h2 id="一模型与对偶结构"&gt;一、模型与对偶结构&lt;/h2&gt;
+&lt;p&gt;沿用统一记号：$N$ 个资产，权重 $\mathbf{w}\in\mathcal{W}=\{\mathbf{w}:\mathbf{1}^\top\mathbf{w}=1,\ \mathbf{w}\ge 0\}$，随机参数 $\boldsymbol{\xi}$（收益向量），损失 $L(\mathbf{w},\boldsymbol{\xi})$。样本 $\{\boldsymbol{\xi}_t\}_{t=1}^T$ 给出经验测度 $\hat P_T$。&lt;/p&gt;
+&lt;p&gt;样本平均近似（SAA）求解 $\min_{\mathbf{w}\in\mathcal{W}}\frac{1}{T}\sum_{t}L(\mathbf{w},\boldsymbol{\xi}_t)$；DRO 则把经验测度放大为一个集合：&lt;/p&gt;
+$$
+\min_{\mathbf{w}\in\mathcal{W}}\ \sup_{P\in\mathcal{B}_\varepsilon(\hat P_T)}\ \mathbb{E}_P\big[L(\mathbf{w},\boldsymbol{\xi})\big],
+\qquad
+\mathcal{B}_\varepsilon(\hat P_T)=\big\{P:\ W_p(P,\hat P_T)\le\varepsilon\big\}.
+$$&lt;p&gt;$p$ 阶 Wasserstein 球上的最坏期望有对偶表示（Mohajerin Esfahani &amp;amp; Kuhn, 2019）：&lt;/p&gt;
+&lt;h1 id="sup_pinmathcalb_varepsilonhat-p_tmathbbe_pl"&gt;$$
+\sup_{P\in\mathcal{B}_\varepsilon(\hat P_T)}\mathbb{E}_P[L]&lt;/h1&gt;
+&lt;p&gt;\inf_{\lambda\ge 0}\Big{\lambda\varepsilon^{p}
++\frac{1}{T}\sum_{t=1}&lt;sup&gt;{T}\sup_{\boldsymbol{\xi}}\big[L(\mathbf{w},\boldsymbol{\xi})-\lambda, d(\boldsymbol{\xi},\boldsymbol{\xi}_t)&lt;/sup&gt;{p}\big]\Big}.
+$$&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;这条对偶是整个方向的引擎&lt;/strong&gt;：左侧是无穷维测度优化，右侧是有限维凸规划。当 $L$ 关于 $\boldsymbol{\xi}$ 分段线性、ground metric 取 $\|\cdot\|_1$ 时，内层 $\sup$ 可解析求出，整体退化为线性规划——可解性因此不是主要障碍。&lt;/p&gt;
+&lt;h2 id="二半径--是统计量不是超参数"&gt;二、半径 $\varepsilon$ 是统计量，不是超参数&lt;/h2&gt;
+&lt;p&gt;半径决定模型的保守程度，其选取是该方向最核心的方法学问题。用测度集中不等式可得：在轻尾假设下取&lt;/p&gt;
+$$
+\varepsilon_T(\beta)\ \asymp\ \Big(\frac{\log(1/\beta)}{T}\Big)^{1/\max\{p,2\}},
+$$&lt;p&gt;则 $P\big\{W_p(P,\hat P_T)\le\varepsilon\big\}\ge 1-\beta$，于是稳健最优值是真实性能的一个 $1-\beta$ 置信上界。需要注意两点边界：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;经验测度以 Wasserstein 距离逼近真实分布的收敛率同时依赖维数（Fournier–Guillin 型结果）。高维下同一半径会迅速变得过度保守，这是「数据自适应半径」的直接动因。&lt;/li&gt;
+&lt;li&gt;该保证要求样本独立同分布；序列相依与分布漂移需要另行处理。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="三20192026三条推进主线"&gt;三、2019–2026：三条推进主线&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;（1）对偶 ⇒ 正则化。&lt;/strong&gt; Gao, Chen &amp;amp; Kleywegt（&lt;em&gt;Operations Research&lt;/em&gt; 72(3):1177–1191, 2024）证明 Wasserstein DRO 等价于&lt;strong&gt;变差正则化&lt;/strong&gt;（variation regularization），推广了全变差、Lipschitz 与梯度正则，并且不要求凸性、光滑性与欧氏空间假设。这把「稳健化即正则化」这一直观在 Wasserstein 情形下完全一般化，并由正则化理论导出新的泛化界。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;（2）均值—方差的直接推广。&lt;/strong&gt; Blanchet, Chen &amp;amp; Zhou（&lt;em&gt;Management Science&lt;/em&gt; 68(9), 2022）把分布鲁棒均值—方差&lt;strong&gt;归约为「经验方差最小化 + 一个额外正则项」&lt;/strong&gt;，不引入半无穷或整数结构；半径与稳健目标收益由 &lt;strong&gt;RWPI&lt;/strong&gt;（robust Wasserstein profile inference，其方法源头见 Blanchet, Kang &amp;amp; Murthy, &lt;em&gt;J. Appl. Probab.&lt;/em&gt; 56(3):830–857, 2019——该文同时说明 $\sqrt{\text{LASSO}}$、正则化 logistic 回归可精确表示为 Wasserstein DRO）数据驱动地确定，从而避免交叉验证。S&amp;amp;P 500 回测优于 Fama–French 与 Black–Litterman 基准。&lt;/p&gt;
+&lt;p&gt;高维推广见 Wu, Yang, Shang &amp;amp; Zhu（
+, 2024）：借助因子结构降维 + 数据自适应估计半径，Monte-Carlo 显示所估半径与目标收益接近 oracle；同类工作还有均值—下半绝对偏差（DR-MLSAD）版本（
+），用 RWPI 选半径并以邻近点对偶半光滑牛顿法求解。两者均为预印本，定理条件的细节尚未逐条复核。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;（3）多源数据与条件信息。&lt;/strong&gt; Rychener 等（
+）用 &lt;strong&gt;$K$ 个最优传输邻域之交&lt;/strong&gt;刻画多个（可能系统性有偏的）数据源，结论是：当决策者对偏差方向有先验时，样本外性能随数据源数 $K$ 提升，且&lt;strong&gt;与偏差幅度无关&lt;/strong&gt;；计算上只需 $K$ 或风险因子维数之一为常数。Nguyen 等（
+）则把球建在&lt;strong&gt;协变量与收益的联合分布&lt;/strong&gt;上，把条件信息纳入模糊集：均值—方差情形化为二阶锥规划，均值—CVaR 情形化为半定规划。&lt;/p&gt;
+&lt;h2 id="四适用边界"&gt;四、适用边界&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;保守性—效率张力&lt;/strong&gt;：$\varepsilon$ 过大时解退化——Hsieh &amp;amp; Yu（
+）在对数最优组合中发现，无交易成本时最优解趋于等权，含凸交易成本时仓位向无风险资产偏移；$\varepsilon\to 0$ 则退回 SAA。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;对偶的解析性依赖损失结构&lt;/strong&gt;：分段线性/Lipschitz 损失可直接得到 LP/SOCP；一般非线性效用需重新推导重构（Hsieh &amp;amp; Gan,
+在 long-only、box 支撑与 $\ell_1$ ground metric 下给出样本特定顶点重构，将问题压成多项式规模 LP，实测 476 个资产）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;可解性 ≠ 统计效率&lt;/strong&gt;：以近年进展看，计算规模已不是瓶颈；瓶颈在半径的相合性、维数效应与漂移下的有效性。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;非 i.i.d. 场景&lt;/strong&gt;：Long（
+, NeurIPS 2025 Workshop）针对 CVaR 约束与分布漂移，用 block multiplier bootstrap 标定同时置信带、在候选解中选「最不保守的可行解」，并在有效样本量崩溃时弃权——属探索性工作，尚未经正式评审。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="五对本人研究方向的启发"&gt;五、对本人研究方向的启发&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;半径校准是可落地的切口&lt;/strong&gt;：RWPI、共形预测与数据自适应估计各有理论工具，但 Guo（
+）的结论相当克制——学习中心与半径能提升可靠性，&lt;strong&gt;并不自动给出更小的半径或更好的决策&lt;/strong&gt;。这一空白可以由「校准后的保守性界 + 组合层面的决策质量」联合刻画。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;「DRO ≡ 正则化」提供了统一语言&lt;/strong&gt;：可把已有的 $\ell_1/\ell_2$ 惩罚、因子惩罚重新解释为某个模糊集下的稳健化，从而给出跨模型的保守性度量，而不必逐一做样本外比拼。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;条件信息 + 多期 + 交易成本几乎是空白&lt;/strong&gt;：目前条件最优传输球的工作多为单期；把条件模糊集与多期可调鲁棒结合，是结构上自然、文献上稀薄的方向。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="参考文献"&gt;参考文献&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Mohajerin Esfahani, P., &amp;amp; Kuhn, D. (2019). Data-driven distributionally robust optimization using the Wasserstein metric. &lt;em&gt;Mathematical Programming&lt;/em&gt;, 171(1–2), 115–166.
+·
+&lt;/li&gt;
+&lt;li&gt;Kuhn, D., Shafiee, S., &amp;amp; Wiesemann, W. (2025). Distributionally robust optimization. &lt;em&gt;Acta Numerica&lt;/em&gt;, 34, 579–804.
+·
+&lt;/li&gt;
+&lt;li&gt;Gao, R., Chen, X., &amp;amp; Kleywegt, A. J. (2024). Wasserstein distributionally robust optimization and variation regularization. &lt;em&gt;Operations Research&lt;/em&gt;, 72(3), 1177–1191.
+&lt;/li&gt;
+&lt;li&gt;Blanchet, J., Chen, L., &amp;amp; Zhou, X. Y. (2022). Distributionally robust mean-variance portfolio selection with Wasserstein distances. &lt;em&gt;Management Science&lt;/em&gt;, 68(9).
+·
+&lt;/li&gt;
+&lt;li&gt;Blanchet, J., Kang, Y., &amp;amp; Murthy, K. (2019). Robust Wasserstein profile inference and applications to machine learning. &lt;em&gt;Journal of Applied Probability&lt;/em&gt;, 56(3), 830–857.
+&lt;/li&gt;
+&lt;li&gt;Rychener, Y., Esteban-Perez, A., Morales, J. M., &amp;amp; Kuhn, D. (2024/2026).
+（预印本）&lt;/li&gt;
+&lt;li&gt;Nguyen, V. A., Zhang, F., Wang, S., Blanchet, J., Delage, E., &amp;amp; Ye, Y. (2024).
+（预印本）&lt;/li&gt;
+&lt;li&gt;Wu, Q., Yang, Y., Shang, Z., &amp;amp; Zhu, Z. (2024).
+（预印本）&lt;/li&gt;
+&lt;li&gt;Hsieh, Y.-G., &amp;amp; Yu, X. (2024).
+（预印本）&lt;/li&gt;
+&lt;li&gt;Hsieh, Y.-G., &amp;amp; Gan, R. (2026).
+（预印本）&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

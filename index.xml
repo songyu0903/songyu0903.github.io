@@ -1,4 +1,277 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>songyu0903</title><link>https://songyu0903.github.io/</link><atom:link href="https://songyu0903.github.io/index.xml" rel="self" type="application/rss+xml"/><description>songyu0903</description><generator>HugoBlox Kit (https://hugoblox.com)</generator><language>zh-Hans</language><lastBuildDate>Sat, 03 Oct 2026 00:00:00 +0000</lastBuildDate><image><url>https://songyu0903.github.io/media/icon_hu_cd51c91342a84ed6.png</url><title>songyu0903</title><link>https://songyu0903.github.io/</link></image><item><title>LaTeX 环境配置：TeX Live + VS Code 工作流</title><link>https://songyu0903.github.io/blog/vscode-setup/</link><pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/blog/vscode-setup/</guid><description>&lt;p&gt;网上很多教程还在推荐 TeXstudio、WinEdt 这类专用编辑器，其实 &lt;strong&gt;VS Code + LaTeX Workshop&lt;/strong&gt; 才是目前体验最好的方案：一个编辑器搞定代码、笔记、论文三件事。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>songyu0903</title><link>https://songyu0903.github.io/</link><atom:link href="https://songyu0903.github.io/index.xml" rel="self" type="application/rss+xml"/><description>songyu0903</description><generator>HugoBlox Kit (https://hugoblox.com)</generator><language>zh-Hans</language><lastBuildDate>Sat, 03 Oct 2026 00:00:00 +0000</lastBuildDate><image><url>https://songyu0903.github.io/media/icon_hu_cd51c91342a84ed6.png</url><title>songyu0903</title><link>https://songyu0903.github.io/</link></image><item><title>Wasserstein 分布鲁棒投资组合：对偶结构、半径校准与有限样本保证</title><link>https://songyu0903.github.io/blog/wasserstein-dro-portfolio/</link><pubDate>Sun, 04 Oct 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/blog/wasserstein-dro-portfolio/</guid><description>&lt;p&gt;&lt;strong&gt;问题定位&lt;/strong&gt;：分布鲁棒优化（DRO）处理的是「分布本身不可信」这一比参数不确定更弱的先验。本文记录该方向上以 Wasserstein 球为模糊集的主线文献：对偶如何把无穷维问题压成有限维、半径 $\varepsilon$ 如何被统计地校准、以及有限样本保证在什么条件下失效。&lt;/p&gt;
+&lt;h2 id="一模型与对偶结构"&gt;一、模型与对偶结构&lt;/h2&gt;
+&lt;p&gt;沿用统一记号：$N$ 个资产，权重 $\mathbf{w}\in\mathcal{W}=\{\mathbf{w}:\mathbf{1}^\top\mathbf{w}=1,\ \mathbf{w}\ge 0\}$，随机参数 $\boldsymbol{\xi}$（收益向量），损失 $L(\mathbf{w},\boldsymbol{\xi})$。样本 $\{\boldsymbol{\xi}_t\}_{t=1}^T$ 给出经验测度 $\hat P_T$。&lt;/p&gt;
+&lt;p&gt;样本平均近似（SAA）求解 $\min_{\mathbf{w}\in\mathcal{W}}\frac{1}{T}\sum_{t}L(\mathbf{w},\boldsymbol{\xi}_t)$；DRO 则把经验测度放大为一个集合：&lt;/p&gt;
+$$
+\min_{\mathbf{w}\in\mathcal{W}}\ \sup_{P\in\mathcal{B}_\varepsilon(\hat P_T)}\ \mathbb{E}_P\big[L(\mathbf{w},\boldsymbol{\xi})\big],
+\qquad
+\mathcal{B}_\varepsilon(\hat P_T)=\big\{P:\ W_p(P,\hat P_T)\le\varepsilon\big\}.
+$$&lt;p&gt;$p$ 阶 Wasserstein 球上的最坏期望有对偶表示（Mohajerin Esfahani &amp;amp; Kuhn, 2019）：&lt;/p&gt;
+&lt;h1 id="sup_pinmathcalb_varepsilonhat-p_tmathbbe_pl"&gt;$$
+\sup_{P\in\mathcal{B}_\varepsilon(\hat P_T)}\mathbb{E}_P[L]&lt;/h1&gt;
+&lt;p&gt;\inf_{\lambda\ge 0}\Big{\lambda\varepsilon^{p}
++\frac{1}{T}\sum_{t=1}&lt;sup&gt;{T}\sup_{\boldsymbol{\xi}}\big[L(\mathbf{w},\boldsymbol{\xi})-\lambda, d(\boldsymbol{\xi},\boldsymbol{\xi}_t)&lt;/sup&gt;{p}\big]\Big}.
+$$&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;这条对偶是整个方向的引擎&lt;/strong&gt;：左侧是无穷维测度优化，右侧是有限维凸规划。当 $L$ 关于 $\boldsymbol{\xi}$ 分段线性、ground metric 取 $\|\cdot\|_1$ 时，内层 $\sup$ 可解析求出，整体退化为线性规划——可解性因此不是主要障碍。&lt;/p&gt;
+&lt;h2 id="二半径--是统计量不是超参数"&gt;二、半径 $\varepsilon$ 是统计量，不是超参数&lt;/h2&gt;
+&lt;p&gt;半径决定模型的保守程度，其选取是该方向最核心的方法学问题。用测度集中不等式可得：在轻尾假设下取&lt;/p&gt;
+$$
+\varepsilon_T(\beta)\ \asymp\ \Big(\frac{\log(1/\beta)}{T}\Big)^{1/\max\{p,2\}},
+$$&lt;p&gt;则 $P\big\{W_p(P,\hat P_T)\le\varepsilon\big\}\ge 1-\beta$，于是稳健最优值是真实性能的一个 $1-\beta$ 置信上界。需要注意两点边界：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;经验测度以 Wasserstein 距离逼近真实分布的收敛率同时依赖维数（Fournier–Guillin 型结果）。高维下同一半径会迅速变得过度保守，这是「数据自适应半径」的直接动因。&lt;/li&gt;
+&lt;li&gt;该保证要求样本独立同分布；序列相依与分布漂移需要另行处理。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="三20192026三条推进主线"&gt;三、2019–2026：三条推进主线&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;（1）对偶 ⇒ 正则化。&lt;/strong&gt; Gao, Chen &amp;amp; Kleywegt（&lt;em&gt;Operations Research&lt;/em&gt; 72(3):1177–1191, 2024）证明 Wasserstein DRO 等价于&lt;strong&gt;变差正则化&lt;/strong&gt;（variation regularization），推广了全变差、Lipschitz 与梯度正则，并且不要求凸性、光滑性与欧氏空间假设。这把「稳健化即正则化」这一直观在 Wasserstein 情形下完全一般化，并由正则化理论导出新的泛化界。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;（2）均值—方差的直接推广。&lt;/strong&gt; Blanchet, Chen &amp;amp; Zhou（&lt;em&gt;Management Science&lt;/em&gt; 68(9), 2022）把分布鲁棒均值—方差&lt;strong&gt;归约为「经验方差最小化 + 一个额外正则项」&lt;/strong&gt;，不引入半无穷或整数结构；半径与稳健目标收益由 &lt;strong&gt;RWPI&lt;/strong&gt;（robust Wasserstein profile inference，其方法源头见 Blanchet, Kang &amp;amp; Murthy, &lt;em&gt;J. Appl. Probab.&lt;/em&gt; 56(3):830–857, 2019——该文同时说明 $\sqrt{\text{LASSO}}$、正则化 logistic 回归可精确表示为 Wasserstein DRO）数据驱动地确定，从而避免交叉验证。S&amp;amp;P 500 回测优于 Fama–French 与 Black–Litterman 基准。&lt;/p&gt;
+&lt;p&gt;高维推广见 Wu, Yang, Shang &amp;amp; Zhu（
+, 2024）：借助因子结构降维 + 数据自适应估计半径，Monte-Carlo 显示所估半径与目标收益接近 oracle；同类工作还有均值—下半绝对偏差（DR-MLSAD）版本（
+），用 RWPI 选半径并以邻近点对偶半光滑牛顿法求解。两者均为预印本，定理条件的细节尚未逐条复核。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;（3）多源数据与条件信息。&lt;/strong&gt; Rychener 等（
+）用 &lt;strong&gt;$K$ 个最优传输邻域之交&lt;/strong&gt;刻画多个（可能系统性有偏的）数据源，结论是：当决策者对偏差方向有先验时，样本外性能随数据源数 $K$ 提升，且&lt;strong&gt;与偏差幅度无关&lt;/strong&gt;；计算上只需 $K$ 或风险因子维数之一为常数。Nguyen 等（
+）则把球建在&lt;strong&gt;协变量与收益的联合分布&lt;/strong&gt;上，把条件信息纳入模糊集：均值—方差情形化为二阶锥规划，均值—CVaR 情形化为半定规划。&lt;/p&gt;
+&lt;h2 id="四适用边界"&gt;四、适用边界&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;保守性—效率张力&lt;/strong&gt;：$\varepsilon$ 过大时解退化——Hsieh &amp;amp; Yu（
+）在对数最优组合中发现，无交易成本时最优解趋于等权，含凸交易成本时仓位向无风险资产偏移；$\varepsilon\to 0$ 则退回 SAA。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;对偶的解析性依赖损失结构&lt;/strong&gt;：分段线性/Lipschitz 损失可直接得到 LP/SOCP；一般非线性效用需重新推导重构（Hsieh &amp;amp; Gan,
+在 long-only、box 支撑与 $\ell_1$ ground metric 下给出样本特定顶点重构，将问题压成多项式规模 LP，实测 476 个资产）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;可解性 ≠ 统计效率&lt;/strong&gt;：以近年进展看，计算规模已不是瓶颈；瓶颈在半径的相合性、维数效应与漂移下的有效性。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;非 i.i.d. 场景&lt;/strong&gt;：Long（
+, NeurIPS 2025 Workshop）针对 CVaR 约束与分布漂移，用 block multiplier bootstrap 标定同时置信带、在候选解中选「最不保守的可行解」，并在有效样本量崩溃时弃权——属探索性工作，尚未经正式评审。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="五对本人研究方向的启发"&gt;五、对本人研究方向的启发&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;半径校准是可落地的切口&lt;/strong&gt;：RWPI、共形预测与数据自适应估计各有理论工具，但 Guo（
+）的结论相当克制——学习中心与半径能提升可靠性，&lt;strong&gt;并不自动给出更小的半径或更好的决策&lt;/strong&gt;。这一空白可以由「校准后的保守性界 + 组合层面的决策质量」联合刻画。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;「DRO ≡ 正则化」提供了统一语言&lt;/strong&gt;：可把已有的 $\ell_1/\ell_2$ 惩罚、因子惩罚重新解释为某个模糊集下的稳健化，从而给出跨模型的保守性度量，而不必逐一做样本外比拼。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;条件信息 + 多期 + 交易成本几乎是空白&lt;/strong&gt;：目前条件最优传输球的工作多为单期；把条件模糊集与多期可调鲁棒结合，是结构上自然、文献上稀薄的方向。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="参考文献"&gt;参考文献&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Mohajerin Esfahani, P., &amp;amp; Kuhn, D. (2019). Data-driven distributionally robust optimization using the Wasserstein metric. &lt;em&gt;Mathematical Programming&lt;/em&gt;, 171(1–2), 115–166.
+·
+&lt;/li&gt;
+&lt;li&gt;Kuhn, D., Shafiee, S., &amp;amp; Wiesemann, W. (2025). Distributionally robust optimization. &lt;em&gt;Acta Numerica&lt;/em&gt;, 34, 579–804.
+·
+&lt;/li&gt;
+&lt;li&gt;Gao, R., Chen, X., &amp;amp; Kleywegt, A. J. (2024). Wasserstein distributionally robust optimization and variation regularization. &lt;em&gt;Operations Research&lt;/em&gt;, 72(3), 1177–1191.
+&lt;/li&gt;
+&lt;li&gt;Blanchet, J., Chen, L., &amp;amp; Zhou, X. Y. (2022). Distributionally robust mean-variance portfolio selection with Wasserstein distances. &lt;em&gt;Management Science&lt;/em&gt;, 68(9).
+·
+&lt;/li&gt;
+&lt;li&gt;Blanchet, J., Kang, Y., &amp;amp; Murthy, K. (2019). Robust Wasserstein profile inference and applications to machine learning. &lt;em&gt;Journal of Applied Probability&lt;/em&gt;, 56(3), 830–857.
+&lt;/li&gt;
+&lt;li&gt;Rychener, Y., Esteban-Perez, A., Morales, J. M., &amp;amp; Kuhn, D. (2024/2026).
+（预印本）&lt;/li&gt;
+&lt;li&gt;Nguyen, V. A., Zhang, F., Wang, S., Blanchet, J., Delage, E., &amp;amp; Ye, Y. (2024).
+（预印本）&lt;/li&gt;
+&lt;li&gt;Wu, Q., Yang, Y., Shang, Z., &amp;amp; Zhu, Z. (2024).
+（预印本）&lt;/li&gt;
+&lt;li&gt;Hsieh, Y.-G., &amp;amp; Yu, X. (2024).
+（预印本）&lt;/li&gt;
+&lt;li&gt;Hsieh, Y.-G., &amp;amp; Gan, R. (2026).
+（预印本）&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>端到端学习与决策聚焦的组合优化：预测—优化错配及其修正</title><link>https://songyu0903.github.io/blog/end-to-end-portfolio-learning/</link><pubDate>Sun, 04 Oct 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/blog/end-to-end-portfolio-learning/</guid><description>&lt;p&gt;&lt;strong&gt;问题定位&lt;/strong&gt;：两阶段流程「先用 MSE 训练预测器，再代入优化器」在目标上是不一致的——预测精度不等于决策质量。本文整理修正这一错配的三条技术路线，并重点记录近期的&lt;strong&gt;负面结果&lt;/strong&gt;：它们决定了这条线是否值得投入。&lt;/p&gt;
+&lt;h2 id="一错配的来源与-spo-损失"&gt;一、错配的来源与 SPO 损失&lt;/h2&gt;
+&lt;p&gt;设决策问题 $\min_{z\in Z} c(\boldsymbol{\xi})^\top z$，$z^{*}(c)$ 为最优解。给定预测 $\hat c$ 与真实 $c$，&lt;strong&gt;SPO 损失&lt;/strong&gt;直接度量决策误差：&lt;/p&gt;
+$$
+\ell_{SPO}(\hat c, c)=c^\top z^{*}(c)-c^\top z^{*}(\hat c).
+$$&lt;p&gt;该损失非凸且不连续，Elmachtoub &amp;amp; Grigas（&lt;em&gt;Management Science&lt;/em&gt; 68(1):9–26, 2022）用对偶理论导出凸替代 &lt;strong&gt;SPO+&lt;/strong&gt;：&lt;/p&gt;
+$$
+\ell_{SPO+}(\hat c, c)=\max_{z\in Z}\big\{(c-2\hat c)^\top z\big\}+2\hat c^\top z^{*}(c)-c^\top z^{*}(c),
+$$&lt;p&gt;并在温和条件下证明其统计一致性。值得注意的是其实验结论：&lt;strong&gt;线性模型 + SPO+ 常胜过随机森林&lt;/strong&gt;——在模型误设时，目标层次的修正比模型容量更重要。&lt;/p&gt;
+&lt;h2 id="二三条技术路线"&gt;二、三条技术路线&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;（1）代理损失路线。&lt;/strong&gt; 以 SPO+ 为代表：把决策损失替换为可优化的凸代理。计算便宜、适用线性目标的多面体/凸/混合整数问题；但组合问题里的方差项、CVaR 项会破坏原有的凸性论证，需要逐案重构。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;（2）可微优化层与隐式微分。&lt;/strong&gt; 对强凸 QP，解对参数的雅可比可由 &lt;strong&gt;KKT 系统的隐式微分&lt;/strong&gt;给出，无需展开求解器迭代。Butler &amp;amp; Kwon（&lt;em&gt;Quantitative Finance&lt;/em&gt; 23:429–452, 2023）把回归预测器直接嵌入均值—方差优化：无约束与等式约束情形给出闭式解，一般不等式约束用可高效求解批量 QP 的神经网络结构。多期情形见 Linghu, Liu &amp;amp; Deng（
+）：预测器输出多期收益、参数化可微凸优化层，并用 &lt;strong&gt;mirror-descent 不动点（MDFP）微分&lt;/strong&gt;避免分解 KKT 系统，隐式梯度更稳定、运行时间对决策步长几乎不敏感。稀疏切线组合则把 Sharpe 最大化改写为 DPP 兼容的凸规划层，用 &lt;strong&gt;smooth top-k&lt;/strong&gt; 精确控制基数（
+，会议标注仅见于 arXiv comments 字段）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;（3）KKT 单层化。&lt;/strong&gt; Nosaka, Ikeda &amp;amp; Takano（
+）把下层均值—方差的 &lt;strong&gt;KKT 最优性条件&lt;/strong&gt;并入上层，构成单层优化式，并显式保留预算约束与卖空约束、不做软松弛。其动机正是：既有 MVO-DFL 依赖代理损失或约束松弛，训练问题与评测问题之间存在&lt;strong&gt;结构性错配&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id="三与分布鲁棒的交汇"&gt;三、与分布鲁棒的交汇&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;把模糊集本身当作可学习对象&lt;/strong&gt;：Ohnemus, Fochesato, Zuliani &amp;amp; Lygeros（
+, 2025）指出最优传输 DRO 惯用的两步法（先定模糊集、再嵌入下游决策）会导致过度保守，改为端到端学习 decision-focused 的模糊集形状，用双层优化 + hypergradient 求解，并借助非光滑保守隐函数定理证明收敛到临界点。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;联合训练预测层与鲁棒决策层&lt;/strong&gt;：Costa &amp;amp; Iyengar（
+）用凸对偶把 minimax 结构化为可反向传播的形式，风险容忍度与鲁棒程度直接从数据学习。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="四负面结果与诊断决定投入价值的部分"&gt;四、负面结果与诊断（决定投入价值的部分）&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;信号膨胀与过度换手&lt;/strong&gt;：Wang &amp;amp; Hasuike（
+；期刊版 &lt;em&gt;JACIII&lt;/em&gt; 30:1515–1525, 2026）发现 SPO 型决策聚焦学习会产生&lt;strong&gt;膨胀的收益信号&lt;/strong&gt;与不稳定的再平衡，实盘代价高昂。其 KKT 视角的诊断是：组合决策等价于对「经风险与交易成本调整后的边际分数」排序，膨胀即排序失真；缓解手段包括 clipping、min–max 重标定与部分组合调整。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;梯度秩塌缩&lt;/strong&gt;：Yuan, Zhang &amp;amp; Su（
+, 2026）用预测器雅可比刻画决策聚焦学习的更新方向受限——&lt;strong&gt;rank-one&lt;/strong&gt; 情形使逐样本非零梯度共线。关键数字：38 个单参数股票配置上，DFL 相对 MSE 的增益 &lt;strong&gt;&amp;lt; 1.8%&lt;/strong&gt;；即使换用 385 参数的条件预测器，逐点雅可比仍为 rank one。基准复核显示全容量 SPO+ 在 shortest-path / knapsack 上分别降低平均 regret 11.6% / 10.6%，但&lt;strong&gt;经八次比较的多重检验校正后仅 knapsack 幸存&lt;/strong&gt;；与神经网络对照时&lt;strong&gt;未发现 DFL 的总体优势&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;体系化基准&lt;/strong&gt;：Mandi 等（&lt;em&gt;Journal of Artificial Intelligence Research&lt;/em&gt; 80:1623–1701, 2024）系统梳理梯度型（可微层/隐式微分）与无梯度型两条路线，并用 11 种方法 × 7 类问题的统一基准比较，是这条线目前最完整的方法学入口。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="五适用边界"&gt;五、适用边界&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;端到端训练要求决策层可微；基数约束（NP 难）、整数变量与不可微目标必须松弛，此时「修正错配」有可能只是把误差搬家。&lt;/li&gt;
+&lt;li&gt;传播的是&lt;strong&gt;决策梯度&lt;/strong&gt;，不是统计结构：样本外表现对过拟合、超参与多重检验的敏感性并不低于两阶段方法。秩塌缩与校正后增益消失这两个结果说明：&lt;strong&gt;评价必须以留出集上的决策质量为唯一判据&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;报告口径需谨慎：本笔记中若于会议的条目（ICML 2026、PRICAI 2026）仅见于 arXiv comments 字段，未在官方 proceedings 复核；另有个别预印本为单作者、无同行评审，其数值结论不应作为已确立事实引用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="六对本人研究方向的启发"&gt;六、对本人研究方向的启发&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;把「错配」做成可诊断量&lt;/strong&gt;：与其只报样本外收益，不如报告梯度秩、信号膨胀率、换手与交易成本敏感性等中间量——这正是与负面结果对话的方式，也更容易形成可发表的方法论贡献。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;与 DRO 的结合点在于模糊集的可学习性&lt;/strong&gt;：把半径/形状作为可学习参数并附带保守性约束，可以把「半径校准」（见本系列阅读笔记一）与端到端训练并入同一目标。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;稳定性应进入训练目标&lt;/strong&gt;：交易成本与换手抑制目前多在事后评估，若作为决策层的一部分参与梯度传播，可同时缓解信号膨胀问题。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="参考文献"&gt;参考文献&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Elmachtoub, A. N., &amp;amp; Grigas, P. (2022). Smart &amp;ldquo;predict, then optimize&amp;rdquo;. &lt;em&gt;Management Science&lt;/em&gt;, 68(1), 9–26.
+&lt;/li&gt;
+&lt;li&gt;Mandi, J., Kotary, J., Berden, S., et al. (2024). Decision-focused learning: Foundations, state of the art, benchmark and future opportunities. &lt;em&gt;Journal of Artificial Intelligence Research&lt;/em&gt;, 80, 1623–1701.
+·
+&lt;/li&gt;
+&lt;li&gt;Butler, A., &amp;amp; Kwon, R. H. (2023). Integrating prediction in mean-variance portfolio optimization. &lt;em&gt;Quantitative Finance&lt;/em&gt;, 23, 429–452.
+·
+&lt;/li&gt;
+&lt;li&gt;Ohnemus, L., Fochesato, M., Zuliani, F., &amp;amp; Lygeros, J. (2025).
+（预印本）&lt;/li&gt;
+&lt;li&gt;Nosaka, Y., Ikeda, S., &amp;amp; Takano, Y. (2026).
+（预印本）&lt;/li&gt;
+&lt;li&gt;Linghu, Z., Liu, Z., &amp;amp; Deng, Y. (2025/2026).
+（预印本）&lt;/li&gt;
+&lt;li&gt;Jeon, J., Choi, S., Bae, J., Lee, K., &amp;amp; Kim, S. (2026).
+（预印本）&lt;/li&gt;
+&lt;li&gt;Wang, Z., &amp;amp; Hasuike, T. (2026).
+；期刊版 &lt;em&gt;Journal of Advanced Computational Intelligence and Intelligent Informatics&lt;/em&gt;, 30, 1515–1525.
+&lt;/li&gt;
+&lt;li&gt;Yuan, Y., Zhang, Z., &amp;amp; Su, L. (2026).
+（预印本）&lt;/li&gt;
+&lt;li&gt;Costa, G., &amp;amp; Iyengar, G. N. (2022).
+（预印本）&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>高维协方差估计与组合稳定性：收缩、随机矩阵与图方法</title><link>https://songyu0903.github.io/blog/high-dim-covariance-estimation/</link><pubDate>Sun, 04 Oct 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/blog/high-dim-covariance-estimation/</guid><description>&lt;p&gt;&lt;strong&gt;问题定位&lt;/strong&gt;：在均值—方差框架里，困难从来不是优化，而是估计。本文沿「估计量的统计误差如何转化为组合的决策损失」这条线索整理三条技术路线（收缩、随机矩阵谱去噪、图/因子模型）以及它们的失效条件。&lt;/p&gt;
+&lt;h2 id="一判据你的协方差矩阵里有多少信息"&gt;一、判据：你的协方差矩阵里有多少信息&lt;/h2&gt;
+&lt;p&gt;设 $p$ 个资产、$n$ 期观测，$c=p/n$。若收益独立同分布、真实协方差为 $\sigma^2 I$，则样本协方差 $S$ 的经验谱密度收敛到 &lt;strong&gt;Marchenko–Pastur 律&lt;/strong&gt;，支撑集为&lt;/p&gt;
+$$
+\big[\sigma^2(1-\sqrt{c})^{2},\ \sigma^{2}(1+\sqrt{c})^{2}\big].
+$$&lt;p&gt;也就是说，即使真实相关结构为零，样本矩阵的最大特征值仍会达到 $\sigma^2(1+\sqrt{c})^2$——&lt;strong&gt;噪声本身会伪装成信号&lt;/strong&gt;。只有当某个「尖峰」强度超过 $\sigma^2\sqrt{c}$ 时，对应样本特征值才脱离噪声体（BBP 相变）。这给出一个实用判据：把样本谱与 MP 律对照，落在体（bulk）内的特征值不携带可交易信息。&lt;/p&gt;
+&lt;h2 id="二收缩路线"&gt;二、收缩路线&lt;/h2&gt;
+&lt;p&gt;线性收缩把样本矩阵向一个良态目标 $F=\bar\lambda I$ 拉：&lt;/p&gt;
+$$
+\hat\Sigma(\delta)=(1-\delta)F+\delta\,S,
+\qquad
+\delta^{\star}=\arg\min_{\delta}\ \mathbb{E}\big\|\hat\Sigma(\delta)-\Sigma\big\|_{F}^{2}.
+$$&lt;p&gt;Ledoit &amp;amp; Wolf（&lt;em&gt;Journal of Multivariate Analysis&lt;/em&gt; 88(2):365–411, 2004）在高维渐近体制下给出 $\delta^{\star}$ 的闭式解，并指出线性收缩恰是逆 Wishart 先验下的后验均值——统计收缩与贝叶斯收缩在这里是同一件事。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;非线性收缩&lt;/strong&gt;（逐特征值收缩）性能更强：Ledoit &amp;amp; Wolf（&lt;em&gt;The Annals of Statistics&lt;/em&gt; 48(5), 2020）利用「非线性收缩 ⇄ 样本谱密度的 Hilbert 变换」给出首个&lt;strong&gt;闭式解析&lt;/strong&gt;公式，比需要数值反演复方程的前作约快 $10^3$ 倍，维度可上万，并在旋转等变估计量类内证明渐近最优（Frobenius 型损失）。作者 2022 年的综述（&lt;em&gt;Journal of Financial Econometrics&lt;/em&gt; 20(1):187–218）给出选择指南：线性收缩更易实现与解释，非线性收缩在时变协方差或与因子模型叠加时更优。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;反例（该方向最重要的一条）&lt;/strong&gt;：Bongiorno &amp;amp; Challet（&lt;em&gt;Finance Research Letters&lt;/em&gt; 52:103383, 2023）指出，非线性收缩优化的代价函数是&lt;strong&gt;谱密度拟合误差，而不是组合优化真正关心的目标&lt;/strong&gt;；在资产依赖结构非平稳时，它会系统性偏离组合意义下的最优收缩目标。这是「估计目标与决策目标错配」最干净的版本，也解释了为什么更「准」的估计器未必给出更好的组合。&lt;/p&gt;
+&lt;h2 id="三随机矩阵与网络去噪"&gt;三、随机矩阵与网络去噪&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;相关结构的网络分解&lt;/strong&gt;：Achitouv（&lt;em&gt;Advances in Complex Systems&lt;/em&gt; 28, 2025；
+）用复杂网络指标把收益相关矩阵拆成噪声成分与市场/结构成分，发现相关矩阵由高特征向量中心性与聚类主导，而非单一市场模态；在模拟市场随机游走上构建组合，短时间尺度内收益优于基于历史均值—方差的组合。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;把评估量本身当作估计对象&lt;/strong&gt;：Meng, Cao &amp;amp; Wang（&lt;em&gt;JASA&lt;/em&gt;, 2025；
+）在 $p/n\to c\in(0,\infty)$ 下设样本外 Sharpe 比的一致估计量，修正样本内 Sharpe 的系统高估，覆盖谱有界、$c&lt;1$ 下任意多发散尖峰、$c\ge1$ 下固定数量发散尖峰三类条件，并可推广到全局最小方差组合与样本外有效前沿的修正。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="四图模型与因子结构"&gt;四、图模型与因子结构&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Factor Graphical Lasso&lt;/strong&gt;：Lee &amp;amp; Seregina（&lt;em&gt;Journal of Financial Econometrics&lt;/em&gt; 22:670–695, 2023）把精度矩阵 $\Theta=\Sigma^{-1}$ 分解为&lt;strong&gt;低秩 + 稀疏&lt;/strong&gt;两部分，直接针对「精度矩阵稀疏」这一假设在共同因子驱动收益时不成立的问题；给出组合权重与风险暴露的一致性，且对重尾分布稳健，S&amp;amp;P 500 上优于等权与指数基准。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;图模型 vs 收缩的系统对比&lt;/strong&gt;：Dutta &amp;amp; Jain（
+, 2023）以&lt;strong&gt;组合风险&lt;/strong&gt;作为估计误差的损失函数，横向比较图模型（直接估精度矩阵）、收缩、阈值化与随机矩阵清洗四类方法，报告图模型类在样本复杂度与日/周/月三个预测周期上优于收缩类。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;$p\gg n$ 的贝叶斯版本&lt;/strong&gt;：Oya（&lt;em&gt;Asia-Pacific Financial Markets&lt;/em&gt;, 2022）用自适应 graphical LASSO 的贝叶斯形式（始终保证精度矩阵正定）在 $p=100$ 的全局最小方差组合上做实验，$n\ll p$ 时非贝叶斯 graphical LASSO 直接失败，贝叶斯版仍可估计且权重与换手更稳定。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="五适用边界"&gt;五、适用边界&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;收缩强度的「最优」是相对某个矩阵范数而言的；换成决策损失后最优收缩强度会改变（见第二节反例）。&lt;/li&gt;
+&lt;li&gt;谱清洗与 MP 律依赖独立同分布、有限方差等假设；真实收益的厚尾、波动率聚集与相关性突变更强，会让噪声体边界本身失真。&lt;/li&gt;
+&lt;li&gt;图模型的一致性依赖稀疏性与重尾条件；因子数选择、结构突变都会破坏一致性论证。&lt;/li&gt;
+&lt;li&gt;因此，「估计更准 ⇒ 组合更好」在本方向已被反复证伪；评价必须落在决策端（样本外风险、换手、Sharpe 的稳健性），而不是估计误差本身。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="六对本人研究方向的启发"&gt;六、对本人研究方向的启发&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;以组合风险为损失来设计估计器&lt;/strong&gt;：既然谱密度拟合不是决策目标，可以直接把决策损失（或其对估计误差的敏感度）当作学习目标；已有工作沿此方向直接学习特征值收缩函数（
+, 2026 预印本），但理论刻画仍薄。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;「估计—决策错配」与 DRO 半径校准是同一枚硬币&lt;/strong&gt;：两者都在把统计误差翻译成决策质量，前者关注 $\hat\Sigma$ 的谱，后者关注分布的球。一个统一的「误差 → 决策损失」传递界，是把两条线缝起来的地方。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;结构化收缩&lt;/strong&gt;：块对角/网络结构的收缩与因子图模型（低秩 + 稀疏）叠加，可能同时获得可解释性与良态逆矩阵，是工程上最直接可行的改进路径。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="参考文献"&gt;参考文献&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Ledoit, O., &amp;amp; Wolf, M. (2004). A well-conditioned estimator for large-dimensional covariance matrices. &lt;em&gt;Journal of Multivariate Analysis&lt;/em&gt;, 88(2), 365–411.&lt;/li&gt;
+&lt;li&gt;Ledoit, O., &amp;amp; Wolf, M. (2020). Analytical nonlinear shrinkage of large-dimensional covariance matrices. &lt;em&gt;The Annals of Statistics&lt;/em&gt;, 48(5).
+&lt;/li&gt;
+&lt;li&gt;Ledoit, O., &amp;amp; Wolf, M. (2022). The power of (non-)linear shrinking: A review and guide to covariance matrix estimation. &lt;em&gt;Journal of Financial Econometrics&lt;/em&gt;, 20(1), 187–218.
+&lt;/li&gt;
+&lt;li&gt;Bongiorno, C., &amp;amp; Challet, D. (2023). Non-linear shrinkage of the price return covariance matrix is far from optimal for portfolio optimization. &lt;em&gt;Finance Research Letters&lt;/em&gt;, 52, 103383.
+·
+&lt;/li&gt;
+&lt;li&gt;Meng, X., Cao, Y., &amp;amp; Wang, W. (2025). Estimation of out-of-sample Sharpe ratio for high dimensional portfolio optimization. &lt;em&gt;Journal of the American Statistical Association&lt;/em&gt;.
+·
+&lt;/li&gt;
+&lt;li&gt;Achitouv, I. (2025). Inferring financial stock returns correlation from complex network analysis. &lt;em&gt;Advances in Complex Systems&lt;/em&gt;, 28.
+·
+&lt;/li&gt;
+&lt;li&gt;Lee, T.-H., &amp;amp; Seregina, E. (2023). Optimal portfolio using factor graphical lasso. &lt;em&gt;Journal of Financial Econometrics&lt;/em&gt;, 22, 670–695.
+·
+&lt;/li&gt;
+&lt;li&gt;Dutta, S., &amp;amp; Jain, S. (2023). Precision versus shrinkage: A comparative analysis of covariance estimation methods for portfolio allocation.
+&lt;/li&gt;
+&lt;li&gt;Oya, S. (2022). A Bayesian graphical approach for large-scale portfolio management with fewer historical data. &lt;em&gt;Asia-Pacific Financial Markets&lt;/em&gt;.
+·
+&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>鲁棒投资组合的不确定集设计：从预算参数 Γ 到数据驱动校准</title><link>https://songyu0903.github.io/blog/robust-portfolio-uncertainty-sets/</link><pubDate>Sun, 04 Oct 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/blog/robust-portfolio-uncertainty-sets/</guid><description>&lt;p&gt;&lt;strong&gt;问题定位&lt;/strong&gt;：鲁棒组合解的保守性完全由不确定集决定，而「集从哪来」长期是一个建模判断而非统计结论。本文记录这条线索上被反复引用的结果：预算参数 $\Gamma$ 的可解释性、仿射决策规则带来的结构性保守，以及把 $\Gamma$（或模糊集大小）当作统计量校准的近期工作。&lt;/p&gt;
+&lt;h2 id="一预算不确定集-的语义与代价"&gt;一、预算不确定集：$\Gamma$ 的语义与代价&lt;/h2&gt;
+&lt;p&gt;设名义问题含约束 $\sum_j \tilde a_{ij}w_j\le b_i$，其中系数独立地在区间 $[\bar a_{ij}-\hat a_{ij},\ \bar a_{ij}+\hat a_{ij}]$ 内扰动。Bertsimas &amp;amp; Sim（&lt;em&gt;Operations Research&lt;/em&gt; 52(1):35–53, 2004）引入&lt;strong&gt;至多 $\Gamma_i$ 个系数同时取到最坏值&lt;/strong&gt;的预算不确定集，其鲁棒对应式为线性规划：&lt;/p&gt;
+$$
+\sum_j \bar a_{ij}w_j+\Gamma_i z_i+\sum_j p_{ij}\le b_i,\qquad
+z_i+p_{ij}\ge \hat a_{ij}\,y_j,\quad p_{ij}\ge 0,\quad y_j\ge |w_j| .
+$$&lt;p&gt;$\Gamma=0$ 退化为名义问题，$\Gamma=|J_i|$ 退化为 Soyster 盒式鲁棒；中间取值在两者之间&lt;strong&gt;连续调节保守度&lt;/strong&gt;。更重要的是它给出显式的&lt;strong&gt;违反概率界&lt;/strong&gt;：&lt;/p&gt;
+$$
+\Pr\Big[\textstyle\sum_j \tilde a_{ij}w_j&gt; b_i\Big]\ \le\ \exp\Big(-\frac{\Gamma_i^{2}}{2|J_i|}\Big),
+$$&lt;p&gt;即 $\Gamma$ 可以直接翻译成置信水平——这是该模型被高频引用的真正原因。后续 Bertsimas, den Hertog &amp;amp; Pauphilet（&lt;em&gt;SIAM Journal on Optimization&lt;/em&gt; 31:2893–2920, 2021）把「$\Gamma$ ↔ 违反概率」做成可用的概率保证与校准工具。&lt;/p&gt;
+&lt;blockquote class="border-l-4 border-neutral-300 dark:border-neutral-600 pl-4 italic text-neutral-600 dark:text-neutral-400 my-6"&gt;
+&lt;p&gt;&lt;strong&gt;引用核对提醒&lt;/strong&gt;：本方向常有文献引用「Bertsimas &amp;amp; Sim (2009), &lt;em&gt;Theory and Practice of Robust Optimization&lt;/em&gt;, &lt;em&gt;Operations Research&lt;/em&gt; 57:1485–1506」，该条目在 Crossref 中查无记录（DOI &lt;code&gt;10.1287/opre.1080.0628&lt;/code&gt; 实为 Guide &amp;amp; Van Wassenhove 的闭环供应链论文）。引用预算不确定集时请核对 DOI &lt;code&gt;10.1287/opre.1030.0065&lt;/code&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="二结构性保守可调鲁棒与决策规则"&gt;二、结构性保守：可调鲁棒与决策规则&lt;/h2&gt;
+&lt;p&gt;单阶段鲁棒把全部决策压成「事前」变量，必然保守。Ben-Tal, Goryashko, Guslitzer &amp;amp; Nemirovski（&lt;em&gt;Mathematical Programming&lt;/em&gt; 99(2):351–376, 2004）区分事前决策（here-and-now）与追索决策（wait-and-see），用&lt;strong&gt;仿射决策规则&lt;/strong&gt;（ADR）近似后者，把两阶段问题压成多项式规模凸规划，并给出近似最优性界。&lt;/p&gt;
+&lt;p&gt;对多期组合而言，这一框架的意义在于：&lt;strong&gt;再平衡本身就是一个可调变量&lt;/strong&gt;。多期情形下「先预测后优化」的偏差，一部分来自预测误差，另一部分来自决策规则的限制——把二者分开需要 ADR 这样的显式函数类。&lt;/p&gt;
+&lt;h2 id="三数据驱动校准从--到模糊集大小"&gt;三、数据驱动校准：从 $\Gamma$ 到模糊集大小&lt;/h2&gt;
+&lt;p&gt;不确定集的大小既是保守性旋钮，也是统计量。三条近期路线：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;广义经验似然视角&lt;/strong&gt;：Duchi, Glynn &amp;amp; Namkoong（&lt;em&gt;Mathematics of Operations Research&lt;/em&gt; 46(3), 2021）把 DRO 半径与置信水平的对应关系系统化，为「半径 = 由数据校准的量」提供理论基石。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;中心与半径的联合学习&lt;/strong&gt;：Guo（
+, 2026）让预测模型确定名义分布、另一个模型估计数据依赖的半径，对&lt;strong&gt;任意学习得到的中心&lt;/strong&gt;给出有限样本保证，并用 split-conformal 做有限样本边际校准。其结论值得原文引用：学习加校准提升的是&lt;strong&gt;可靠性&lt;/strong&gt;，并不自动导致更小的半径或更好的决策。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;乐观—悲观的连续插值&lt;/strong&gt;：Tsang &amp;amp; Shehadeh（
+）用「size 参数 = 乐观程度、shape 参数 = 模糊度」的模糊集族连接乐观与悲观极端；证明星形 shape、以经验分布为星中心是层级结构的&lt;strong&gt;充要条件&lt;/strong&gt;，并给出最优值与解集的几乎必然收敛性。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;综述入口&lt;/strong&gt;：Ghahtarani, Saif &amp;amp; Ghasemi（&lt;em&gt;Operational Research&lt;/em&gt; 22(4):3203–3264, 2022）按「金融问题 × 不确定集类型（盒/椭球/预算 $\Gamma$/多面体/数据驱动）× 方法（静态/可调/分布鲁棒）」四维分类，并列出不确定集校准、情景内生化等开放问题。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="四前沿决策依赖的不确定性与-esg-约束"&gt;四、前沿：决策依赖的不确定性与 ESG 约束&lt;/h2&gt;
+&lt;p&gt;更具张力的一类设定是&lt;strong&gt;不确定性本身依赖于决策&lt;/strong&gt;（内生不确定性）。Liu &amp;amp; Zhao（&lt;em&gt;Mathematics&lt;/em&gt; 14(15):2793, 2026）在 ESG 感知组合中构造收益与 ESG 得分的联合多面体不确定集，其中收益边界依赖第一阶段权重（通过 ESG 相关持仓），并采用两阶段可调鲁棒 + 追索再平衡 + 比例交易成本，CVaR 约束经 Rockafellar–Uryasev 线性化后嵌入 column-and-constraint generation 求解。该文为 2026 年新刊文、引用量极低，出版商站点直连受限，实验细节尚未核对，引用时应保持审慎。&lt;/p&gt;
+&lt;p&gt;另一条路径是把鲁棒程度交给学习：Costa &amp;amp; Iyengar（
+）把预测层与鲁棒决策层&lt;strong&gt;联合训练&lt;/strong&gt;，用凸对偶把 minimax 结构化为可反向传播的形式，风险容忍度与鲁棒程度直接从数据学习而非人工设定。&lt;/p&gt;
+&lt;h2 id="五适用边界"&gt;五、适用边界&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;$\Gamma$ 的概率界建立在&lt;strong&gt;系数独立、对称分布&lt;/strong&gt;的假设上；相关性、厚尾或结构性漂移会显著改变实际的违反概率。&lt;/li&gt;
+&lt;li&gt;椭球不确定集下的稳健组合等价于在均值—方差目标上加 $\ell_2$ 惩罚（「稳健化即正则化」）；这一等价说明&lt;strong&gt;保守性可以直接定价&lt;/strong&gt;，但也意味着鲁棒模型的能力上限受限于该惩罚的形式。&lt;/li&gt;
+&lt;li&gt;ADR 是近似：它把追索限制在参数的仿射函数类内，其保守性来源与预测误差不同，二者需分别度量。&lt;/li&gt;
+&lt;li&gt;由数据校准半径的方法（RWPI、共形预测）给出的保证多为&lt;strong&gt;边际&lt;/strong&gt;或渐近保证；条件性的有限样本保证在组合问题上仍稀缺。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="六对本人研究方向的启发"&gt;六、对本人研究方向的启发&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;把 $\Gamma$ 的语义从约束层面转到决策层面&lt;/strong&gt;：现有概率界刻画的是「约束被违反的概率」，而组合优化关心的是「决策质量的损失」。把违反概率界改造成&lt;strong&gt;决策质量的下界&lt;/strong&gt;，是一个表述自然、工具成熟（概率界 + 对偶）的切口。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;内生不确定性 + 组合约束&lt;/strong&gt;：ESG、流动性、容量约束都会让不确定性依赖持仓；这类问题的可调鲁棒重构与求解仍不成熟。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;校准与保守性的联合度量&lt;/strong&gt;：把「校准后半径」与「组合层面的决策损失」放进同一评价框架，可以比较不同模糊集构造（矩约束 / $\phi$-散度 / Wasserstein / 预算 $\Gamma$）的真实代价，而不依赖个案的样本外胜负。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="参考文献"&gt;参考文献&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Bertsimas, D., &amp;amp; Sim, M. (2004). The price of robustness. &lt;em&gt;Operations Research&lt;/em&gt;, 52(1), 35–53.
+&lt;/li&gt;
+&lt;li&gt;Ben-Tal, A., Goryashko, A., Guslitzer, E., &amp;amp; Nemirovski, A. (2004). Adjustable robust solutions of uncertain linear programs. &lt;em&gt;Mathematical Programming&lt;/em&gt;, 99(2), 351–376.
+&lt;/li&gt;
+&lt;li&gt;Bertsimas, D., den Hertog, D., &amp;amp; Pauphilet, J. (2021). Probabilistic guarantees in robust optimization. &lt;em&gt;SIAM Journal on Optimization&lt;/em&gt;, 31, 2893–2920.
+&lt;/li&gt;
+&lt;li&gt;Duchi, J., Glynn, P., &amp;amp; Namkoong, H. (2021). Statistics of robust optimization: A generalized empirical likelihood approach. &lt;em&gt;Mathematics of Operations Research&lt;/em&gt;, 46(3).
+&lt;/li&gt;
+&lt;li&gt;Ghahtarani, A., Saif, A., &amp;amp; Ghasemi, A. (2022). Robust portfolio selection problems: A comprehensive review. &lt;em&gt;Operational Research&lt;/em&gt;, 22(4), 3203–3264.
+&lt;/li&gt;
+&lt;li&gt;Liu, Y., &amp;amp; Zhao, L. (2026). An adjustable robust approach for ESG-aware portfolio optimization under decision-dependent return uncertainty. &lt;em&gt;Mathematics&lt;/em&gt;, 14(15), 2793.
+&lt;/li&gt;
+&lt;li&gt;Tsang, M. Y., &amp;amp; Shehadeh, K. S. (2024/2025).
+（预印本）&lt;/li&gt;
+&lt;li&gt;Guo, Z. (2026).
+（预印本）&lt;/li&gt;
+&lt;li&gt;Costa, G., &amp;amp; Iyengar, G. N. (2022).
+（预印本）&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>LaTeX 环境配置：TeX Live + VS Code 工作流</title><link>https://songyu0903.github.io/blog/vscode-setup/</link><pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/blog/vscode-setup/</guid><description>&lt;p&gt;网上很多教程还在推荐 TeXstudio、WinEdt 这类专用编辑器，其实 &lt;strong&gt;VS Code + LaTeX Workshop&lt;/strong&gt; 才是目前体验最好的方案：一个编辑器搞定代码、笔记、论文三件事。&lt;/p&gt;
 &lt;h2 id="安装组合"&gt;安装组合&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;TeX Live&lt;/strong&gt;（发行版）：跨平台、宏包全。国内建议用清华镜像安装：&lt;code&gt;https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/&lt;/code&gt;&lt;/li&gt;
