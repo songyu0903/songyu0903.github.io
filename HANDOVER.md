@@ -1,7 +1,7 @@
 # 交接文档：个人学术主页维护
 
 > 接收方：deepseek harness（接替原助手维护 songyu0903 的学术主页）
-> 交接时间：2026-10-03
+> 交接时间：2026-10-03 ／ 最后更新：2026-10-04（主题更换为 Hugo Book）
 > 站点仓库：`songyu0903/songyu0903.github.io`
 
 ---
@@ -18,7 +18,8 @@
 1. **更新就必须同步。** 任何内容修改后，立刻同步到**两个**线上地址，不要问"要不要推送""确认一下吗"。用户原话："不要再问我这种弱智的问题，更新就必须同步。"
 2. **执行要快。** 少解释、少铺垫、直接干活。用户会用"立刻推送""加速推进""继续"催促。
 3. 用户是**数学专业研究生**，研究方向**投资组合优化**（Markowitz → 鲁棒优化 → 分布鲁棒优化 DRO），当前处于**开题前文献调研阶段**。写作和代码示例要贴合这个背景。
-4. 页面数学公式用 **KaTeX**，直接写 `$$...$$`，不需要额外配置。
+4. 页面数学公式用 **KaTeX**，正文直接写 `$...$` / `$$...$$`，无需额外配置（渲染链路已在站点内配好，见 §4）。
+5. **换主题时"内容不要变"**：只改版式/配置，不动笔记正文与既有 URL（2026-10-04 换 Hugo Book 时即按此执行，17 篇笔记正文一字未改）。
 
 ---
 
@@ -33,6 +34,8 @@ GitHub 仓库两个分支：
 - `main` → **构建产物**（HTML/CSS/图片），由 `public-gh/` 这个**独立 git 仓库**推送
 - `source` → **源码**（Hugo 站点），由 `academic-homepage/` 这个 git 仓库推送
 
+**注意**：DSH 侧没有 `workbuddy_sites_deploy` 工具，备用链接**只能由用户在 WorkBuddy 里点部署**；DSH 只能保证 GitHub Pages 同步（当前备用站仍是旧 HugoBlox 版本）。
+
 ---
 
 ## 3. 工作区结构
@@ -40,61 +43,72 @@ GitHub 仓库两个分支：
 ```
 C:/Users/eiegant/WorkBuddy/2026-10-01-16-16-12/
 ├── academic-homepage/          # Hugo 源码站（git 仓库，推 source 分支）
-│   ├── config/_default/        # 站点配置
-│   │   ├── hugo.yaml           # baseURL / title / 安全白名单
-│   │   ├── params.yaml         # 站点身份、主题配色、数学开关
-│   │   ├── menus.yaml          # 导航栏
-│   │   ├── languages.yaml      # 单语言 zh
-│   │   └── module.yaml         # Hugo 模块挂载
+│   ├── hugo.toml               # ★ 站点配置（Hugo Book 主题：菜单/参数/markup/KaTeX passthrough）
 │   ├── content/
-│   │   ├── _index.md           # 首页（landing，定义区块顺序）
-│   │   ├── authors/            # 作者页
-│   │   └── blog/<slug>/index.md# 笔记文章（5 篇）
-│   ├── data/authors/me.yaml    # 作者档案（姓名/简介/教育/技能）
-│   ├── assets/media/authors/   # 头像 me.jpg
-│   ├── static/.nojekyll        # 必留！GitHub Pages 修复 CSS 404
+│   │   ├── _index.md           # 首页（layout: landing，含"研究方向"正文）
+│   │   ├── about.md            # 关于页（原先首页的简历块搬到这里）
+│   │   └── blog/<slug>/index.md# 笔记文章（17 篇，front matter 含 weight 决定侧栏顺序）
+│   ├── content/blog/_index.md  # 笔记章节页（BookSection，侧边栏目录树的根）
+│   ├── layouts/
+│   │   ├── single.html         # 覆盖主题：渲染 front matter 标题 + 日期（主题默认不渲染 H1）
+│   │   ├── list.html           # /blog/ 列表（分页 10/页）
+│   │   ├── term.html / taxonomy.html  # 标签页
+│   │   └── _partials/docs/inject/head.html  # ★ 注入 KaTeX 前端 auto-render
+│   ├── assets/styles/custom.css# 站点自定义样式（主题最后加载，可覆盖主题）
+│   ├── static/
+│   │   ├── .nojekyll           # 必留！GitHub Pages 修复下划线资源 404
+│   │   ├── katex/              # ★ 前端 KaTeX（JS 由本仓库提供，CSS/字体主题也有）
+│   │   ├── media/authors/me.jpg# 头像（URL /media/authors/me.jpg）
+│   │   └── uploads/resume.pdf
+│   ├── themes/hugo-book/       # Hugo Book 主题（**不入库**，获取方式见 §4）
+│   ├── _blox-backup/           # 旧 HugoBlox 配置备份（不入库，仅本机留档）
 │   ├── public/                 # 构建产物 A（→ 备用链接）
-│   ├── public-gh/              # 构建产物 B（独立 git 仓库 → main 分支）
-│   ├── go.mod / go.sum         # 模块版本已锁定，别乱动
-│   └── package.json            # Tailwind 依赖
+│   └── public-gh/              # 构建产物 B（独立 git 仓库 → main 分支）
 ├── tools/
-│   ├── hugo/hugo.exe           # Hugo extended v0.167.0
-│   ├── go/go/bin/go.exe        # Go 1.27（Hugo 模块解析必需）
-│   ├── gocache/ gopath/        # 本地 Go 缓存（避免沙箱拦 AppData）
-│   ├── gh_api_push.py          # 走 REST API 推送（git push 走代理会失败）
-│   └── build.sh                # ★ 一键构建脚本
-└── HANDOVER.md                 # 本文档
+│   ├── hugo/hugo.exe           # Hugo extended v0.167.0（★ 不在 PATH，必须用全路径）
+│   ├── gh_api_push.py          # 走 REST API 推送（git push 走代理基本必失败）
+│   └── build.sh                # 旧 HugoBlox 构建脚本（**已失效，勿用**）
+└── HANDOVER.md                 # 本文档（与 academic-homepage/HANDOVER.md 同内容）
 ```
 
 ---
 
-## 4. 构建（直接跑脚本，别裸跑 hugo）
+## 4. 构建（Hugo Book 版，不再需要 Go / Node）
 
-```bash
-cd /c/Users/eiegant/WorkBuddy/2026-10-01-16-16-12
-bash tools/build.sh            # 构建 public/ + public-gh/
-bash tools/build.sh public     # 只构建 public/
+**前提**：`academic-homepage/themes/hugo-book/` 必须存在（主题不入库，见下方获取方式）。
+
+```powershell
+$site = "C:\Users\eiegant\WorkBuddy\2026-10-01-16-16-12\academic-homepage"
+$hugo = "C:\Users\eiegant\WorkBuddy\2026-10-01-16-16-12\tools\hugo\hugo.exe"
+
+# 1) 清空产物目录（public-gh 保留 .git！）
+Get-ChildItem "$site\public" -Force | Remove-Item -Recurse -Force
+Get-ChildItem "$site\public-gh" -Force | Where-Object { $_.Name -ne '.git' } | Remove-Item -Recurse -Force
+
+# 2) 构建
+Set-Location $site
+& $hugo --minify                  # → public/
+& $hugo --minify -d public-gh     # → public-gh/
 ```
 
-脚本已内置全部环境变量。如需手动执行，等价命令是：
+- 成功标志：`exit=0`，摘要 `Pages │ 125` 左右，`Static files │ 31`
+- 清理输出目录是**必须**的：清空后旧主题残留（`_headers`、`_redirects`、`backlinks.json`、`css/`、`dist/`、`js/`）才会消失，推送脚本也才会在远端删除它们
+- **不要**用 `hugo --cleanDestinationDir`（可能误删 `public-gh/.git`）
 
-```bash
-export PATH="tools/go/go/bin:tools/hugo:/c/Users/eiegant/.workbuddy/binaries/node/versions/22.22.2-3:academic-homepage/node_modules/.bin:$PATH"
-export GOCACHE=tools/gocache GOMODCACHE=tools/gopath/pkg/mod GOPATH=tools/gopath
-export GOPROXY=https://goproxy.cn
-cd academic-homepage
-hugo --minify                  # → public/
-hugo --minify -d public-gh     # → public-gh/
+**主题获取（本机已装好，仅在换机器/目录丢失时需要）**：
+
+```powershell
+# GitHub Releases 资产域名在本机被墙；codeload 归档可用
+curl.exe -L -o "$env:TEMP\hugo-book.zip" "https://github.com/alex-shpak/hugo-book/archive/refs/heads/master.zip"
+Expand-Archive "$env:TEMP\hugo-book.zip" "$env:TEMP\hugo-book" -Force
+Copy-Item "$env:TEMP\hugo-book\hugo-book-main" "$site\themes\hugo-book" -Recurse
+# 可选瘦身：删 themes\hugo-book\exampleSite、images、.github，以及
+#   static\mermaid.min.js（3.5MB）、static\asciinema\、static\katex\fonts\*.ttf|*.woff（留 .woff2）
 ```
 
-**为什么必须这些环境变量：**
-- 没有 Go → Hugo 无法解析 HugoBlox 模块，直接报错
-- `GOPROXY=https://goproxy.cn` + `go.mod` 里锁定的伪版本号 → 走 zip 下载，**不触发 git**，否则本机报 `codehost lock file: Access is denied`
-- `GOCACHE/GOMODCACHE/GOPATH` 指向 `tools/` 下 → 避免写 AppData 被沙箱拒绝
-- Node 在 PATH + `node_modules/.bin` → Hugo 调 `css.TailwindCSS` 需要 `tailwindcss` 二进制
-
-构建成功标志：输出 `Pages │ 45` 左右，末尾 `[OK] public/ 干净`。
-若输出 `[WARN] ... localhost/livereload 残留` → `rm -rf public` 后重跑（残留来自 `hugo server`）。
+**KaTeX 前端资源**：主题自带 `katex.min.css` + 字体，但**不带 katex.min.js**，所以站点 `static/katex/` 里放了
+`katex.min.js`、`katex.min.css`、`contrib/auto-render.min.js`、`fonts/*.woff2`（KaTeX 0.19.0，已入库）。
+如需重下：`https://mirrors.cloud.tencent.com/npm/katex/-/katex-0.19.0.tgz`（jsDelivr 可用，npmjs/unpkg 在本机不通）。
 
 ---
 
@@ -102,20 +116,23 @@ hugo --minify -d public-gh     # → public-gh/
 
 | 想改什么 | 改哪个文件 | 说明 |
 |---|---|---|
-| 姓名 / 头衔 / 个人简介 / 研究兴趣 / 教育经历 / 技能 | `data/authors/me.yaml` | schema `hugoblox/author/v1` |
-| 首页区块顺序、研究方向正文、笔记列表区块 | `content/_index.md` | `type: landing` + `sections`，区块含 `resume-biography-3`、`markdown(id=research)`、`collection(id=notes)` |
-| 新增/修改一篇笔记 | `content/blog/<新slug>/index.md` | front matter：`title / date / summary / tags` |
-| 导航栏 | `config/_default/menus.yaml` | 现为：主页 / 研究方向 / 笔记 / GitHub |
-| 站点名、副标题、SEO 描述、深色模式、主题色 | `config/_default/params.yaml` → `hugoblox.identity` / `hugoblox.theme` | |
-| 头像 | 覆盖 `assets/media/authors/me.jpg` | **必须是 JPG/PNG**，不能用 SVG |
-| 数学公式开关 | `config/_default/params.yaml` → `hugoblox.content.math.enable: true` | 已开启 |
+| 站点名 / 菜单 / 主题外观 / 搜索 / 目录树根 | `hugo.toml` | `title`、`[[menu.home]]`（首页顶部导航）、`[[menu.after]]`（侧栏底部链接）、`[params] BookTheme=light|dark|auto`、`BookSection="blog"`（侧栏目录树渲染哪个章节） |
+| 首页文案（研究方向、笔记导览） | `content/_index.md` | front matter 必须是 `layout: landing`（否则顶部导航不显示） |
+| 个人简介 / 教育 / 研究兴趣 / 技能 / 语言 / 链接 | `content/about.md` | 原先由 `data/authors/me.yaml` 渲染，现已写成正文；`data/authors/me.yaml` 仅作留档 |
+| 新增/修改一篇笔记 | `content/blog/<slug>/index.md` | front matter：`title / date / summary / tags / weight`；**正文不要写 H1**（`layouts/single.html` 已用 title 渲染标题） |
+| 笔记在侧栏与列表中的顺序 | 各笔记 front matter 的 `weight` | 数值越小越靠前；当前 1–17 |
+| 笔记章节导语 | `content/blog/_index.md` | 同时是侧栏目录树的根（`BookSection="blog"`） |
+| 头像 | 覆盖 `static/media/authors/me.jpg` | URL 固定 `/media/authors/me.jpg` |
+| 公式渲染 | `layouts/_partials/docs/inject/head.html` | 前端 KaTeX（auto-render），改动前先读主题同名文件 |
+| 版式微调 | `assets/styles/custom.css` | 主题 `assets/styles/index.yaml` 中最后加载，可覆盖主题 |
 
 ### 新增一篇文章（模板）
 
 ```markdown
 ---
+weight: 18
 title: "文章标题"
-date: 2026-10-03
+date: 2026-10-05
 summary: "一两句话摘要。"
 tags: ["投资组合优化", "鲁棒优化"]
 ---
@@ -124,6 +141,8 @@ tags: ["投资组合优化", "鲁棒优化"]
 
 $$\min_{w}\ w^{\top}\Sigma w \quad \text{s.t.} \quad w^{\top}\mathbf{1}=1$$
 ```
+
+写完新笔记后：`weight` 决定顺序 → 构建 → 两仓库提交 → 推送两个分支 → 验证。
 
 ### 提供 PDF 下载链接（用户问过）
 
@@ -142,53 +161,55 @@ $$\min_{w}\ w^{\top}\Sigma w \quad \text{s.t.} \quad w^{\top}\mathbf{1}=1$$
 ## 6. 部署流程（每次更新照做，顺序不能乱）
 
 ### 步骤 1：构建
-```bash
-bash tools/build.sh
-```
+见 §4（清空 `public/`、`public-gh/` 后各跑一次 `hugo --minify`）。
 
 ### 步骤 2：提交两个 git 仓库
-```bash
-# 源码仓库（→ source 分支）
-cd academic-homepage
-git add -A && git commit -m "描述本次改动"
 
-# 产物仓库（→ main 分支），独立 .git
-cd public-gh
-git add -A && git commit -m "描述本次改动"
+```powershell
+$site = "C:\Users\eiegant\WorkBuddy\2026-10-01-16-16-12\academic-homepage"
+$git  = "C:\Users\eiegant\.workbuddy\binaries\PortableGit\versions\1.2.0\cmd\git.exe"
+& $git -C $site add -A;            & $git -C $site commit -m "描述本次改动"     # 源码 → source 分支
+& $git -C "$site\public-gh" add -A; & $git -C "$site\public-gh" commit -m "描述本次改动"  # 产物 → main 分支
 ```
+
 若需要清理 public-gh 里的旧产物（比如删了大文件），**只能**：
-```bash
-cd public-gh && git rm -rfq . && git commit -m "clean"
-```
+`cd public-gh && git rm -rfq . && git commit -m "clean"`
 **绝对不要 `rm -rf public-gh`** —— 里面有独立的 `.git`，删了要重建仓库和远端历史。
 
 ### 步骤 3：推送（用 API 脚本，git push 走代理基本必失败）
-```bash
-cd /c/Users/eiegant/WorkBuddy/2026-10-01-16-16-12
-python tools/gh_api_push.py academic-homepage/public-gh main
-python tools/gh_api_push.py academic-homepage source
+
+```powershell
+$env:PYTHONUTF8 = "1"     # ★ 不加会把中文路径解成 GBK，脚本静默失败
+$py = "C:\Users\eiegant\AppData\Local\Programs\Python\Python314\python.exe"
+Set-Location "C:\Users\eiegant\WorkBuddy\2026-10-01-16-16-12"
+& $py tools\gh_api_push.py "$site\public-gh" main
+& $py tools\gh_api_push.py $site source
 ```
-- 脚本从 `git credential fill` 取 token，无需手动填
+
+- 脚本从 `git credential fill` 取 token，无需手动填；输出会打印 `branch=… remote=… local=…`、`changed=… deleted=…`
 - 输出以 `PUSH_OK <commit-sha>` 结尾即成功
-- **大推送放到后台跑**（`run_in_background`），否则可能超时
+- `urllib.error.URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] …>` 是**本机常态**：脚本内置 5 次重试；失败就整条命令重跑（幂等）
 - 若提示 `ALREADY_UP_TO_DATE` 但你明明改了 → 一定是**忘了 commit**，回去做步骤 2
 
 ### 步骤 4：同步备用链接
-调用部署工具（`workbuddy_sites_deploy`），参数：
-- 目录：`academic-homepage/public`
-- `domainPrefix`: `songyu-academic-home`
-- `appName`: `个人学术主页`
-- `userAskedToPublish`: `true`
+调用部署工具（`workbuddy_sites_deploy`）——**DSH 侧没有这个工具**，只能请用户在 WorkBuddy 里点部署：
+目录 `academic-homepage/public`、`domainPrefix: songyu-academic-home`、`appName: 个人学术主页`。
 
 ### 步骤 5：验证
-```bash
-curl -s -o /dev/null -w "home:%{http_code}\n" "https://songyu0903.github.io/?v=$RANDOM"
-curl -s -o /dev/null -w "blog:%{http_code}\n" "https://songyu0903.github.io/blog/?v=$RANDOM"
-curl -s -o /dev/null -w "css:%{http_code}\n"  "https://songyu0903.github.io/css/_entry.*.css"   # 路径以实际产物为准
-curl -s -o /dev/null -w "bak:%{http_code}\n"  "https://songyu-academic-home.app.workbuddy.host/?v=$RANDOM"
+
+```powershell
+$r = Get-Random
+curl.exe -s -o NUL -w "home:%{http_code}`n" "https://songyu0903.github.io/?v=$r"
+curl.exe -s -o NUL -w "blog:%{http_code}`n" "https://songyu0903.github.io/blog/?v=$r"
+curl.exe -s -o NUL -w "note:%{http_code}`n" "https://songyu0903.github.io/blog/wasserstein-dro-portfolio/?v=$r"
+curl.exe -s -o NUL -w "katex:%{http_code}`n" "https://songyu0903.github.io/katex/katex.min.js"
+curl.exe -s -o NUL -w "bak:%{http_code}`n"  "https://songyu-academic-home.app.workbuddy.host/?v=$r"
 ```
-- GitHub Pages 有约 1 分钟缓存，用 `?v=$RANDOM` 绕过
-- 必须确认 CSS 是 200。若 CSS 404 → 检查 `static/.nojekyll` 是否存在且已推上去（Jekyll 会忽略下划线开头的文件）
+
+- GitHub Pages 有约 1 分钟缓存；推送后轮询 2–4 轮（每轮 15 秒）即可看到新版本，用 `?v=$RANDOM` 绕过缓存
+- 判断"新版本已生效"：首页 HTML 里出现 `book.min.<hash>.css`（旧版是 `css/_entry.<hash>.css`）
+- 若样式全丢 → 检查 `static/.nojekyll` 是否存在（Jekyll 会忽略下划线开头的文件）
+- 校验脚本里**不要用 `$home` 作变量名**（见 §7）
 
 ---
 
@@ -196,50 +217,69 @@ curl -s -o /dev/null -w "bak:%{http_code}\n"  "https://songyu-academic-home.app.
 
 | 坑 | 现象 | 解法 |
 |---|---|---|
-| 缺 Go | `hugo: binary with name go not found` | PATH 加 `tools/go/go/bin` |
-| `hugo mod get` 触发 git | `Access is denied ... codehost lock file` | **不要**跑 `hugo mod get`；`go.mod` 已锁伪版本号，配 `GOPROXY=https://goproxy.cn` 走 zip |
-| Tailwind 未授权 | `tailwindcss is not whitelisted in security.exec.allow` | `hugo.yaml` 的 `security.exec.allow` 已含 `^tailwindcss$`、`^npx$`、`^node$`；另需 `npm install` 过 |
-| SVG 头像 | `resource ... does not support this method: Fill` | 头像用 JPG/PNG |
-| GitHub Pages 样式全丢 | `css/_entry.*.css` 404 | `static/.nojekyll`（已存在，别删） |
-| `public/` 被 hugo server 污染 | 线上地址指向 localhost、注入 livereload.js | 部署前 `rm -rf public` 重构建；脚本已自动检查 |
+| `hugo` 不在 PATH | `无法将"hugo"项识别为 cmdlet…` | 用全路径 `tools\hugo\hugo.exe`（v0.167.0+extended） |
+| 主题不入库 | 换机器/清目录后构建报找不到主题 | 按 §4 下载 Hugo Book 到 `themes\hugo-book` |
+| GitHub Releases 资产域名被墙 | 下载 `katex.zip` 得到 **0 字节** | 改用 `codeload`（主题）/腾讯 npm 镜像（KaTeX） |
+| 主题默认不渲染 H1 | 笔记页没有标题 | 站点 `layouts/single.html` 覆盖，用 `{{ partial "docs/title" . }}` 渲染 front matter 标题 |
+| 首页导航不显示 | landing 顶部空白 | `content/_index.md` 必须写 `layout: landing`（体 class 才带 `book-layout-landing`） |
+| 侧栏目录为空 | 左侧只有站名 | `hugo.toml` 的 `BookSection="blog"` 必须指向 `content/blog`（否则主题 `errorf` 或渲染空树） |
+| KaTeX 只显示源码 | 页面上是 `$…$` 原文 | 主题不带 `katex.min.js`：需 `static/katex/katex.min.js` + `inject/head.html` 里的 auto-render |
+| LaTeX 转义被吃掉 | `\max\{p,2\}` 变成 `\max{p,2}` | `hugo.toml` 开 `[markup.goldmark.extensions.passthrough]`（block/inline 定界符） |
+| `--minify` 去掉属性引号 | 校验正则 `href="/blog/` 全部 0 命中 | 校验时不要强制引号（写 `href=/blog/` 或用正则 `href=[""]?`） |
+| `$home` 是只读自动变量 | `$home = @'…'@` 静默失败，文件被写成 16 字节路径 | 变量改名为 `$homeMd` 之类，**永远别用 `$home`** |
+| `[regex]::Replace` 的 `$1` 未展开 | 文件第一行变成字面量 `$1weight: 1`，`---` 丢失 | 不要在此处依赖 `$1`；用 `ReadAllLines` 重建前两行 |
+| 本机 pwsh 实为 Windows PowerShell 5.1 | `Set-Content -Encoding utf8NoBOM` 报"无法将标识符名称 utf8NoBOM 与有效的枚举器名称相匹配" | 写无 BOM UTF-8 用 `[System.IO.File]::WriteAllText($f,$t,(New-Object System.Text.UTF8Encoding($false)))` |
+| 沙箱拦网络/写工作区外 | `curl: (35) schannel: AcquireCredentialsHandle failed: SEC_NO_CREDENTIALS`、`[sandbox: file access denied]` | 需要网络或写站点目录时申请放宽权限 |
+| DSH 沙箱内 bash 不可用 | MSYS bash 启动即 `fatal error - NtCreateDirectoryObject(\BaseNamedObjects\msys-2.0S5-…): 0xC0000022` | 用 PowerShell 等价命令，别调 `bash tools/build.sh` |
+| HugoBlox 时代的 `tools/build.sh` | 已失效（要 Go 模块 + Tailwind） | 直接用 §4 的 PowerShell 命令 |
 | 删了 public-gh 的 .git | 远端历史丢失、推送异常 | 永远用 `git rm -rfq .`，不要 `rm -rf public-gh` |
 | git push 失败 | 代理超时/中断 | 用 `tools/gh_api_push.py` |
 | 推送脚本报 up-to-date 但没生效 | 忘了 commit | 先 `git status` 确认干净再推 |
+| 推送脚本 `AttributeError: 'NoneType' object has no attribute 'strip'` | 中文路径被按 GBK 解码，`stdout` 为 None | 脚本 L20-24/L81-83 的 `subprocess.run` 已加 `encoding="utf-8", errors="replace"`；运行时另设 `$env:PYTHONUTF8="1"` |
+| 备用站不自动更新 | 正式站已是新版，备用站还是旧版 | 只能由用户在 WorkBuddy 侧部署（DSH 无该工具） |
 
 ---
 
 ## 8. 常见任务 Playbook
 
 **A. 新增一篇笔记**
-新建 `content/blog/<slug>/index.md` → `bash tools/build.sh` → 两仓库 commit → API 推两个分支 → 部署备用链接 → curl 验证。
+新建 `content/blog/<slug>/index.md`（含 `weight`，正文不写 H1）→ 构建（§4）→ 两仓库 commit → 推两个分支（§6 步骤 3）→ curl 验证新 URL 200。
 
 **B. 换头像**
-覆盖 `assets/media/authors/me.jpg`（JPG/PNG）→ 构建 → 提交推送 → 验证 `media/authors/me_hu_*.jpg` 返回 200。
+覆盖 `static/media/authors/me.jpg`（JPG/PNG）→ 构建 → 提交推送 → 验证 `/media/authors/me.jpg` 200。
 
 **C. 改个人简介 / 教育经历**
-改 `data/authors/me.yaml` → 构建 → 提交推送 → 验证首页文案。
+改 `content/about.md`（首页文案改 `content/_index.md`）→ 构建 → 提交推送 → 验证 `/about/`。
 
 **D. 加 PDF 下载**
-PDF 放 `static/uploads/` → 在 `_index.md` 或文章里加 `[PDF](/uploads/xxx.pdf)` → 构建 → 同步。
+PDF 放 `static/uploads/` → 在 `_index.md`、`about.md` 或笔记里加 `[PDF](/uploads/xxx.pdf)` → 构建 → 同步。
+
+**E. 调侧栏顺序 / 分专题**
+改各笔记 front matter 的 `weight`；笔记只用 `##` 及以下标题（ToC 从 2 级起）。
 
 ---
 
 ## 9. 当前状态快照（2026-10-04）
 
-- **主题**：Hugo Blox Academic CV（HugoBlox Kit 0.12 + Tailwind CSS v4，单语言中文）
-- **源码仓库最新提交**：`8a9ed9c Add risk parity and risk budgeting reading note`（source 分支）
-- **产物仓库最新提交**：`0b08d1e Add risk parity reading note`（main 分支）
-- **头像**：`assets/media/authors/me.jpg`（用户提供的 logo.jpg，19 059 字节）
+- **主题**：**Hugo Book**（`github.com/alex-shpak/hugo-book`，min_version 0.158.0，本机 Hugo v0.167.0+extended；主题不入库，vendored 于 `themes/hugo-book`）
+- **版式**：首页 = `layout: landing`（hero + 研究方向 + 笔记导览）；侧边栏 = `BookSection="blog"` 的 17 篇笔记目录树（按 `weight` 1–17）；`/about/` = 关于页；`/blog/` 列表分页 10/页 + `/blog/page/2/` 7 篇；KaTeX 前端渲染；搜索框（MiniSearch）；深色/浅色自动（`BookTheme="auto"`）
+- **源码仓库最新提交**：`ecd0d87 Switch site theme to Hugo Book (content unchanged; landing home + about page; KaTeX front-end)` → 已推送 `PUSH_OK 8d2dfdb`（source 分支）
+- **产物仓库最新提交**：`2df239e Rebuild with Hugo Book theme` → 已推送 `PUSH_OK 4a77dcc`（main 分支，160 changed / 133 deleted）
+- **构建**：`Pages 125`、`Static files 31`、73 个 HTML、`public/` ≈1.65 MB、无 localhost/livereload 污染
+- **头像**：`static/media/authors/me.jpg`（用户提供的 logo.jpg，19 059 字节，URL `/media/authors/me.jpg`）
 - **已发布文章**（`content/blog/`，共 **17 篇**）：原有 5 篇 `portfolio-optimization`、`thesis-proposal`、`vscode-setup`、`math-typesetting`、`writing-workflow`；2026-10-04 新增 12 篇文献调研笔记 —— `wasserstein-dro-portfolio`、`robust-portfolio-uncertainty-sets`、`high-dim-covariance-estimation`、`end-to-end-portfolio-learning`、`risk-measures-cvar-spectral-drawdown`、`factor-models-sparsity-cardinality`、`mean-estimation-error-and-1n-paradox`、`multiperiod-portfolio-and-transaction-costs`、`backtest-overfitting-and-strategy-evaluation`、`large-scale-portfolio-optimization-algorithms`、`dynamic-risk-measures-time-consistency`、`risk-parity-and-risk-budgeting`
-- **构建产物 127 页**：博客列表已分页（`/blog/` 10 篇 + `/blog/page/2/` 7 篇），`public-gh/` 无 localhost 污染
-- **GitHub Pages 已同步并逐页验证**（首页 / 博客 / 全部 17 篇详情页 / CSS 均 200）；**备用链接 https://songyu-academic-home.app.workbuddy.host/ 仍为旧版** —— DSH 侧没有 `workbuddy_sites_deploy` 工具，只能由用户在 WorkBuddy 里点部署
+- **GitHub Pages 已同步并逐页验证**：`/`、`/about/`、`/blog/`、`/blog/page/2/`、`/tags/`、`/index.xml`、`/sitemap.xml`、`/robots.txt`、`/404.html` 及 **17/17 篇笔记详情页全部 200**；`/katex/katex.min.js`、`/katex/katex.min.css`、`/katex/contrib/auto-render.min.js`、`/katex/fonts/KaTeX_Main-Regular.woff2`、`/minisearch.min.js`、`/favicon.ico`、`/media/authors/me.jpg`、`/uploads/resume.pdf` 均 200；旧 HugoBlox 资源（`/backlinks.json`、`/_headers`、`/_redirects`、`/css/_entry.*.css`、`/js/hb-*.js`、`/publication_types/`）**全部 404**
+- **备用链接 https://songyu-academic-home.app.workbuddy.host/ 仍为旧版**（仍含 `css/_entry.*.css`）—— DSH 侧没有 `workbuddy_sites_deploy` 工具，只能由用户在 WorkBuddy 里点部署
 
 ---
 ## 10. 接手第一步建议
 
-```bash
-cd /c/Users/eiegant/WorkBuddy/2026-10-01-16-16-12
-bash tools/build.sh                      # 确认环境正常
-curl -s "https://songyu0903.github.io/" | grep -o "<title>.*</title>"
+```powershell
+$site = "C:\Users\eiegant\WorkBuddy\2026-10-01-16-16-12\academic-homepage"
+$hugo = "C:\Users\eiegant\WorkBuddy\2026-10-01-16-16-12\tools\hugo\hugo.exe"
+"themes_ok=" + (Test-Path "$site\themes\hugo-book\theme.toml")
+Set-Location $site; & $hugo --minify            # 期望 Pages │ 125、exit=0
+curl.exe -s "https://songyu0903.github.io/" | Select-String -Pattern "book\.min\." -Quiet
 ```
-两分钟内能跑通这两条，说明环境完全就绪，可以直接开始改内容。
+
+三分钟内能跑通这三步，说明环境完全就绪，可以直接开始改内容。
