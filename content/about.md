@@ -3,9 +3,9 @@ title: "👤 关于"
 weight: 1
 ---
 
-<img class="avatar" src="/media/authors/me.jpg" alt="songyu0903" />
+<img class="avatar" src="/media/authors/me.jpg" alt="Y.S" />
 
-**songyu0903** 🎓 ｜ 数学专业硕士研究生 ｜ 数学学院
+**Y.S** 🎓 ｜ 数学专业硕士研究生 ｜ 数学学院
 
 研究方向为**投资组合优化**，聚焦鲁棒与分布鲁棒组合选择的理论与数值方法。
 
