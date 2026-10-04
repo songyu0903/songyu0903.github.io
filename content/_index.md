@@ -43,4 +43,10 @@ $$\min_{w}\ w^{\top}\Sigma w \quad \text{s.t.}\quad w^{\top}\mu \geq r_{\text{ta
 - **[策略评估与决策聚焦学习](/topics/evaluation-learning/)**：回测过拟合与搜索感知的绩效推断
 - **[研究入门与写作工具](/topics/research-writing/)**：研究方向综述、开题报告、排版与写作工作流
 
+## 📈 GitHub 活跃度
+
+<a class="heatmap" href="https://github.com/songyu0903" target="_blank" rel="noopener"><img src="/heatmap/snake.svg" alt="近一年 GitHub 贡献热力图（贪吃蛇动效）" width="695" height="120" /></a>
+
+<p class="heatmap-note">近一年 GitHub 贡献热力图：小蛇每跑一趟，会把有贡献的格子依次吃掉一遍。</p>
+
 {{< visitors >}}

@@ -47,6 +47,18 @@
   height: auto;
 }
 
+/* 首页 GitHub 活跃度热力图（自包含 SVG 动效，生成脚本 tools/gen_heatmap_snake.py） */
+.heatmap img {
+  max-width: 100%;
+  height: auto;
+}
+
+.heatmap-note {
+  font-size: 0.85rem;
+  opacity: 0.65;
+  margin: 0 0 1rem;
+}
+
 /* 首页访客计数：唯一的对外部服务的依赖；服务不可达时由 onerror 整块隐藏 */
 .visitors {
   display: flex;

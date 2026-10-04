@@ -63,6 +63,7 @@ C:/Users/eiegant/WorkBuddy/2026-10-01-16-16-12/
 │   │   ├── .nojekyll           # 必留！GitHub Pages 修复下划线资源 404
 │   │   ├── badges/             # ★ 技术栈徽章 SVG ×15（本地化；生成脚本 tools/fetch_badges.ps1）
 │   │   ├── typing/             # ★ 首页打字动画 SVG（typing-dark/typing-light，自包含动画）
+│   │   ├── heatmap/snake.svg   # ★ 首页「📈 GitHub 活跃度」热力图贪吃蛇（自包含 SMIL 动效；生成脚本 tools/gen_heatmap_snake.py）
 │   │   ├── katex/              # ★ 前端 KaTeX（JS 由本仓库提供，CSS/字体主题也有）
 │   │   ├── media/authors/me.jpg# 头像（URL /media/authors/me.jpg）
 │   │   └── uploads/resume.pdf
@@ -72,7 +73,9 @@ C:/Users/eiegant/WorkBuddy/2026-10-01-16-16-12/
 ├── tools/
 │   ├── hugo/hugo.exe           # Hugo extended v0.167.0（★ 不在 PATH，必须用全路径）
 │   ├── gh_api_push.py          # 走 REST API 推送（git push 走代理基本必失败）
-│   └── fetch_badges.ps1        # ★ 重下徽章墙/打字动画 SVG（改脚本里 $badges 列表即可增删徽章）
+│   ├── fetch_badges.ps1        # ★ 重下徽章墙/打字动画 SVG（改脚本里 $badges 列表即可增删徽章）
+│   ├── gen_heatmap_snake.py    # ★ 生成首页热力图贪吃蛇 SVG（联网抓 GitHub 贡献数据；--offline 用缓存重画）
+│   └── data/contrib_songyu0903.json   # 贡献日历原始 JSON 缓存（gen_heatmap_snake.py 写入）
 └── HANDOVER.md                 # 本文档（与 academic-homepage/HANDOVER.md 同内容）
 ```
 
@@ -96,7 +99,7 @@ Set-Location $site
 & $hugo --minify -d public-gh     # → public-gh/
 ```
 
-- 成功标志：`exit=0`，摘要 `Pages │ 139` 左右，`Static files │ 48`
+- 成功标志：`exit=0`，摘要 `Pages │ 139` 左右，`Static files │ 49`
 - 清理输出目录是**必须**的：清空后旧主题残留（`_headers`、`_redirects`、`backlinks.json`、`css/`、`dist/`、`js/`）才会消失，推送脚本也才会在远端删除它们
 - **不要**用 `hugo --cleanDestinationDir`（可能误删 `public-gh/.git`）
 
@@ -131,6 +134,7 @@ Copy-Item "$env:TEMP\hugo-book\hugo-book-main" "$site\themes\hugo-book" -Recurse
 | 头像 | 覆盖 `static/media/authors/me.jpg` | URL 固定 `/media/authors/me.jpg` |
 | 技术栈徽章墙 / 首页打字动画 | 徽章墙＝`layouts/_shortcodes/badges.html`（首页与关于页共用，改一处两页同步；正文里写 `{{< badges >}}`）；图＝`static/badges/*.svg`、`static/typing/*.svg`；生成脚本＝`tools/fetch_badges.ps1` | 图片**全部本地化**，页面不依赖 shields.io 在线服务；增删徽章＝改短代码里的 `<img>` 行（并可用脚本的 `$badges` 列表重下图）；simple-icons 已下架 matlab/cvxpy/powershell/vscode/windows 图标 → 这 5 个是纯文字胶囊（不是 bug） |
 | 首页访客计数 | `layouts/_shortcodes/visitors.html`（首页正文末尾写 `{{< visitors >}}`）；CSS 在 `assets/styles/custom.css` 的 `.visitors` | **全站唯一的外部服务依赖**：`https://visitor-badge.laobi.icu/badge?page_id=songyu0903.github.io&left_text=visits`（实测国内直连约 1s、响应头 `Cache-Control: no-cache` → 每次加载真实 +1）。`page_id` 固定为站点域名，正式站与备用站共用同一计数器（即「总访问量」）。**加载失败时 `onerror` 整块隐藏**，不会出现破图；换服务只改短代码里那一行 URL（备选：`https://komarev.com/ghpvc/?username=songyu0903&label=Views&color=0e75b6&style=flat`）；不蒜子 busuanzi 已实测不可用（JS 能下但计数接口 `busuanzi.ibruce.info/busuanzi` 从国内超时） |
+| 首页「📈 GitHub 活跃度」热力图贪吃蛇 | 图＝`static/heatmap/snake.svg`（自包含 SMIL 动效，**运行时不依赖任何外部服务**）；生成脚本＝`tools/gen_heatmap_snake.py`；首页正文在 `content/_index.md`（`.heatmap` / `.heatmap-note` 样式在 `assets/styles/custom.css`） | 数据＝GitHub 贡献日历，抓 `https://github-contributions-api.jogruber.de/v4/songyu0903?y=last`（本机直连可用；`github.com/users/<user>/contributions` 在本机被重置）。**静态站没有后端，所以数据是构建前抓下来烘进 SVG 的**：要更新数据就重新跑 `python tools\gen_heatmap_snake.py`（加 `--offline` 用 `tools/data/contrib_songyu0903.json` 缓存重画），再按 §6 构建推送。小蛇每跑一趟（18 s）会把有贡献的格子依次吃掉、走完再恢复，循环播放 |
 | 公式渲染 | `layouts/_partials/docs/inject/head.html` | 前端 KaTeX（auto-render），改动前先读主题同名文件 |
 | 版式微调 | `assets/styles/custom.css` | 主题 `assets/styles/index.yaml` 中最后加载，可覆盖主题 |
 
@@ -275,7 +279,7 @@ PDF 放 `static/uploads/` → 在 `_index.md`、`about.md` 或笔记里加 `[PDF
 - **版式**：首页与所有页面统一 Book 标准版式（**左侧大目录树** + 正文）；侧栏 = 「👤 关于」+「📝 笔记专题」（展开 6 个专题页：分布鲁棒与鲁棒优化 / 估计误差与高维统计 / 风险度量与组合结构 / 动态与计算 / 策略评估与决策聚焦学习 / 研究入门与写作工具），底部 `menu.after` = 📚 全部笔记 / 🐙 GitHub；**侧栏不列单篇笔记标题**（笔记与 `/blog/`、`/authors/` 均 `bookHidden: true`）；`/blog/` = 「📝 全部笔记」分页 10/页 + `/blog/page/2/` 7 篇；专题页按 front matter `notes:` 列出该方向笔记（2/2/3/3/2/5 = 17 篇）；KaTeX 前端渲染；搜索框（MiniSearch）；深色/浅色自动（`BookTheme="auto"`）
 - **源码仓库最新提交**：`43ba10c Rename display name to Y.S (home h1, site title, about page)` → 已推送 `PUSH_OK 0c2af28`（source 分支，changed=4）；此后若仅更新本文档，可能另有提交，以 `git -C <site> log -1` 为准
 - **产物仓库最新提交**：`0c44ca4 Rename site display name to Y.S; refresh search index assets` → 已推送 `PUSH_OK ea15249`（main 分支，changed=142 deleted=2）
-- **构建**：`Pages 139`、`Static files 48`、81 个 HTML、无 localhost/livereload 污染
+- **构建**：`Pages 139`、`Static files 49`、81 个 HTML、无 localhost/livereload 污染
 - **头像**：`static/media/authors/me.jpg`（用户提供的 logo.jpg，19 059 字节，URL `/media/authors/me.jpg`）
 - **已发布文章**（`content/blog/`，共 **17 篇**）：原有 5 篇 `portfolio-optimization`、`thesis-proposal`、`vscode-setup`、`math-typesetting`、`writing-workflow`；2026-10-04 新增 12 篇文献调研笔记 —— `wasserstein-dro-portfolio`、`robust-portfolio-uncertainty-sets`、`high-dim-covariance-estimation`、`end-to-end-portfolio-learning`、`risk-measures-cvar-spectral-drawdown`、`factor-models-sparsity-cardinality`、`mean-estimation-error-and-1n-paradox`、`multiperiod-portfolio-and-transaction-costs`、`backtest-overfitting-and-strategy-evaluation`、`large-scale-portfolio-optimization-algorithms`、`dynamic-risk-measures-time-consistency`、`risk-parity-and-risk-budgeting`
 - **侧栏专题分组**（`content/topics/`，侧栏顺序按 weight 1–6）：`dro-robust` ← wasserstein-dro-portfolio, robust-portfolio-uncertainty-sets；`estimation-highdim` ← mean-estimation-error-and-1n-paradox, high-dim-covariance-estimation；`risk-structure` ← risk-measures-cvar-spectral-drawdown, factor-models-sparsity-cardinality, risk-parity-and-risk-budgeting；`dynamic-compute` ← multiperiod-portfolio-and-transaction-costs, dynamic-risk-measures-time-consistency, large-scale-portfolio-optimization-algorithms；`evaluation-learning` ← backtest-overfitting-and-strategy-evaluation, end-to-end-portfolio-learning；`research-writing` ← portfolio-optimization, thesis-proposal, math-typesetting, vscode-setup, writing-workflow
@@ -285,7 +289,9 @@ PDF 放 `static/uploads/` → 在 `_index.md`、`about.md` 或笔记里加 `[PDF
 - **2026-10-04 视觉样式上线后复验（GitHub Pages）**：**首页**与 `/about/` 均含 **15** 个 `/badges/*.svg` 引用（首页在「🛠 技术栈」小节，标题与简介下方，右侧目录树也列出该项）；`/badges/python.svg` 200（3102 B）、`/badges/matlab.svg` 200（988 B）、`/badges/hugo.svg` 200（2008 B）；首页含 `/typing/typing-dark.svg` 与 `/typing/typing-light.svg` 两个引用且两者均 200（各 10 793 B）；新 CSS `book.min.de9cec6e…css` 200（20 025 B）、旧 `book.min.246490aa…css` **404**（旧哈希资源已在远端删除）
 - **2026-10-04 首页访客计数**：新增 `layouts/_shortcodes/visitors.html`（首页正文末尾 `{{< visitors >}}`），徽章服务 `https://visitor-badge.laobi.icu/badge?page_id=songyu0903.github.io&left_text=visits`，右下角小块（`.visitors`，右对齐、透明度 .85）。**全站唯一的外部服务依赖**：实测国内直连 ≈1.0 s、`Cache-Control: no-cache`（每次加载真实 +1，不会被缓存吞掉）；实测**不可用**的方案 —— busuanzi 的不蒜子（JS 能下但计数接口 `busuanzi.ibruce.info/busuanzi` 25 s 超时）、`hits.seeyoufarm.com`（DNS 解析失败）、`api.vercount.one`（DNS 解析失败）；`komarev.com` 可用但 ≈2.1 s（作为备选 URL 写进 §5）。页面加载失败时 `onerror` 整块隐藏、不留破图。CSS 哈希 `de9cec6e → a5543f11`（20 211 B，含 `.visitors`）；新旧哈希资源在 `public/` 与 `public-gh/` 均只保留最新一份。**线上复验（GitHub Pages）**：首页含 1 处 `visitor-badge.laobi.icu` 引用与 `class=visitors`，徽章仍 15 个、打字动画两张均在；`/book.min.a5543f11…css` 200（20 211 B）、旧 `/book.min.de9cec6e…css` **404**；`/about/` 200 且**不含**该计数（只在首页）；线上首页与本地 `public-gh/index.html` **逐字节一致**（各 10 338 B）；计数服务本身实测返回 `[访问量][visits|N]` 且 `Cache-Control: no-cache`
 - **2026-10-04 站点显示名改为 `Y.S`**：首页 H1 `# songyu0903 → # Y.S`（标题锚点随之变为 `#ys`）、`hugo.toml` 的站点 `title` 与 `[languages.zh].title` 均改为 `Y.S`（影响浏览器标签页标题、侧栏左上角品牌、RSS 标题）、关于页头像 `alt` 与正文署名改为 `Y.S`。**功能标识一律未动**：`baseURL`、GitHub 链接（`https://github.com/songyu0903`）、访客计数 `page_id=songyu0903.github.io`（改了会把计数清零）。构建 `Pages 139 / Static files 48`；搜索索引哈希随之变化（`zh.search-data bdd1e88a → 1dd60f1b`、`zh.search.min 9f941e6c → 5a9a0648`），旧的两个搜索资源已在 `public/`、`public-gh/` 与远端删除；CSS 哈希不变（`a5543f11`）。**线上复验（GitHub Pages）**：首页标题 `🏠 首页 • Y.S`、H1 `Y.S`、侧栏品牌 `<span>Y.S</span>`；页面上剩下的 6 处 `songyu0903` **全是 URL**（`og:url`、`canonical`、RSS `<link>`、两处 `github.com/songyu0903`、访客计数 `page_id`）；`/about/` 标题 `👤 关于 • Y.S`、头像 `alt=Y.S`、徽章仍 15 个；新搜索资源 200 / 旧的两个 404；首页与本地 `public-gh/index.html` **逐字节一致**（10 266 B，SHA256 `C95B367D3ABE70B237B34479DC066409E461A707A57D297341E571933E3D3949`），`/about/` 同为 9 396 B 逐字节一致
-- **构建必须在站点目录内执行**（本次踩坑）：`-d public` 是相对**当前目录**的，在别处运行会生成一个空站点。本次误在 `C:\Users\eiegant\Desktop\投资组合优化` 生成了 `public/`、`public-gh/`（各 4 个 XML）与 `.hugo_build.lock`，已全部删除；正确做法是先 `Set-Location $site`（或在 pwsh 工具里用 `workdir`），再看输出里的 `Pages │ 139`、`Static files │ 48`
+- **2026-10-04 首页「📈 GitHub 活跃度」热力图贪吃蛇（用户要求：参考图是 GitHub 贡献日历 + 紫色小蛇）**：新增 `static/heatmap/snake.svg`（15 150 B，自包含 SMIL 动效，**运行时不依赖任何外部服务**）；`content/_index.md` 在「📝 阅读笔记」之后加「📈 GitHub 活跃度」小节（右侧目录树自动多出第 4 项）：图外包 `https://github.com/songyu0903` 链接，下面一行 `.heatmap-note` 说明「小蛇每跑一趟，会把有贡献的格子依次吃掉一遍」；`assets/styles/custom.css` 加 `.heatmap img{max-width:100%;height:auto}` 与 `.heatmap-note`。数据＝GitHub 贡献日历 `https://github-contributions-api.jogruber.de/v4/songyu0903?y=last`（本机直连 200、≈4 s；`github.com/users/<user>/contributions` 在本机被重置不可用）：**近一年 65 次贡献、8 天有贡献、单日最多 33 次**，范围 2025-10-05～2026-10-04（53 周 × 7 天）。生成脚本 `tools/gen_heatmap_snake.py`：把 371 个格子中心连成上下往返的折线（和 snk 走法一致），蛇身 7 节用 `animateMotion` 沿折线匀速滑动（18 s 一趟；折线两端各延伸 10 格到画面外，所以循环时整条蛇都在画面外、看不到跳变），**有贡献的格子**用 `animate opacity` 在蛇头经过时消失、一趟走完再恢复；空格子合并成一条 `<path>`（体积小）；明暗色、月份标签（英文 Oct/Nov…，避免 CJK 字形与裁切问题）与右下角统计文字都在 SVG 内（`prefers-color-scheme`）。CSS 哈希 `a5543f11 → fc1de341`（20 310 B，含 `.heatmap`/`.heatmap-note`），旧哈希在 `public/`、`public-gh/` 与远端删除；构建 `Pages 139 / Static files 49`（+1 个 SVG）
+- **2026-10-04 动效验证方法（可复用）**：`python -m http.server <port> --directory public-gh` 起本地服务，再用 Edge 无头截图（`msedge.exe --headless=new --disable-gpu --user-data-dir=<临时目录> --window-size=720,200 --virtual-time-budget=3000 --screenshot=<png> <url>`；**必须给 `--user-data-dir`**，否则会去碰用户正在用的 Edge 配置），分别取 3 s 与 11 s 两帧对比：蛇的位置不同、且先前有贡献的格子已消失 → 证明 SMIL 动画在 `<img>` 里真的在跑。注意 `--virtual-time-budget` 的采样点可能落在擦除/切换瞬间（打字动画在 6 s 时几乎空白属正常，3 s 帧能看到 `M.Sc. in Mathematics`），别据此误判成坏图
+- **构建必须在站点目录内执行**（本次踩坑）：`-d public` 是相对**当前目录**的，在别处运行会生成一个空站点。本次误在 `C:\Users\eiegant\Desktop\投资组合优化` 生成了 `public/`、`public-gh/`（各 4 个 XML）与 `.hugo_build.lock`，已全部删除；正确做法是先 `Set-Location $site`（或在 pwsh 工具里用 `workdir`），再看输出里的 `Pages │ 139`、`Static files │ 49`
 - **备用链接 https://songyu-academic-home.app.workbuddy.host/ 仍为旧版**（仍含 `css/_entry.*.css`）—— DSH 侧没有 `workbuddy_sites_deploy` 工具，只能由用户在 WorkBuddy 里点部署
 
 ---
