@@ -224,18 +224,17 @@ PDF 放 `static/uploads/` → 在 `_index.md` 或文章里加 `[PDF](/uploads/xx
 
 ---
 
-## 9. 当前状态快照（2026-10-03）
+## 9. 当前状态快照（2026-10-04）
 
 - **主题**：Hugo Blox Academic CV（HugoBlox Kit 0.12 + Tailwind CSS v4，单语言中文）
-- **源码仓库最新提交**：`d762ddb Add handover document for site maintenance`（source 分支，本文件已在仓库内）
-- **产物仓库最新提交**：`a101338 Update avatar`（main 分支）
-- **头像**：`assets/media/authors/me.jpg`（用户提供的 logo.jpg，19059 字节）
-- **已发布文章**（`content/blog/`）：`portfolio-optimization`、`thesis-proposal`、`vscode-setup`、`math-typesetting`、`writing-workflow`
-- **两个线上地址均已同步且正常**（首页/博客/CSS/头像全部 200）
-- 构建产物 45 页，工作区无未提交改动
+- **源码仓库最新提交**：`8a9ed9c Add risk parity and risk budgeting reading note`（source 分支）
+- **产物仓库最新提交**：`0b08d1e Add risk parity reading note`（main 分支）
+- **头像**：`assets/media/authors/me.jpg`（用户提供的 logo.jpg，19 059 字节）
+- **已发布文章**（`content/blog/`，共 **17 篇**）：原有 5 篇 `portfolio-optimization`、`thesis-proposal`、`vscode-setup`、`math-typesetting`、`writing-workflow`；2026-10-04 新增 12 篇文献调研笔记 —— `wasserstein-dro-portfolio`、`robust-portfolio-uncertainty-sets`、`high-dim-covariance-estimation`、`end-to-end-portfolio-learning`、`risk-measures-cvar-spectral-drawdown`、`factor-models-sparsity-cardinality`、`mean-estimation-error-and-1n-paradox`、`multiperiod-portfolio-and-transaction-costs`、`backtest-overfitting-and-strategy-evaluation`、`large-scale-portfolio-optimization-algorithms`、`dynamic-risk-measures-time-consistency`、`risk-parity-and-risk-budgeting`
+- **构建产物 127 页**：博客列表已分页（`/blog/` 10 篇 + `/blog/page/2/` 7 篇），`public-gh/` 无 localhost 污染
+- **GitHub Pages 已同步并逐页验证**（首页 / 博客 / 全部 17 篇详情页 / CSS 均 200）；**备用链接 https://songyu-academic-home.app.workbuddy.host/ 仍为旧版** —— DSH 侧没有 `workbuddy_sites_deploy` 工具，只能由用户在 WorkBuddy 里点部署
 
 ---
-
 ## 10. 接手第一步建议
 
 ```bash
