@@ -1,0 +1,32 @@
+{{- /*
+  技术栈徽章墙（首页与「关于」页共用，避免两处维护）
+  图片全部本地化在 static/badges/，由 tools/fetch_badges.ps1 生成/更新。
+  用法：在 markdown 里写  {{< badges >}}   ← 尖括号语法=输出原样 HTML，所以说明文字也用 HTML 标签
+  样式：assets/styles/custom.css 里的 .badges
+*/ -}}
+<p><strong>编程与数值计算</strong></p>
+<div class="badges">
+<img src="/badges/python.svg" alt="Python" height="20" />
+<img src="/badges/matlab.svg" alt="MATLAB" height="20" />
+<img src="/badges/cvxpy.svg" alt="CVXPY" height="20" />
+<img src="/badges/powershell.svg" alt="PowerShell" height="20" />
+</div>
+
+<p><strong>写作与科研工作流</strong></p>
+<div class="badges">
+<img src="/badges/latex.svg" alt="LaTeX" height="20" />
+<img src="/badges/texlive.svg" alt="TeX Live" height="20" />
+<img src="/badges/overleaf.svg" alt="Overleaf" height="20" />
+<img src="/badges/zotero.svg" alt="Zotero" height="20" />
+<img src="/badges/obsidian.svg" alt="Obsidian" height="20" />
+<img src="/badges/markdown.svg" alt="Markdown" height="20" />
+</div>
+
+<p><strong>开发与站点工具</strong></p>
+<div class="badges">
+<img src="/badges/git.svg" alt="Git" height="20" />
+<img src="/badges/github.svg" alt="GitHub" height="20" />
+<img src="/badges/vscode.svg" alt="Visual Studio Code" height="20" />
+<img src="/badges/windows.svg" alt="Windows" height="20" />
+<img src="/badges/hugo.svg" alt="Hugo" height="20" />
+</div>
