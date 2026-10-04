@@ -45,13 +45,15 @@ C:/Users/eiegant/WorkBuddy/2026-10-01-16-16-12/
 ├── academic-homepage/          # Hugo 源码站（git 仓库，推 source 分支）
 │   ├── hugo.toml               # ★ 站点配置（Hugo Book 主题：菜单/参数/markup/KaTeX passthrough）
 │   ├── content/
-│   │   ├── _index.md           # 首页（layout: landing，含"研究方向"正文）
-│   │   ├── about.md            # 关于页（原先首页的简历块搬到这里）
-│   │   └── blog/<slug>/index.md# 笔记文章（17 篇，front matter 含 weight 决定侧栏顺序）
-│   ├── content/blog/_index.md  # 笔记章节页（BookSection，侧边栏目录树的根）
+│   │   ├── _index.md           # 首页（正文含"研究方向" + 六个专题导览）
+│   │   ├── about.md            # 关于页（weight: 1 → 侧栏目录树第一项）
+│   │   ├── blog/<slug>/index.md# 笔记文章（17 篇；weight 定"全部笔记"列表顺序，bookHidden 使其不进侧栏）
+│   │   ├── blog/_index.md      # 「📝 全部笔记」页（bookHidden: true）
+│   │   └── topics/<topic>/_index.md # 6 个专题页 = 侧栏大目录（front matter notes: [笔记 slug…]）
 │   ├── layouts/
+│   │   ├── index.html          # 首页版式（标准 Book 版式 → 保留左侧目录）
 │   │   ├── single.html         # 覆盖主题：渲染 front matter 标题 + 日期（主题默认不渲染 H1）
-│   │   ├── list.html           # /blog/ 列表（分页 10/页）
+│   │   ├── list.html           # section 列表：有 notes: 则列该专题笔记，否则分页列出（/blog/ 10/页）
 │   │   ├── term.html / taxonomy.html  # 标签页
 │   │   └── _partials/docs/inject/head.html  # ★ 注入 KaTeX 前端 auto-render
 │   ├── assets/styles/custom.css# 站点自定义样式（主题最后加载，可覆盖主题）
@@ -91,7 +93,7 @@ Set-Location $site
 & $hugo --minify -d public-gh     # → public-gh/
 ```
 
-- 成功标志：`exit=0`，摘要 `Pages │ 125` 左右，`Static files │ 31`
+- 成功标志：`exit=0`，摘要 `Pages │ 139` 左右，`Static files │ 31`
 - 清理输出目录是**必须**的：清空后旧主题残留（`_headers`、`_redirects`、`backlinks.json`、`css/`、`dist/`、`js/`）才会消失，推送脚本也才会在远端删除它们
 - **不要**用 `hugo --cleanDestinationDir`（可能误删 `public-gh/.git`）
 
@@ -116,12 +118,13 @@ Copy-Item "$env:TEMP\hugo-book\hugo-book-main" "$site\themes\hugo-book" -Recurse
 
 | 想改什么 | 改哪个文件 | 说明 |
 |---|---|---|
-| 站点名 / 菜单 / 主题外观 / 搜索 / 目录树根 | `hugo.toml` | `title`、`[[menu.home]]`（首页顶部导航）、`[[menu.after]]`（侧栏底部链接）、`[params] BookTheme=light|dark|auto`、`BookSection="blog"`（侧栏目录树渲染哪个章节） |
+| 站点名 / 菜单 / 主题外观 / 搜索 / 目录树根 | `hugo.toml` | `title`、`[[menu.home]]`（仅 landing 版式用）、`[[menu.after]]`（侧栏底部链接）、`[params] BookTheme=light|dark|auto`、`BookSection="*"`（侧栏目录树以**站点顶层**为根 → 只显示「关于」+「笔记专题」两个大目录） |
 | 首页文案（研究方向、笔记导览） | `content/_index.md` + `layouts/index.html` | 首页与其它页**统一使用 Book 标准版式**（左侧目录树 + 正文）；若想用主题的 landing 版式，给 front matter 加 `layout: landing`，但那会**隐藏左侧目录** |
 | 个人简介 / 教育 / 研究兴趣 / 技能 / 语言 / 链接 | `content/about.md` | 原先由 `data/authors/me.yaml` 渲染，现已写成正文；`data/authors/me.yaml` 仅作留档 |
-| 新增/修改一篇笔记 | `content/blog/<slug>/index.md` | front matter：`title / date / summary / tags / weight`；**正文不要写 H1**（`layouts/single.html` 已用 title 渲染标题） |
-| 笔记在侧栏与列表中的顺序 | 各笔记 front matter 的 `weight` | 数值越小越靠前；当前 1–17 |
-| 笔记章节导语 | `content/blog/_index.md` | 同时是侧栏目录树的根（`BookSection="blog"`） |
+| 新增/修改一篇笔记 | `content/blog/<slug>/index.md` | front matter：`title / date / summary / tags / weight`；**正文不要写 H1**（`layouts/single.html` 已用 title 渲染标题）；**写完还要把 slug 加进对应专题页的 `notes:` 列表**，否则专题页不显示它 |
+| 笔记在「全部笔记」列表里的顺序 | 各笔记 front matter 的 `weight` | 数值越小越靠前；当前 1–17（侧栏**不**列单篇笔记） |
+| 侧栏大目录（专题分组） | `content/topics/<topic>/_index.md` | `weight`（1–6）定侧栏顺序、`notes: [笔记 slug…]` 定该专题收录哪些笔记；`content/topics/_index.md` 是目录树的根 |
+| 全部笔记页导语 | `content/blog/_index.md` | 「📝 全部笔记」页；`bookHidden: true` 使其不单独出现在侧栏目录树 |
 | 头像 | 覆盖 `static/media/authors/me.jpg` | URL 固定 `/media/authors/me.jpg` |
 | 公式渲染 | `layouts/_partials/docs/inject/head.html` | 前端 KaTeX（auto-render），改动前先读主题同名文件 |
 | 版式微调 | `assets/styles/custom.css` | 主题 `assets/styles/index.yaml` 中最后加载，可覆盖主题 |
@@ -142,7 +145,7 @@ tags: ["投资组合优化", "鲁棒优化"]
 $$\min_{w}\ w^{\top}\Sigma w \quad \text{s.t.} \quad w^{\top}\mathbf{1}=1$$
 ```
 
-写完新笔记后：`weight` 决定顺序 → 构建 → 两仓库提交 → 推送两个分支 → 验证。
+写完新笔记后：① 把 slug 加进对应专题页 `content/topics/<topic>/_index.md` 的 `notes:` 列表（六选一，否则侧栏专题页里看不到它）；② `weight` 决定「全部笔记」列表顺序 → 构建（§4）→ 两仓库提交 → 推送两个分支 → 验证。
 
 ### 提供 PDF 下载链接（用户问过）
 
@@ -222,7 +225,8 @@ curl.exe -s -o NUL -w "bak:%{http_code}`n"  "https://songyu-academic-home.app.wo
 | GitHub Releases 资产域名被墙 | 下载 `katex.zip` 得到 **0 字节** | 改用 `codeload`（主题）/腾讯 npm 镜像（KaTeX） |
 | 主题默认不渲染 H1 | 笔记页没有标题 | 站点 `layouts/single.html` 覆盖，用 `{{ partial "docs/title" . }}` 渲染 front matter 标题 |
 | 首页没有左侧目录 | 首页用了主题 landing 版式（`landing.html` 清空 `menu-container`） | 去掉 `content/_index.md` 的 `layout: landing`，改用站点 `layouts/index.html`（默认 Book 版式，自带左侧目录树） |
-| 侧栏目录为空 | 左侧只有站名 | `hugo.toml` 的 `BookSection="blog"` 必须指向 `content/blog`（否则主题 `errorf` 或渲染空树） |
+| 侧栏目录为空 | 左侧只有站名 | `hugo.toml` 的 `BookSection` 必须指向存在的章节（`"*"` = 站点顶层） |
+| 侧栏列出一堆文章标题 | 想要「大目录」却看到 17 篇笔记 | 用 `BookSection="*"` + `content/topics/` 做粗粒度目录，并给 `content/blog/_index.md`、`content/authors/_index.md` 及各笔记所在章节加 `bookHidden: true` |
 | KaTeX 只显示源码 | 页面上是 `$…$` 原文 | 主题不带 `katex.min.js`：需 `static/katex/katex.min.js` + `inject/head.html` 里的 auto-render |
 | LaTeX 转义被吃掉 | `\max\{p,2\}` 变成 `\max{p,2}` | `hugo.toml` 开 `[markup.goldmark.extensions.passthrough]`（block/inline 定界符） |
 | `--minify` 去掉属性引号 | 校验正则 `href="/blog/` 全部 0 命中 | 校验时不要强制引号（写 `href=/blog/` 或用正则 `href=[""]?`） |
@@ -243,7 +247,7 @@ curl.exe -s -o NUL -w "bak:%{http_code}`n"  "https://songyu-academic-home.app.wo
 ## 8. 常见任务 Playbook
 
 **A. 新增一篇笔记**
-新建 `content/blog/<slug>/index.md`（含 `weight`，正文不写 H1）→ 构建（§4）→ 两仓库 commit → 推两个分支（§6 步骤 3）→ curl 验证新 URL 200。
+新建 `content/blog/<slug>/index.md`（含 `weight`，正文不写 H1）→ 把 slug 加进 `content/topics/<topic>/_index.md` 的 `notes:`（六选一）→ 构建（§4）→ 两仓库 commit → 推两个分支（§6 步骤 3）→ curl 验证新 URL 与所属专题页均 200。
 
 **B. 换头像**
 覆盖 `static/media/authors/me.jpg`（JPG/PNG）→ 构建 → 提交推送 → 验证 `/media/authors/me.jpg` 200。
@@ -254,20 +258,21 @@ curl.exe -s -o NUL -w "bak:%{http_code}`n"  "https://songyu-academic-home.app.wo
 **D. 加 PDF 下载**
 PDF 放 `static/uploads/` → 在 `_index.md`、`about.md` 或笔记里加 `[PDF](/uploads/xxx.pdf)` → 构建 → 同步。
 
-**E. 调侧栏顺序 / 分专题**
-改各笔记 front matter 的 `weight`；笔记只用 `##` 及以下标题（ToC 从 2 级起）。
+**E. 调侧栏大目录 / 新建专题**
+侧栏由 `hugo.toml` 的 `BookSection="*"` + `content/topics/` 决定：新建 `content/topics/<slug>/_index.md`（`weight` 定侧栏顺序、`notes: [笔记 slug…]` 定收录哪些笔记、正文写 2–3 句导语）就多一个侧栏大目录；笔记顺序改各笔记 `weight`；笔记只用 `##` 及以下标题（ToC 从 2 级起）。
 
 ---
 
 ## 9. 当前状态快照（2026-10-04）
 
 - **主题**：**Hugo Book**（`github.com/alex-shpak/hugo-book`，min_version 0.158.0，本机 Hugo v0.167.0+extended；主题不入库，vendored 于 `themes/hugo-book`）
-- **版式**：首页 = Book 标准版式（**左侧目录树** + hero「songyu0903」+ 研究方向 + 笔记导览），与笔记页/关于页一致；侧边栏 = `BookSection="blog"` 的 17 篇笔记目录树（按 `weight` 1–17）+ `menu.after`（关于/GitHub）；`/about/` = 关于页；`/blog/` 列表分页 10/页 + `/blog/page/2/` 7 篇；KaTeX 前端渲染；搜索框（MiniSearch）；深色/浅色自动（`BookTheme="auto"`）
+- **版式**：首页与所有页面统一 Book 标准版式（**左侧大目录树** + 正文）；侧栏 = 「👤 关于」+「📝 笔记专题」（展开 6 个专题页：分布鲁棒与鲁棒优化 / 估计误差与高维统计 / 风险度量与组合结构 / 动态与计算 / 策略评估与决策聚焦学习 / 研究入门与写作工具），底部 `menu.after` = 📚 全部笔记 / 🐙 GitHub；**侧栏不列单篇笔记标题**（笔记与 `/blog/`、`/authors/` 均 `bookHidden: true`）；`/blog/` = 「📝 全部笔记」分页 10/页 + `/blog/page/2/` 7 篇；专题页按 front matter `notes:` 列出该方向笔记（2/2/3/3/2/5 = 17 篇）；KaTeX 前端渲染；搜索框（MiniSearch）；深色/浅色自动（`BookTheme="auto"`）
 - **源码仓库最新提交**：`ecd0d87 Switch site theme to Hugo Book (content unchanged; landing home + about page; KaTeX front-end)` → 已推送 `PUSH_OK 8d2dfdb`（source 分支）
 - **产物仓库最新提交**：`2df239e Rebuild with Hugo Book theme` → 已推送 `PUSH_OK 4a77dcc`（main 分支，160 changed / 133 deleted）
 - **构建**：`Pages 125`、`Static files 31`、73 个 HTML、`public/` ≈1.65 MB、无 localhost/livereload 污染
 - **头像**：`static/media/authors/me.jpg`（用户提供的 logo.jpg，19 059 字节，URL `/media/authors/me.jpg`）
 - **已发布文章**（`content/blog/`，共 **17 篇**）：原有 5 篇 `portfolio-optimization`、`thesis-proposal`、`vscode-setup`、`math-typesetting`、`writing-workflow`；2026-10-04 新增 12 篇文献调研笔记 —— `wasserstein-dro-portfolio`、`robust-portfolio-uncertainty-sets`、`high-dim-covariance-estimation`、`end-to-end-portfolio-learning`、`risk-measures-cvar-spectral-drawdown`、`factor-models-sparsity-cardinality`、`mean-estimation-error-and-1n-paradox`、`multiperiod-portfolio-and-transaction-costs`、`backtest-overfitting-and-strategy-evaluation`、`large-scale-portfolio-optimization-algorithms`、`dynamic-risk-measures-time-consistency`、`risk-parity-and-risk-budgeting`
+- **侧栏专题分组**（`content/topics/`，侧栏顺序按 weight 1–6）：`dro-robust` ← wasserstein-dro-portfolio, robust-portfolio-uncertainty-sets；`estimation-highdim` ← mean-estimation-error-and-1n-paradox, high-dim-covariance-estimation；`risk-structure` ← risk-measures-cvar-spectral-drawdown, factor-models-sparsity-cardinality, risk-parity-and-risk-budgeting；`dynamic-compute` ← multiperiod-portfolio-and-transaction-costs, dynamic-risk-measures-time-consistency, large-scale-portfolio-optimization-algorithms；`evaluation-learning` ← backtest-overfitting-and-strategy-evaluation, end-to-end-portfolio-learning；`research-writing` ← portfolio-optimization, thesis-proposal, math-typesetting, vscode-setup, writing-workflow
 - **GitHub Pages 已同步并逐页验证**：`/`、`/about/`、`/blog/`、`/blog/page/2/`、`/tags/`、`/index.xml`、`/sitemap.xml`、`/robots.txt`、`/404.html` 及 **17/17 篇笔记详情页全部 200**；`/katex/katex.min.js`、`/katex/katex.min.css`、`/katex/contrib/auto-render.min.js`、`/katex/fonts/KaTeX_Main-Regular.woff2`、`/minisearch.min.js`、`/favicon.ico`、`/media/authors/me.jpg`、`/uploads/resume.pdf` 均 200；旧 HugoBlox 资源（`/backlinks.json`、`/_headers`、`/_redirects`、`/css/_entry.*.css`、`/js/hb-*.js`、`/publication_types/`）**全部 404**
 - **备用链接 https://songyu-academic-home.app.workbuddy.host/ 仍为旧版**（仍含 `css/_entry.*.css`）—— DSH 侧没有 `workbuddy_sites_deploy` 工具，只能由用户在 WorkBuddy 里点部署
 
@@ -278,7 +283,7 @@ PDF 放 `static/uploads/` → 在 `_index.md`、`about.md` 或笔记里加 `[PDF
 $site = "C:\Users\eiegant\WorkBuddy\2026-10-01-16-16-12\academic-homepage"
 $hugo = "C:\Users\eiegant\WorkBuddy\2026-10-01-16-16-12\tools\hugo\hugo.exe"
 "themes_ok=" + (Test-Path "$site\themes\hugo-book\theme.toml")
-Set-Location $site; & $hugo --minify            # 期望 Pages │ 125、exit=0
+Set-Location $site; & $hugo --minify            # 期望 Pages │ 139、exit=0
 curl.exe -s "https://songyu0903.github.io/" | Select-String -Pattern "book\.min\." -Quiet
 ```
 

@@ -1,5 +1,6 @@
 ---
 title: "👤 关于"
+weight: 1
 ---
 
 <img class="avatar" src="/media/authors/me.jpg" alt="songyu0903" />

@@ -2,8 +2,22 @@
 <article class="markdown book-article">
   <h1>{{ partial "docs/title" . }}</h1>
   {{ .Content }}
-  {{- $pages := .Paginator.Pages -}}
-  {{- range $pages }}
+  {{- with .Params.notes }}
+  {{- /* 专题页：按 front matter 的 notes 列表渲染该方向的笔记 */}}
+  {{- range . }}
+  {{- with $.Site.GetPage (printf "/blog/%s" .) }}
+  <article class="book-post markdown">
+    <h2><a href="{{ .RelPermalink }}">{{ partial "docs/title" . }}</a></h2>
+    {{- with .Date }}
+    <p class="note-meta">{{ .Format "2006-01-02" }}</p>
+    {{- end }}
+    <p>{{ .Summary | plainify | truncate 200 }}</p>
+  </article>
+  {{- end }}
+  {{- end }}
+  {{- else }}
+  {{- /* 章节列表页（/blog/、/topics/、标签页）：按分页渲染子页 */}}
+  {{- range .Paginator.Pages }}
   <article class="book-post markdown">
     <h2><a href="{{ .RelPermalink }}">{{ partial "docs/title" . }}</a></h2>
     {{- with .Date }}
@@ -13,5 +27,6 @@
   </article>
   {{- end }}
   {{ partial "docs/pagination" . }}
+  {{- end }}
 </article>
 {{ end }}
