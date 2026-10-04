@@ -59,6 +59,8 @@ C:/Users/eiegant/WorkBuddy/2026-10-01-16-16-12/
 │   ├── assets/styles/custom.css# 站点自定义样式（主题最后加载，可覆盖主题）
 │   ├── static/
 │   │   ├── .nojekyll           # 必留！GitHub Pages 修复下划线资源 404
+│   │   ├── badges/             # ★ 技术栈徽章 SVG ×15（本地化；生成脚本 tools/fetch_badges.ps1）
+│   │   ├── typing/             # ★ 首页打字动画 SVG（typing-dark/typing-light，自包含动画）
 │   │   ├── katex/              # ★ 前端 KaTeX（JS 由本仓库提供，CSS/字体主题也有）
 │   │   ├── media/authors/me.jpg# 头像（URL /media/authors/me.jpg）
 │   │   └── uploads/resume.pdf
@@ -67,7 +69,8 @@ C:/Users/eiegant/WorkBuddy/2026-10-01-16-16-12/
 │   └── public-gh/              # 构建产物 B（独立 git 仓库 → main 分支）
 ├── tools/
 │   ├── hugo/hugo.exe           # Hugo extended v0.167.0（★ 不在 PATH，必须用全路径）
-│   └── gh_api_push.py          # 走 REST API 推送（git push 走代理基本必失败）
+│   ├── gh_api_push.py          # 走 REST API 推送（git push 走代理基本必失败）
+│   └── fetch_badges.ps1        # ★ 重下徽章墙/打字动画 SVG（改脚本里 $badges 列表即可增删徽章）
 └── HANDOVER.md                 # 本文档（与 academic-homepage/HANDOVER.md 同内容）
 ```
 
@@ -91,7 +94,7 @@ Set-Location $site
 & $hugo --minify -d public-gh     # → public-gh/
 ```
 
-- 成功标志：`exit=0`，摘要 `Pages │ 139` 左右，`Static files │ 31`
+- 成功标志：`exit=0`，摘要 `Pages │ 139` 左右，`Static files │ 48`
 - 清理输出目录是**必须**的：清空后旧主题残留（`_headers`、`_redirects`、`backlinks.json`、`css/`、`dist/`、`js/`）才会消失，推送脚本也才会在远端删除它们
 - **不要**用 `hugo --cleanDestinationDir`（可能误删 `public-gh/.git`）
 
@@ -118,12 +121,13 @@ Copy-Item "$env:TEMP\hugo-book\hugo-book-main" "$site\themes\hugo-book" -Recurse
 |---|---|---|
 | 站点名 / 菜单 / 主题外观 / 搜索 / 目录树根 | `hugo.toml` | `title`、`[[menu.home]]`（仅 landing 版式用）、`[[menu.after]]`（侧栏底部链接）、`[params] BookTheme=light|dark|auto`、`BookSection="*"`（侧栏目录树以**站点顶层**为根 → 只显示「关于」+「笔记专题」两个大目录） |
 | 首页文案（研究方向、笔记导览） | `content/_index.md` + `layouts/index.html` | 首页与其它页**统一使用 Book 标准版式**（左侧目录树 + 正文）；若想用主题的 landing 版式，给 front matter 加 `layout: landing`，但那会**隐藏左侧目录** |
-| 个人简介 / 教育 / 研究兴趣 / 技能 / 语言 / 链接 | `content/about.md` | 原先由 HugoBlox 的 `data/authors/me.yaml` 渲染，现已写成正文（该 yaml 已于 2026-10-04 清理删除） |
+| 个人简介 / 教育 / 研究兴趣 / 技能 / 语言 / 链接 | `content/about.md` | 原先由 HugoBlox 的 `data/authors/me.yaml` 渲染，现已写成正文（该 yaml 已于 2026-10-04 清理删除）；「🛠 技能」是本地 SVG 徽章墙（图片在 `static/badges/`） |
 | 新增/修改一篇笔记 | `content/blog/<slug>/index.md` | front matter：`title / date / summary / tags / weight`；**正文不要写 H1**（`layouts/single.html` 已用 title 渲染标题）；**写完还要把 slug 加进对应专题页的 `notes:` 列表**，否则专题页不显示它 |
 | 笔记在「全部笔记」列表里的顺序 | 各笔记 front matter 的 `weight` | 数值越小越靠前；当前 1–17（侧栏**不**列单篇笔记） |
 | 侧栏大目录（专题分组） | `content/topics/<topic>/_index.md` | `weight`（1–6）定侧栏顺序、`notes: [笔记 slug…]` 定该专题收录哪些笔记；`content/topics/_index.md` 是目录树的根 |
 | 全部笔记页导语 | `content/blog/_index.md` | 「📝 全部笔记」页；`bookHidden: true` 使其不单独出现在侧栏目录树 |
 | 头像 | 覆盖 `static/media/authors/me.jpg` | URL 固定 `/media/authors/me.jpg` |
+| 技术栈徽章墙 / 首页打字动画 | `static/badges/*.svg`、`static/typing/*.svg` + `tools/fetch_badges.ps1` | 图片**全部本地化**，页面不依赖 shields.io 在线服务；增删徽章＝改脚本里 `$badges` 列表后重跑脚本；simple-icons 已下架 matlab/cvxpy/powershell/vscode/windows 图标 → 这 5 个是纯文字胶囊（不是 bug） |
 | 公式渲染 | `layouts/_partials/docs/inject/head.html` | 前端 KaTeX（auto-render），改动前先读主题同名文件 |
 | 版式微调 | `assets/styles/custom.css` | 主题 `assets/styles/index.yaml` 中最后加载，可覆盖主题 |
 
@@ -267,11 +271,12 @@ PDF 放 `static/uploads/` → 在 `_index.md`、`about.md` 或笔记里加 `[PDF
 - **版式**：首页与所有页面统一 Book 标准版式（**左侧大目录树** + 正文）；侧栏 = 「👤 关于」+「📝 笔记专题」（展开 6 个专题页：分布鲁棒与鲁棒优化 / 估计误差与高维统计 / 风险度量与组合结构 / 动态与计算 / 策略评估与决策聚焦学习 / 研究入门与写作工具），底部 `menu.after` = 📚 全部笔记 / 🐙 GitHub；**侧栏不列单篇笔记标题**（笔记与 `/blog/`、`/authors/` 均 `bookHidden: true`）；`/blog/` = 「📝 全部笔记」分页 10/页 + `/blog/page/2/` 7 篇；专题页按 front matter `notes:` 列出该方向笔记（2/2/3/3/2/5 = 17 篇）；KaTeX 前端渲染；搜索框（MiniSearch）；深色/浅色自动（`BookTheme="auto"`）
 - **源码仓库最新提交**：`fc4a1dc Sidebar: group notes into six topic sections (big directory instead of article titles)` → 已推送 `PUSH_OK a0303d5`（source 分支）；此后若仅更新本文档，可能另有提交，以 `git -C <site> log -1` 为准
 - **产物仓库最新提交**：`b989f31 Sidebar: group notes into six topic sections` → 已推送 `PUSH_OK ee895cc`（main 分支）
-- **构建**：`Pages 139`、`Static files 31`、81 个 HTML、无 localhost/livereload 污染
+- **构建**：`Pages 139`、`Static files 48`、81 个 HTML、无 localhost/livereload 污染
 - **头像**：`static/media/authors/me.jpg`（用户提供的 logo.jpg，19 059 字节，URL `/media/authors/me.jpg`）
 - **已发布文章**（`content/blog/`，共 **17 篇**）：原有 5 篇 `portfolio-optimization`、`thesis-proposal`、`vscode-setup`、`math-typesetting`、`writing-workflow`；2026-10-04 新增 12 篇文献调研笔记 —— `wasserstein-dro-portfolio`、`robust-portfolio-uncertainty-sets`、`high-dim-covariance-estimation`、`end-to-end-portfolio-learning`、`risk-measures-cvar-spectral-drawdown`、`factor-models-sparsity-cardinality`、`mean-estimation-error-and-1n-paradox`、`multiperiod-portfolio-and-transaction-costs`、`backtest-overfitting-and-strategy-evaluation`、`large-scale-portfolio-optimization-algorithms`、`dynamic-risk-measures-time-consistency`、`risk-parity-and-risk-budgeting`
 - **侧栏专题分组**（`content/topics/`，侧栏顺序按 weight 1–6）：`dro-robust` ← wasserstein-dro-portfolio, robust-portfolio-uncertainty-sets；`estimation-highdim` ← mean-estimation-error-and-1n-paradox, high-dim-covariance-estimation；`risk-structure` ← risk-measures-cvar-spectral-drawdown, factor-models-sparsity-cardinality, risk-parity-and-risk-budgeting；`dynamic-compute` ← multiperiod-portfolio-and-transaction-costs, dynamic-risk-measures-time-consistency, large-scale-portfolio-optimization-algorithms；`evaluation-learning` ← backtest-overfitting-and-strategy-evaluation, end-to-end-portfolio-learning；`research-writing` ← portfolio-optimization, thesis-proposal, math-typesetting, vscode-setup, writing-workflow
 - **2026-10-04 本地清理（旧主题残留与缓存，共约 45.9 MB）**：已删 `node_modules/`(18.5MB，HugoBlox/Tailwind)、`resources/`(5.3MB，Hugo 资源缓存)、`_blox-backup/`、`data/authors/me.yaml`(HugoBlox 作者档案)、`assets/media/`(含 421KB slides-logo.svg)、`assets/jsconfig.json`、`.github/workflows/hugo.yml`(旧 Actions 工作流，本就只在 source 分支、不影响 main 的 Pages 部署)、`.hugo_build.lock`、`%TEMP%\hb`(19.4MB 主题/KaTeX 下载暂存)、`%LOCALAPPDATA%\hugo_cache`(2.6MB Hugo Modules 缓存)、`tools/build.sh`、`hugo_gh.txt`/`hugo_out.txt`(旧构建日志)。清理后重建输出与清理前逐字节一致（`Pages 139`、81 个 HTML），`README.md` 已改写为 Hugo Book 版
+- **2026-10-04 视觉样式（参考 sun0225SUN 个人主页）**：①「👤 关于」页「🛠 技能」改成**本地化徽章墙**（15 个扁平徽章，分「编程与数值计算 / 写作与科研工作流 / 开发与站点工具」三行），图片在 `static/badges/`；②首页标题 `# songyu0903` 下加**打字动画**（`static/typing/typing-dark.svg` / `typing-light.svg`，用 `<picture>` + `prefers-color-scheme` 自动切明暗）；③`assets/styles/custom.css` 增 `.badges`（flex 换行、gap 6px、图高 20px）与 `.typing`（`max-width:100%`）样式；④新增可重跑脚本 `tools/fetch_badges.ps1`（改 `$badges` 列表即可增删徽章）。**页面不引用任何外部图片服务**（未搬 sun0225SUN 的 github-readme-stats / streak / wakatime / 访问计数等 vercel·heroku 卡片，国内访问不稳）。构建后 `Static files 31 → 48`（+15 徽章 +2 打字动画）
 - **GitHub Pages 已同步并逐页验证**：`/`、`/about/`、`/blog/`、`/blog/page/2/`、`/tags/`、`/index.xml`、`/sitemap.xml`、`/robots.txt`、`/404.html` 及 **17/17 篇笔记详情页全部 200**；`/katex/katex.min.js`、`/katex/katex.min.css`、`/katex/contrib/auto-render.min.js`、`/katex/fonts/KaTeX_Main-Regular.woff2`、`/minisearch.min.js`、`/favicon.ico`、`/media/authors/me.jpg`、`/uploads/resume.pdf` 均 200；旧 HugoBlox 资源（`/backlinks.json`、`/_headers`、`/_redirects`、`/css/_entry.*.css`、`/js/hb-*.js`、`/publication_types/`）**全部 404**
 - **备用链接 https://songyu-academic-home.app.workbuddy.host/ 仍为旧版**（仍含 `css/_entry.*.css`）—— DSH 侧没有 `workbuddy_sites_deploy` 工具，只能由用户在 WorkBuddy 里点部署
 

@@ -23,7 +23,36 @@ weight: 1
 
 ## 🛠 技能
 
-- **编程与工具**：Python、MATLAB、LaTeX、Git
+**编程与数值计算**
+
+<div class="badges">
+<img src="/badges/python.svg" alt="Python" height="20" />
+<img src="/badges/matlab.svg" alt="MATLAB" height="20" />
+<img src="/badges/cvxpy.svg" alt="CVXPY" height="20" />
+<img src="/badges/powershell.svg" alt="PowerShell" height="20" />
+</div>
+
+**写作与科研工作流**
+
+<div class="badges">
+<img src="/badges/latex.svg" alt="LaTeX" height="20" />
+<img src="/badges/texlive.svg" alt="TeX Live" height="20" />
+<img src="/badges/overleaf.svg" alt="Overleaf" height="20" />
+<img src="/badges/zotero.svg" alt="Zotero" height="20" />
+<img src="/badges/obsidian.svg" alt="Obsidian" height="20" />
+<img src="/badges/markdown.svg" alt="Markdown" height="20" />
+</div>
+
+**开发与站点工具**
+
+<div class="badges">
+<img src="/badges/git.svg" alt="Git" height="20" />
+<img src="/badges/github.svg" alt="GitHub" height="20" />
+<img src="/badges/vscode.svg" alt="Visual Studio Code" height="20" />
+<img src="/badges/windows.svg" alt="Windows" height="20" />
+<img src="/badges/hugo.svg" alt="Hugo" height="20" />
+</div>
+
 - **数学方法**：凸优化、随机优化、鲁棒优化
 
 ## 🌐 语言

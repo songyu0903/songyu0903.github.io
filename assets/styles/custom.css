@@ -21,3 +21,28 @@
   display: block;
   margin-bottom: 1rem;
 }
+
+/* 技术栈徽章墙（图片全部本地化在 static/badges/，不依赖 shields.io 在线服务） */
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 0.35rem 0 1rem;
+}
+
+.badges img {
+  height: 20px;
+  width: auto;
+  vertical-align: middle;
+}
+
+/* 首页打字动画（自包含 SVG，明/暗两套主题色） */
+.typing {
+  margin: 0.25rem 0 1rem;
+}
+
+.typing img {
+  max-width: 100%;
+  height: auto;
+}

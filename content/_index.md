@@ -4,6 +4,14 @@ title: "🏠 首页"
 
 # songyu0903
 
+<div class="typing">
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="/typing/typing-dark.svg" />
+<source media="(prefers-color-scheme: light)" srcset="/typing/typing-light.svg" />
+<img src="/typing/typing-light.svg" alt="M.Sc. in Mathematics · Portfolio Optimization · Robust &amp; Distributionally Robust · Convex Optimization &amp; Numerics" width="620" height="48" />
+</picture>
+</div>
+
 数学专业硕士研究生，研究方向为**投资组合优化**（鲁棒优化与分布鲁棒优化）。
 
 ## 🔬 研究方向
