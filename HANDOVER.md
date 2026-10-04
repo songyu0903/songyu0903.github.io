@@ -227,7 +227,7 @@ PDF 放 `static/uploads/` → 在 `_index.md` 或文章里加 `[PDF](/uploads/xx
 ## 9. 当前状态快照（2026-10-03）
 
 - **主题**：Hugo Blox Academic CV（HugoBlox Kit 0.12 + Tailwind CSS v4，单语言中文）
-- **源码仓库最新提交**：`05b685d Update avatar to logo.jpg`（source 分支）
+- **源码仓库最新提交**：`d762ddb Add handover document for site maintenance`（source 分支，本文件已在仓库内）
 - **产物仓库最新提交**：`a101338 Update avatar`（main 分支）
 - **头像**：`assets/media/authors/me.jpg`（用户提供的 logo.jpg，19059 字节）
 - **已发布文章**（`content/blog/`）：`portfolio-optimization`、`thesis-proposal`、`vscode-setup`、`math-typesetting`、`writing-workflow`
