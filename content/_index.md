@@ -34,14 +34,14 @@ $$\min_{w}\ w^{\top}\Sigma w \quad \text{s.t.}\quad w^{\top}\mu \geq r_{\text{ta
 
 ## 📝 阅读笔记
 
-文献阅读笔记按专题整理，共 17 篇，见左侧「笔记专题」或 [全部笔记](/blog/)：
+文献阅读笔记按专题整理，共 18 篇，见左侧「笔记专题」或 [全部笔记](/blog/)：
 
 - **[分布鲁棒与鲁棒优化](/topics/dro-robust/)**：Wasserstein 对偶结构与半径校准、不确定集设计
 - **[估计误差与高维统计](/topics/estimation-highdim/)**：1/N 悖论与收缩修正、协方差估计与随机矩阵
 - **[风险度量与组合结构](/topics/risk-structure/)**：CVaR 与谱风险、因子模型与稀疏性、风险平价与风险预算
 - **[动态与计算](/topics/dynamic-compute/)**：多期组合与交易成本、时间一致性、一阶算法与可微优化
 - **[策略评估与决策聚焦学习](/topics/evaluation-learning/)**：回测过拟合与搜索感知的绩效推断
-- **[研究入门与写作工具](/topics/research-writing/)**：研究方向综述、开题报告、排版与写作工作流
+- **[研究入门与写作工具](/topics/research-writing/)**：研究方向综述、开题报告、数学排版、R 图直出 LaTeX 与写作工作流
 
 ## 📈 GitHub 活跃度
 

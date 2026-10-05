@@ -1,5 +1,5 @@
 ---
-weight: 5
+weight: 6
 title: "风险度量与凸化：从 VaR 的非次可加性到 CVaR、谱风险与回撤"
 date: 2026-10-04
 summary: "阅读笔记：风险度量的公理化—凸性—可计算性—可估性推理链，Rockafellar–Uryasev 凸化技巧为何把分位数优化变成线性规划，以及 CVaR 作为 Wasserstein 球上最坏情形风险的统一视角。"

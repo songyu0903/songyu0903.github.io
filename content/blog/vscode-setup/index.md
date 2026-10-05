@@ -1,5 +1,5 @@
 ---
-weight: 16
+weight: 17
 title: "LaTeX 环境配置：TeX Live + VS Code 工作流"
 date: 2026-10-01
 summary: "抛弃臃肿的专用编辑器，用 TeX Live + VS Code + LaTeX Workshop 搭一套轻量高效的本地写作环境。"

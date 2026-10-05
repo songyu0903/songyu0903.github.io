@@ -1,5 +1,5 @@
 ---
-weight: 17
+weight: 18
 title: "学术写作工作流：文献管理、模板与版本控制"
 date: 2026-09-01
 summary: "Zotero + BibTeX 的自动化文献流，Git 管理论文版本，以及投稿前的检查清单。"
