@@ -9,5 +9,6 @@ Y.S
 - 动态与计算: https://songyu0903.github.io/topics/dynamic-compute/
 - 策略评估与决策聚焦学习: https://songyu0903.github.io/topics/evaluation-learning/
 - 研究入门与写作工具: https://songyu0903.github.io/topics/research-writing/
+- 📄 论文: https://songyu0903.github.io/papers/
 
 

@@ -1,0 +1,48 @@
+{
+  "seed": 20261006,
+  "replications": 60,
+  "ntrain": 80,
+  "nvalid": 120,
+  "ntest": 400,
+  "summary": [
+    {
+      "method": "Prediction MSE",
+      "prediction_mse_times_1e4": 0.2381928655517761,
+      "prediction_mse_times_1e4_mcse": 0.01887380069479525,
+      "monthly_regret_bps": 37.11392058095642,
+      "monthly_regret_bps_mcse": 2.8837565693752274,
+      "mean_gross_exposure": 1.5880534637925818,
+      "mean_gross_exposure_mcse": 0.0426105485900273,
+      "correction_norm": 0.0,
+      "correction_norm_mcse": 0.0,
+      "selected_alpha": 0.0,
+      "selected_alpha_mcse": 0.0
+    },
+    {
+      "method": "Decision metric",
+      "prediction_mse_times_1e4": 0.20153902878352276,
+      "prediction_mse_times_1e4_mcse": 0.013449436784447771,
+      "monthly_regret_bps": 31.531208269031442,
+      "monthly_regret_bps_mcse": 2.0603231411854863,
+      "mean_gross_exposure": 1.5397246018541326,
+      "mean_gross_exposure_mcse": 0.0372254120705244,
+      "correction_norm": 0.005748964819343167,
+      "correction_norm_mcse": 0.00028851140484543834,
+      "selected_alpha": 1.0,
+      "selected_alpha_mcse": 0.0
+    },
+    {
+      "method": "Trust correction",
+      "prediction_mse_times_1e4": 0.2056220712385784,
+      "prediction_mse_times_1e4_mcse": 0.015506842291219812,
+      "monthly_regret_bps": 32.1524176169876,
+      "monthly_regret_bps_mcse": 2.3685620993641,
+      "mean_gross_exposure": 1.528516383692742,
+      "mean_gross_exposure_mcse": 0.03714366933347143,
+      "correction_norm": 0.0017392538344319563,
+      "correction_norm_mcse": 0.00014412100316625357,
+      "selected_alpha": 0.3407017962578397,
+      "selected_alpha_mcse": 0.03601937695890664
+    }
+  ]
+}
