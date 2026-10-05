@@ -1,0 +1,71 @@
+{
+  "seed": 202610051,
+  "reps": 24,
+  "n_train": 100,
+  "n_test": 4000,
+  "assets": 5,
+  "alpha": 0.9,
+  "units": "daily percentage points",
+  "summary": [
+    {
+      "radius": -1.0,
+      "n_replicates": 24,
+      "clean_cvar": 1.023254484719275,
+      "clean_cvar_se": 0.006091794725918625,
+      "stress_cvar": 1.2406563885648183,
+      "stress_cvar_se": 0.0059973878515922315,
+      "clean_mean": 0.033971076328548476,
+      "clean_mean_se": 0.0018878246785219435,
+      "concentration": 0.20000000000000004,
+      "concentration_se": 0.0
+    },
+    {
+      "radius": 0.0,
+      "n_replicates": 24,
+      "clean_cvar": 0.848773145548602,
+      "clean_cvar_se": 0.009018434917198665,
+      "stress_cvar": 2.0380183398001477,
+      "stress_cvar_se": 0.060580990463027125,
+      "clean_mean": 0.04996524344383441,
+      "clean_mean_se": 0.0019853176483672487,
+      "concentration": 0.502363193692257,
+      "concentration_se": 0.026480977489817002
+    },
+    {
+      "radius": 0.03,
+      "n_replicates": 24,
+      "clean_cvar": 0.8565405334538978,
+      "clean_cvar_se": 0.01062239119496762,
+      "stress_cvar": 1.8592181125773932,
+      "stress_cvar_se": 0.05566336435375339,
+      "clean_mean": 0.04709757616564619,
+      "clean_mean_se": 0.0019092063077560768,
+      "concentration": 0.41559249313208513,
+      "concentration_se": 0.021631194813946288
+    },
+    {
+      "radius": 0.1,
+      "n_replicates": 24,
+      "clean_cvar": 0.8893434447456384,
+      "clean_cvar_se": 0.012198330518208955,
+      "stress_cvar": 1.5475896386096393,
+      "stress_cvar_se": 0.03035392237779222,
+      "clean_mean": 0.04210813426779087,
+      "clean_mean_se": 0.0016168911786663622,
+      "concentration": 0.2850379939159013,
+      "concentration_se": 0.008677823996478012
+    },
+    {
+      "radius": 0.25,
+      "n_replicates": 24,
+      "clean_cvar": 0.9370693731038496,
+      "clean_cvar_se": 0.010123464570176427,
+      "stress_cvar": 1.3647935967645555,
+      "stress_cvar_se": 0.015550627116583232,
+      "clean_mean": 0.03820498791913809,
+      "clean_mean_se": 0.0017113745049191637,
+      "concentration": 0.22489702478761509,
+      "concentration_se": 0.0027111669151173674
+    }
+  ]
+}

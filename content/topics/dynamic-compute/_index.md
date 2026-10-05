@@ -2,10 +2,10 @@
 title: "动态与计算"
 weight: 4
 notes:
-  - multiperiod-portfolio-and-transaction-costs
-  - dynamic-risk-measures-time-consistency
-  - large-scale-portfolio-optimization-algorithms
+  - transaction-cost-regularization
+  - time-consistent-dynamic-risk
 ---
 
-多期与大规模情形下的建模与算法：**交易成本下的多期组合**（Merton 的对冲项、aim portfolio 反馈律）、
-**动态风险度量的时间一致性**（多期 DRO 的结构性障碍），以及**一阶算法与可微优化**（ADMM、可微求解层）。
+多期与动态情形下的建模与求解。论文《交易成本如何改变有效前沿》把成本写进决策：从交易前持仓出发推导
+**比例成本与二次冲击下的成本感知均值—方差模型**，说明成本惩罚越强并不等于净收益越高；
+论文《多期投资组合的时间一致性》用条件风险递推与两期情景树的**精确枚举**，说明终端风险最优策略为何会发生再优化偏离。

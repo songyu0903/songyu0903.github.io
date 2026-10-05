@@ -32,16 +32,24 @@ $$\min_{w}\ w^{\top}\Sigma w \quad \text{s.t.}\quad w^{\top}\mu \geq r_{\text{ta
 
 相关代码与实验笔记见 [GitHub](https://github.com/songyu0903)。
 
+## 📄 论文
+
+研究工作与可复现的数值实验，共 8 篇，见左侧「论文」或 [全部论文](/papers/)（按方向浏览见「笔记专题」）：
+
+- **[从 Wasserstein 球到尾部风险](/papers/wasserstein-cvar-portfolio/)**：Wasserstein 对偶、半径校准与尾部风险的保守性代价
+- **[高维投资组合为何放大估计误差](/papers/high-dimensional-shrinkage/)**：协方差误差经矩阵求逆的放大与线性收缩实验
+- **[厚尾收益与鲁棒估计](/papers/heavy-tail-robust-estimation/)**：自然厚尾与污染下的估计，统计精度与组合效用的差异
+- **[交易成本如何改变有效前沿](/papers/transaction-cost-regularization/)**：持仓锚定、二次冲击与净收益的合成实验
+- **[从预测误差到决策遗憾](/papers/decision-focused-portfolio/)**：决策导向学习与可信区域内的受限校正
+- **[共形预测如何进入组合约束](/papers/conformal-risk-calibration/)**：同时覆盖、选择效应与分布漂移下的损失界
+- **[多期投资组合的时间一致性](/papers/time-consistent-dynamic-risk/)**：终端尾部风险、嵌套风险与再优化偏离
+- **[矩信息下的鲁棒缺口风险](/papers/moment-shortfall-sos/)**：最坏分布、矩信息的价值与平方和证书
+
 ## 📝 阅读笔记
 
-文献阅读笔记按专题整理，共 18 篇，见左侧「笔记专题」或 [全部笔记](/blog/)：
+工具与写作类笔记共 4 篇，见左侧「笔记专题」或 [全部笔记](/blog/)：
 
-- **[分布鲁棒与鲁棒优化](/topics/dro-robust/)**：Wasserstein 对偶结构与半径校准、不确定集设计
-- **[估计误差与高维统计](/topics/estimation-highdim/)**：1/N 悖论与收缩修正、协方差估计与随机矩阵
-- **[风险度量与组合结构](/topics/risk-structure/)**：CVaR 与谱风险、因子模型与稀疏性、风险平价与风险预算
-- **[动态与计算](/topics/dynamic-compute/)**：多期组合与交易成本、时间一致性、一阶算法与可微优化
-- **[策略评估与决策聚焦学习](/topics/evaluation-learning/)**：回测过拟合与搜索感知的绩效推断
-- **[研究入门与写作工具](/topics/research-writing/)**：研究方向综述、开题报告、数学排版、R 图直出 LaTeX 与写作工作流
+- **[研究入门与写作工具](/topics/research-writing/)**：数学排版、R 图直出 LaTeX、VS Code 配置与论文写作工作流
 
 ## 📈 GitHub 活跃度
 

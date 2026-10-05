@@ -1,0 +1,68 @@
+{
+  "seed": 20261005,
+  "replications": 30,
+  "months": 120,
+  "assets": 8,
+  "summary": [
+    {
+      "multiplier": 0.0,
+      "annual_arithmetic_return_pct": -4.209278169552463,
+      "annual_arithmetic_return_pct_mcse": 0.6803598622636194,
+      "annual_volatility_pct": 14.108208423106168,
+      "annual_volatility_pct_mcse": 0.21558612380510617,
+      "sharpe": -0.30262328887710316,
+      "sharpe_mcse": 0.04790009665389924,
+      "monthly_turnover_pct": 80.27582717137813,
+      "monthly_turnover_pct_mcse": 0.5342505756763856,
+      "monthly_fee_bps": 93.84428536643792,
+      "monthly_fee_bps_mcse": 0.8684741997860465,
+      "terminal_wealth": 0.6340271654601092,
+      "terminal_wealth_mcse": 0.04367266829155381
+    },
+    {
+      "multiplier": 1.0,
+      "annual_arithmetic_return_pct": 2.9081353866265824,
+      "annual_arithmetic_return_pct_mcse": 0.5538043747315432,
+      "annual_volatility_pct": 12.249740719871856,
+      "annual_volatility_pct_mcse": 0.16477311581606607,
+      "sharpe": 0.239907354116636,
+      "sharpe_mcse": 0.044208952703879666,
+      "monthly_turnover_pct": 45.072102947001866,
+      "monthly_turnover_pct_mcse": 0.5795047078568683,
+      "monthly_fee_bps": 37.53762128531883,
+      "monthly_fee_bps_mcse": 0.5665340787623874,
+      "terminal_wealth": 1.298844874046322,
+      "terminal_wealth_mcse": 0.07777350016204942
+    },
+    {
+      "multiplier": 3.0,
+      "annual_arithmetic_return_pct": 6.753388159672267,
+      "annual_arithmetic_return_pct_mcse": 0.6565609582061394,
+      "annual_volatility_pct": 11.10155809346773,
+      "annual_volatility_pct_mcse": 0.1648820910517895,
+      "sharpe": 0.6178865843287313,
+      "sharpe_mcse": 0.06054296465875624,
+      "monthly_turnover_pct": 13.52696907487397,
+      "monthly_turnover_pct_mcse": 0.2684990423498203,
+      "monthly_fee_bps": 7.613959276459694,
+      "monthly_fee_bps_mcse": 0.1660128203791552,
+      "terminal_wealth": 1.9660802819346954,
+      "terminal_wealth_mcse": 0.13888748102279402
+    },
+    {
+      "multiplier": 10.0,
+      "annual_arithmetic_return_pct": 5.76124597866612,
+      "annual_arithmetic_return_pct_mcse": 0.5748223271209639,
+      "annual_volatility_pct": 9.70087481699861,
+      "annual_volatility_pct_mcse": 0.13695136697171442,
+      "sharpe": 0.6004083184367474,
+      "sharpe_mcse": 0.059494981882342576,
+      "monthly_turnover_pct": 0.27433140079410967,
+      "monthly_turnover_pct_mcse": 0.018486635742473438,
+      "monthly_fee_bps": 0.08864428573757044,
+      "monthly_fee_bps_mcse": 0.0062596879171407434,
+      "terminal_wealth": 1.7788540266028319,
+      "terminal_wealth_mcse": 0.10525022172289354
+    }
+  ]
+}

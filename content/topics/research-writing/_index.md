@@ -3,12 +3,10 @@ title: "研究入门与写作工具"
 weight: 6
 notes:
   - r-tikz-figures
-  - portfolio-optimization
-  - thesis-proposal
   - math-typesetting
   - vscode-setup
   - writing-workflow
 ---
 
-开题与日常研究的基础设施：**研究方向与经典框架综述**、**开题报告要点**，
-以及数学排版（LaTeX / KaTeX）、R 图的 LaTeX（TikZ）渲染、VS Code 配置与论文写作工作流。
+日常研究的基础设施：数学排版（LaTeX / KaTeX 与公式排版心得）、R 图直出 LaTeX（TikZ）渲染的配置方案与踩坑，
+以及 VS Code + TeX Live 工作流与论文写作（文献管理、模板、版本控制）。

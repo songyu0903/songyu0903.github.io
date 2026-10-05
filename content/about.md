@@ -36,4 +36,5 @@ weight: 1
 
 - GitHub：<https://github.com/songyu0903>
 - 简历：[resume.pdf](/uploads/resume.pdf)
+- 论文：[论文列表](/papers/)
 - 阅读笔记：[笔记列表](/blog/)

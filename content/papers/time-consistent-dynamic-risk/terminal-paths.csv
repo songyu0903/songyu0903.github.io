@@ -1,0 +1,13 @@
+"method","path","probability","return"
+"static","good-1",0.56,0.0291899999999998
+"static","good-2",0.16,0.0291899999999998
+"static","good-3",0.08,0.0291899999999998
+"static","bad-1",0.06,0.2857
+"static","bad-2",0.1,0.0285599999999999
+"static","bad-3",0.04,-0.15935
+"nested","good-1",0.56,0.0201
+"nested","good-2",0.16,0.0201
+"nested","good-3",0.08,0.0201
+"nested","bad-1",0.06,0.0201
+"nested","bad-2",0.1,0.0201
+"nested","bad-3",0.04,0.0201

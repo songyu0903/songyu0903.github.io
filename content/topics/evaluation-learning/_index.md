@@ -2,9 +2,10 @@
 title: "策略评估与决策聚焦学习"
 weight: 5
 notes:
-  - backtest-overfitting-and-strategy-evaluation
-  - end-to-end-portfolio-learning
+  - decision-focused-portfolio
+  - conformal-risk-calibration
 ---
 
-策略到底好不好、预测该不该直接服务于决策。整理**回测过拟合与搜索感知的绩效推断**
-（PSR/DSR、SPA、PBO、试验登记），以及**端到端学习与决策聚焦的组合优化**（预测—优化错配及其修正）。
+策略到底好不好、预测该不该直接服务于决策。论文《从预测误差到决策遗憾》在预算约束的均值—方差模型下
+推导**预测误差与决策遗憾之间的精确恒等式**，并比较预测训练、决策训练与可信区域内的受限校正；
+论文《共形预测如何进入组合约束》区分**逐资产边际覆盖与组合所需的同时覆盖**，讨论选择效应与分布漂移下的损失约束。
