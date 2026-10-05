@@ -1,7 +1,7 @@
 # 交接文档：个人学术主页维护
 
 > 接收方：deepseek harness（接替原助手维护 songyu0903 的学术主页）
-> 交接时间：2026-10-03 ／ 最后更新：2026-10-04（主题更换为 Hugo Book）
+> 交接时间：2026-10-03 ／ 最后更新：2026-10-05（8 篇论文上线 `/papers/`；旧的 14 篇组合优化文章下线）
 > 站点仓库：`songyu0903/songyu0903.github.io`
 
 ---
@@ -47,9 +47,11 @@ C:/Users/eiegant/WorkBuddy/2026-10-01-16-16-12/
 │   ├── content/
 │   │   ├── _index.md           # 首页（正文含"研究方向" + 六个专题导览）
 │   │   ├── about.md            # 关于页（weight: 1 → 侧栏目录树第一项）
-│   │   ├── blog/<slug>/index.md# 笔记文章（18 篇；weight 定「全部笔记」列表顺序——**新文章要给 weight: 1、其余整体 +1**，否则会掉到最后一页；bookHidden 使其不进侧栏）
+│   │   ├── blog/<slug>/index.md# 笔记文章（4 篇工具/写作类；weight 定「全部笔记」列表顺序——**新文章要给 weight: 1、其余整体 +1**，否则会掉到最后一页；bookHidden 使其不进侧栏）
 │   │   ├── blog/_index.md      # 「📝 全部笔记」页（bookHidden: true）
-│   │   └── topics/<topic>/_index.md # 6 个专题页 = 侧栏大目录（front matter notes: [笔记 slug…]）
+│   │   ├── papers/_index.md    # 「📄 论文」板块页（weight: 3 → 侧栏第三项；正文列 8 篇论文）
+│   │   ├── papers/<slug>/index.md # 论文 page bundle（正文 + fig1.png/fig2.png + reproduce.py|.R + 结果 CSV/JSON，全部随页面发布；每篇 bookHidden: true）
+│   │   └── topics/<topic>/_index.md # 6 个专题页 = 侧栏大目录（front matter notes: [slug…]；slug 先在 /blog/ 找、找不到再到 /papers/ 找）
 │   ├── layouts/
 │   │   ├── index.html          # 首页版式（标准 Book 版式 → 保留左侧目录）
 │   │   ├── single.html         # 覆盖主题：渲染 front matter 标题 + 日期（主题默认不渲染 H1）
@@ -128,8 +130,9 @@ Copy-Item "$env:TEMP\hugo-book\hugo-book-main" "$site\themes\hugo-book" -Recurse
 | 首页文案（研究方向、笔记导览） | `content/_index.md` + `layouts/index.html` | 首页与其它页**统一使用 Book 标准版式**（左侧目录树 + 正文）；若想用主题的 landing 版式，给 front matter 加 `layout: landing`，但那会**隐藏左侧目录** |
 | 个人简介 / 教育 / 研究兴趣 / 技能 / 语言 / 链接 | `content/about.md` | 原先由 HugoBlox 的 `data/authors/me.yaml` 渲染，现已写成正文（该 yaml 已于 2026-10-04 清理删除）；「🛠 技能」是本地 SVG 徽章墙（图片在 `static/badges/`） |
 | 新增/修改一篇笔记 | `content/blog/<slug>/index.md` | front matter：`title / date / summary / tags / weight`；**正文不要写 H1**（`layouts/single.html` 已用 title 渲染标题）；**写完还要把 slug 加进对应专题页的 `notes:` 列表**，否则专题页不显示它 |
-| 笔记在「全部笔记」列表里的顺序 | 各笔记 front matter 的 `weight` | 数值越小越靠前；当前 1–17（侧栏**不**列单篇笔记） |
-| 侧栏大目录（专题分组） | `content/topics/<topic>/_index.md` | `weight`（1–6）定侧栏顺序、`notes: [笔记 slug…]` 定该专题收录哪些笔记；`content/topics/_index.md` 是目录树的根 |
+| 笔记在「全部笔记」列表里的顺序 | 各笔记 front matter 的 `weight` | 数值越小越靠前；当前只有 4 篇笔记（`r-tikz-figures`=1、`math-typesetting`=16、`vscode-setup`=17、`writing-workflow`=18；中间的 2–15 随 2026-10-05 删除旧文而空出，加新笔记时按「新文给 1、其余整体 +1」由脚本重排即可）。论文列表同理（`/papers/` 与首页 `## 📄 论文` 都按 weight 升序，当前 1–8）；侧栏**不**列单篇笔记/论文 |
+| 侧栏大目录（专题分组） | `content/topics/<topic>/_index.md` | `weight`（1–6）定侧栏顺序、`notes: [slug…]` 定该专题收录哪些内容——slug **可以是笔记也可以是论文**（`layouts/list.html` 先查 `/blog/<slug>/`，查不到再查 `/papers/<slug>/`）；`content/topics/_index.md` 是目录树的根 |
+| 「📄 论文」板块 | `content/papers/_index.md`（板块页）+ `content/papers/<slug>/index.md`（单篇） | `weight: 3` → 侧栏第三项；单篇一律 `bookHidden: true`。首页 `content/_index.md` 的 `## 📄 论文` 小节是 8 篇的入口清单 |
 | 全部笔记页导语 | `content/blog/_index.md` | 「📝 全部笔记」页；`bookHidden: true` 使其不单独出现在侧栏目录树 |
 | 头像 | 覆盖 `static/media/authors/me.jpg` | URL 固定 `/media/authors/me.jpg` |
 | 技术栈徽章墙 / 首页打字动画 | 徽章墙＝`layouts/_shortcodes/badges.html`（首页与关于页共用，改一处两页同步；正文里写 `{{< badges >}}`）；图＝`static/badges/*.svg`、`static/typing/*.svg`；生成脚本＝`tools/fetch_badges.ps1` | 图片**全部本地化**，页面不依赖 shields.io 在线服务；增删徽章＝改短代码里的 `<img>` 行（并可用脚本的 `$badges` 列表重下图）；simple-icons 已下架 matlab/cvxpy/powershell/vscode/windows 图标 → 这 5 个是纯文字胶囊（不是 bug） |
@@ -160,9 +163,9 @@ $$\min_{w}\ w^{\top}\Sigma w \quad \text{s.t.} \quad w^{\top}\mathbf{1}=1$$
 
 **给用户／Codex 的写作模板**：`academic-homepage/PAPER-TEMPLATE.md`（front matter、正文骨架、"哪些 KaTeX 命令不能用"、Codex 提示词、定稿自检清单都在里面）。用户说「写好后我给你，由你负责同步」——所以同步这一步是我们的活。
 
-1. 建目录 `content/papers/<slug>/`，`index.md` 与插图放**同一目录**（page bundle，正文用相对路径 `![图注](fig1.png)`）；**首次添加时同时建 `content/papers/_index.md`**（`title: "📄 论文"`，可加 `bookHidden: true` 先不进侧栏），Hugo 才会生成 `/papers/` 板块页。
+1. 建目录 `content/papers/<slug>/`，`index.md` 与插图放**同一目录**（page bundle，正文用相对路径 `![图注](fig1.png)`）；复现脚本与结果 CSV/JSON 也一起放进该目录，会作为页面资源发布（可直接下载）；`figures-list.md` 这类内部 .md **不会**发布、也不会生成多余页面。`content/papers/_index.md` 已存在（`title: "📄 论文"`、`weight: 3`、**未** bookHidden → 侧栏出现第三项「📄 论文」）。
 2. 单篇 front matter 与笔记一致，另可用 `pdf:` / `code:` / `doi:` / `status:` 字段；**每篇都写 `bookHidden: true`**（单篇不进侧栏树）。
-3. 首页 `content/_index.md` 在 `## 🔬 研究方向` 与 `## 📝 阅读笔记` 之间插入 `## 📄 论文` 小节与条目：`- **[标题](/papers/<slug>/)**：一句话说明`（页面按 `weight` 升序，规则同笔记）。
+3. 首页 `content/_index.md` 的 `## 📄 论文` 小节（已存在，位于 `## 🔬 研究方向` 与 `## 📝 阅读笔记` 之间）追加条目：`- **[标题](/papers/<slug>/)**：一句话说明`（按 `weight` 升序，规则同笔记）。若要把论文归入某个方向，把 slug 加进对应 `content/topics/<topic>/_index.md` 的 `notes:` 即可——`layouts/list.html` 会先在 `/blog/` 找、找不到再到 `/papers/` 找。
 4. 正文不写 H1；KaTeX **不支持** `\label`/`\eqref`/`\ref`/`\begin{equation}`/`\begin{align}`（要引用就手写「式 (1)」）；合成数据必须显式标注；**不要出现编造的参考文献**。
 5. 构建（§4）→ 两仓库提交 → 推送两个分支 → 验证（§6 步骤 5）→ 同步两份 HANDOVER。
 
@@ -284,7 +287,9 @@ PDF 放 `static/uploads/` → 在 `_index.md`、`about.md` 或笔记里加 `[PDF
 
 ---
 
-## 9. 当前状态快照（2026-10-04）
+## 9. 当前状态快照（2026-10-04 起按时间倒序追加）
+
+> 以下各条是当时的状态记录；**"当前状态"以最后一条为准**（例如侧栏条目数、文章篇数会随更新变化）。
 
 - **主题**：**Hugo Book**（`github.com/alex-shpak/hugo-book`，min_version 0.158.0，本机 Hugo v0.167.0+extended；主题不入库，vendored 于 `themes/hugo-book`）
 - **版式**：首页与所有页面统一 Book 标准版式（**左侧大目录树** + 正文）；侧栏 = 「👤 关于」+「📝 笔记专题」（展开 6 个专题页：分布鲁棒与鲁棒优化 / 估计误差与高维统计 / 风险度量与组合结构 / 动态与计算 / 策略评估与决策聚焦学习 / 研究入门与写作工具），底部 `menu.after` = 📚 全部笔记 / 🐙 GitHub；**侧栏不列单篇笔记标题**（笔记与 `/blog/`、`/authors/` 均 `bookHidden: true`）；`/blog/` = 「📝 全部笔记」分页 10/页 + `/blog/page/2/` 8 篇；专题页按 front matter `notes:` 列出该方向笔记（2/2/3/3/2/6 = 18 篇）；KaTeX 前端渲染；搜索框（MiniSearch）；深色/浅色自动（`BookTheme="auto"`）
@@ -307,6 +312,15 @@ PDF 放 `static/uploads/` → 在 `_index.md`、`about.md` 或笔记里加 `[PDF
 - **2026-10-04 动效验证方法（可复用）**：`python -m http.server <port> --directory public-gh` 起本地服务，再用 Edge 无头截图（`msedge.exe --headless=new --disable-gpu --user-data-dir=<临时目录> --window-size=720,200 --virtual-time-budget=3000 --screenshot=<png> <url>`；**必须给 `--user-data-dir`**，否则会去碰用户正在用的 Edge 配置），分别取 3 s 与 11 s 两帧对比：蛇的位置不同、且先前有贡献的格子已消失 → 证明 SMIL 动画在 `<img>` 里真的在跑。注意 `--virtual-time-budget` 的采样点可能落在擦除/切换瞬间（打字动画在 6 s 时几乎空白属正常，3 s 帧能看到 `M.Sc. in Mathematics`），别据此误判成坏图
 - **构建必须在站点目录内执行**（本次踩坑）：`-d public` 是相对**当前目录**的，在别处运行会生成一个空站点。本次误在 `C:\Users\eiegant\Desktop\投资组合优化` 生成了 `public/`、`public-gh/`（各 4 个 XML）与 `.hugo_build.lock`，已全部删除；正确做法是先 `Set-Location $site`（或在 pwsh 工具里用 `workdir`），再看输出里的 `Pages │ 139`、`Static files │ 49`
 - **备用链接 https://songyu-academic-home.app.workbuddy.host/ 仍为旧版**（仍含 `css/_entry.*.css`）—— DSH 侧没有 `workbuddy_sites_deploy` 工具，只能由用户在 WorkBuddy 里点部署
+- **2026-10-05 8 篇论文上线 `/papers/`，旧的 14 篇组合优化文章下线**（用户要求：`这里面是8篇推文，请推送到我的学术主页，删去我以前写的关于投资组合优化的文章`；删除范围经用户确认）：
+  - 来源：`C:\Users\eiegant\Desktop\投资组合优化\主页推文\content\papers`（8 个 page bundle，合计 1 992 034 B）**整目录拷入**站点 `content/papers/`：`wasserstein-cvar-portfolio`、`high-dimensional-shrinkage`、`heavy-tail-robust-estimation`、`transaction-cost-regularization`、`decision-focused-portfolio`、`conformal-risk-calibration`、`time-consistent-dynamic-risk`、`moment-shortfall-sos`（front matter 已是 `date: 2026-10-05`、`status: "working paper"`、`bookHidden: true`、weight 1–8，与 README 顺序一致，未改动正文）。新增 `content/papers/_index.md`（`title: "📄 论文"`、`weight: 3`、不 bookHidden）→ 侧栏变为「👤 关于」→「📝 笔记专题」（6 个专题）→「📄 论文」。
+  - **删除 14 篇**：12 篇阅读笔记（`wasserstein-dro-portfolio`、`robust-portfolio-uncertainty-sets`、`high-dim-covariance-estimation`、`end-to-end-portfolio-learning`、`risk-measures-cvar-spectral-drawdown`、`factor-models-sparsity-cardinality`、`mean-estimation-error-and-1n-paradox`、`multiperiod-portfolio-and-transaction-costs`、`backtest-overfitting-and-strategy-evaluation`、`large-scale-portfolio-optimization-algorithms`、`dynamic-risk-measures-time-consistency`、`risk-parity-and-risk-budgeting`）+ `portfolio-optimization` + `thesis-proposal`；只保留 4 篇工具/写作笔记（`r-tikz-figures`、`math-typesetting`、`vscode-setup`、`writing-workflow`）。副作用：`/blog/` 只剩 1 页（`Paginator pages 0`），`/blog/page/2/` 与 `/papers/page/1/` 之外的分页页不再生成。
+  - 站点侧改动：首页 `content/_index.md` 新增 `## 📄 论文` 小节（8 条 `- **[短标题](/papers/<slug>/)**：一句话`），`## 📝 阅读笔记` 改为「共 4 篇」；`content/topics/_index.md`（改为「8 篇论文 + 4 篇笔记」）、`content/blog/_index.md`、`content/about.md`（新增 `- 论文：[论文列表](/papers/)`）同步改写；6 个专题页 `notes:` 改为指向论文 slug（dro-robust←wasserstein；estimation-highdim←shrinkage+heavy-tail；risk-structure←moment-shortfall-sos；dynamic-compute←transaction-cost+time-consistent；evaluation-learning←decision-focused+conformal；research-writing 保留 4 篇笔记）。
+  - **`layouts/list.html` 关键改动**（专题页同时支持笔记与论文）：`{{- $p := $.Site.GetPage (printf "/blog/%s" .) }}` / `{{- if not $p }}{{ $p = $.Site.GetPage (printf "/papers/%s" .) }}{{ end }}` / `{{- with $p }}`。
+  - 构建（§4 全流程）：`Pages 142 → 108`、`Static files 50`、`Non-page files 51`、HTML 83 → 55；CSS 哈希不变（`book.min.fc1de341…css`）；搜索索引 `zh.search-data 5d3d4226 → cc43a68d`、`zh.search.min 1cca8f43 → c30b566f`（旧的已随推送在远端删除）。`figures-list.md` 未发布、未生成多余页面；论文目录里的 `reproduce.py|.R` 与结果 CSV/JSON 作为页面资源发布（可直接下载）。
+  - 提交与推送：源码 `2665eff`（source）、产物 `b36c26a`（main）；`PUSH_OK 7928346`（main，changed=129 deleted=85）、`PUSH_OK 912f5c3`（source，changed=78 deleted=14）。
+  - **线上复验（GitHub Pages）**：`/`、`/papers/`、`/about/`、`/blog/`、`/topics/`、`/topics/dro-robust/`、`/topics/research-writing/` 与 **8 篇 `/papers/<slug>/` 全部 200**；`/papers/wasserstein-cvar-portfolio/fig1.png`、`…/reproduce.py`、`/papers/moment-shortfall-sos/reproduce.R`、`/katex/katex.min.js` 均 200；已删的 `/blog/wasserstein-dro-portfolio/`、`/blog/portfolio-optimization/` 均 **404**；首页含「共 8 篇」「共 4 篇」、8 条 `/papers/` 链接与侧栏「📄 论文」，`/blog/` 只剩 4 篇笔记；`index.html`、`papers/index.html`、`papers/wasserstein-cvar-portfolio/index.html`、`topics/dro-robust/index.html`、`topics/research-writing/index.html`、`blog/index.html`、`about/index.html`、`sitemap.xml` 与本地 `public-gh/` **逐字节一致**。
+  - 公式链路未变：构建产物里保留 `$…$` / `$$…$$` 原文（例：`$$ P=\Sigma^{-1}-\frac{ss^{\top}}{\mathbf1^{\top}s}. \tag{2} $$`），由前端 KaTeX auto-render 渲染，与既有笔记同一约定。
 
 ---
 ## 10. 接手第一步建议
