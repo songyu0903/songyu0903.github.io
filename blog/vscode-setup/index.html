@@ -1,9 +1,150 @@
-<!doctype html><html lang=zh-CN dir=ltr data-theme=auto><head><meta name=generator content="Hugo 0.167.0"><meta name=generator-theme content="Book Theme: https://github.com/alex-shpak/hugo-book"><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="抛弃臃肿的专用编辑器，用 TeX Live + VS Code + LaTeX Workshop 搭一套轻量高效的本地写作环境。"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#2e3440"><meta name=color-scheme content="light dark"><meta name=format-detection content="telephone=no"><meta property="og:url" content="https://songyu0903.github.io/blog/vscode-setup/"><meta property="og:site_name" content="Y.S"><meta property="og:title" content="LaTeX 环境配置：TeX Live + VS Code 工作流"><meta property="og:description" content="抛弃臃肿的专用编辑器，用 TeX Live + VS Code + LaTeX Workshop 搭一套轻量高效的本地写作环境。"><meta property="og:locale" content="zh_CN"><meta property="og:type" content="article"><meta property="article:section" content="blog"><meta property="article:published_time" content="2026-10-01T00:00:00+00:00"><meta property="article:modified_time" content="2026-10-01T00:00:00+00:00"><meta property="article:tag" content="LaTeX"><meta property="article:tag" content="工具链"><meta property="article:tag" content="VS Code"><meta property="article:tag" content="LaTeX 心得"><meta itemprop=name content="LaTeX 环境配置：TeX Live + VS Code 工作流"><meta itemprop=description content="抛弃臃肿的专用编辑器，用 TeX Live + VS Code + LaTeX Workshop 搭一套轻量高效的本地写作环境。"><meta itemprop=datePublished content="2026-10-01T00:00:00+00:00"><meta itemprop=dateModified content="2026-10-01T00:00:00+00:00"><meta itemprop=wordCount content="397"><meta itemprop=keywords content="LaTeX,工具链,VS Code,LaTeX 心得"><title>LaTeX 环境配置：TeX Live + VS Code 工作流 • Y.S</title><link rel=icon href=/favicon.svg type=image/svg+xml><link rel=icon href=/favicon.png sizes=any><link rel=apple-touch-icon href=/apple-touch-icon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://songyu0903.github.io/blog/vscode-setup/><link rel=stylesheet href=/book.min.fc1de341d6fc228105cbf22102d959a29e0e6e3d1ab73657a7c370db99738977.css integrity="sha256-/B3jQdb8IoEFy/IhAtlZop4Obj0atzZXp8Nw25lziXc=" crossorigin=anonymous><script type=module src=/zh.search.min.c30b566f810b6305140dce250f13c23c105215264b95674414e0c5f1fcfc27dd.js integrity="sha256-wwtWb4ELYwUUDc4lDxPCPBBSFSZLlWdEFODF8fz8J90=" crossorigin=anonymous></script><link rel=stylesheet href=/katex/katex.min.css><script defer src=/katex/katex.min.js></script><script defer src=/katex/contrib/auto-render.min.js onload='renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"\\[",right:"\\]",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1}],throwOnError:!1,ignoredTags:["script","noscript","style","textarea","pre","code","option"]})'></script></head><body dir=ltr class="book-kind-page book-type-blog"><main class="container flex"><aside class=book-menu aria-label=Menu><div class=book-menu-content><nav><div class=book-brand><a class="flex align-center" href=/><img src=/favicon.ico alt=Logo><span>Y.S</span></a></div><div class="book-search hidden"><input id=book-search-input type=text role=searchbox enterkeyhint=search placeholder=搜索 aria-label=搜索 maxlength=64><div class="book-search-spinner hidden"></div><ul id=book-search-results aria-live=polite></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li><a href=/about/>👤 关于</a></li><li><a href=/topics/>📝 笔记专题</a><ul><li><a href=/topics/dro-robust/>分布鲁棒与鲁棒优化</a><ul></ul></li><li><a href=/topics/estimation-highdim/>估计误差与高维统计</a><ul></ul></li><li><a href=/topics/risk-structure/>风险度量与组合结构</a><ul></ul></li><li><a href=/topics/dynamic-compute/>动态与计算</a><ul></ul></li><li><a href=/topics/evaluation-learning/>策略评估与决策聚焦学习</a><ul></ul></li><li><a href=/topics/research-writing/>研究入门与写作工具</a><ul></ul></li></ul></li><li><a href=/papers/>📄 论文</a><ul></ul></li></ul><ul><li><a href=/blog/ title="📝 全部笔记">📚 全部笔记</a></li><li><a href=https://github.com/songyu0903 target=_blank rel=noopener>🐙 GitHub</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><header class="book-header hidden"><div class="flex align-center justify-between gap"><input type=checkbox class=toggle id=menu-control>
-<label for=menu-control aria-label=Menu><svg class="book-icon"><use href="/iconset.min.90a7fd302dc1b9bc3c291688faee66a3e60a9209f59b89fa00669e35d6907b3f.svg#menu"/></svg></label><div class=book-brand><a class="flex align-center" href=/><img src=/favicon.ico alt=Logo><span>Y.S</span></a></div><input type=checkbox class=toggle id=toc-control>
-<label for=toc-control aria-label="Table of Contents"><svg class="book-icon"><use href="/iconset.min.90a7fd302dc1b9bc3c291688faee66a3e60a9209f59b89fa00669e35d6907b3f.svg#toc"/></svg></label></div></header><div class=book-page><article class="markdown book-article"><h1>LaTeX 环境配置：TeX Live + VS Code 工作流</h1><p class=note-meta>2026-10-01</p><p>网上很多教程还在推荐 TeXstudio、WinEdt 这类专用编辑器，其实 <strong>VS Code + LaTeX Workshop</strong> 才是目前体验最好的方案：一个编辑器搞定代码、笔记、论文三件事。</p><h2 id=安装组合>安装组合<a class=anchor href=#%e5%ae%89%e8%a3%85%e7%bb%84%e5%90%88 aria-label=Link></a></h2><ol><li><strong>TeX Live</strong>（发行版）：跨平台、宏包全。国内建议用清华镜像安装：<code>https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/</code></li><li><strong>VS Code + LaTeX Workshop 插件</strong>：编译、预览、跳转全包</li></ol><h2 id=必调配置>必调配置<a class=anchor href=#%e5%bf%85%e8%b0%83%e9%85%8d%e7%bd%ae aria-label=Link></a></h2><p>在 VS Code <code>settings.json</code> 中加入：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>{
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LaTeX 环境配置：TeX Live + VS Code 工作流 · Y.S</title>
+<meta name="description" content="抛弃臃肿的专用编辑器，用 TeX Live + VS Code + LaTeX Workshop 搭一套轻量高效的本地写作环境。">
+<link rel="canonical" href="https://songyu0903.github.io/blog/vscode-setup/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Y.S">
+<meta property="og:title" content="LaTeX 环境配置：TeX Live + VS Code 工作流 · Y.S">
+<meta property="og:description" content="抛弃臃肿的专用编辑器，用 TeX Live + VS Code + LaTeX Workshop 搭一套轻量高效的本地写作环境。">
+<meta property="og:url" content="https://songyu0903.github.io/blog/vscode-setup/">
+<meta property="og:locale" content="zh_CN">
+<meta name="theme-color" content="#eef2f8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.png" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="alternate" type="application/rss+xml" title="Y.S" href="/index.xml">
+<link rel="stylesheet" href="/assets/site.css">
+<script>(function(){try{var q=new URLSearchParams(location.search).get("theme");var s=localStorage.getItem("ys-theme");var m=window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.setAttribute("data-theme",q==="dark"||q==="light"?q:(s||(m?"dark":"light")));}catch(e){document.documentElement.setAttribute("data-theme","light");}})();</script>
+<link rel="stylesheet" href="/katex/katex.min.css">
+<script defer src="/katex/katex.min.js"></script>
+<script defer src="/katex/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="bg" aria-hidden="true">
+  <span class="blob blob-1"></span><span class="blob blob-2"></span>
+  <span class="blob blob-3"></span><span class="blob blob-4"></span>
+  <span class="grid-overlay"></span>
+</div>
+<a class="skip-link" href="#main">跳到主要内容</a>
+
+<header class="nav">
+  <a class="brand" href="/">
+    <span class="brand-mark">YS</span>
+  </a>
+  <nav class="nav-links" aria-label="主导航"><a href="/">首页</a><a href="/topics/">研究方向</a><a href="/papers/">论文</a><a href="/blog/" aria-current="page">笔记</a><a href="/about/">关于</a></nav>
+  <div class="nav-tools">
+    <button class="icon-btn" type="button" data-search-open aria-label="搜索（Ctrl 或 ⌘ + K）" title="搜索 ⌘K" hidden><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg></button>
+    <button class="icon-btn theme-toggle" type="button" aria-label="切换深浅色" aria-pressed="false" hidden><svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.6 6.6 0 0 0 9.8 9.8Z"/></svg><svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+    <a class="icon-btn" href="https://github.com/songyu0903" target="_blank" rel="noopener" aria-label="GitHub"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.77-.24.77-.54v-2.1c-3.12.68-3.78-1.32-3.78-1.32-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.68.08-.68 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.27.93.1-.72.39-1.22.71-1.5-2.49-.28-5.11-1.25-5.11-5.56 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.43.11-2.98 0 0 .94-.3 3.08 1.15a10.6 10.6 0 0 1 5.6 0c2.14-1.45 3.08-1.15 3.08-1.15.61 1.55.23 2.7.11 2.98.72.79 1.16 1.79 1.16 3.02 0 4.32-2.62 5.28-5.12 5.55.4.35.76 1.03.76 2.08v3.08c0 .3.2.65.78.54A11.2 11.2 0 0 0 12 .8Z"/></svg></a>
+    <button class="nav-toggle icon-btn" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="mobile-menu" hidden>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+<div class="drawer" id="mobile-menu" hidden>
+  <nav aria-label="移动端导航"><a href="/">首页</a><a href="/topics/">研究方向</a><a href="/papers/">论文</a><a href="/blog/" aria-current="page">笔记</a><a href="/about/">关于</a></nav>
+</div>
+<main id="main" tabindex="-1">
+
+<div class="progress" aria-hidden="true"></div>
+<div class="container container-article">
+  <div class="article-head">
+    <div class="breadcrumb">
+      <a href="/">首页</a><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg><a href="/blog/">笔记</a><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg><span>LaTeX 环境配置：TeX Liv…</span>
+    </div>
+    <h1>LaTeX 环境配置：TeX Live + VS Code 工作流</h1>
+    <div class="article-meta">
+      <span>2026-10-01</span>
+      <span class="meta-dot"></span>
+      <span>约 1 分钟</span>
+      <a class="chip" href="/tags/latex/">LaTeX</a><a class="chip" href="/tags/%E5%B7%A5%E5%85%B7%E9%93%BE/">工具链</a><a class="chip" href="/tags/vs-code/">VS Code</a><a class="chip" href="/tags/latex-%E5%BF%83%E5%BE%97/">LaTeX 心得</a>
+    </div>
+  </div>
+  <div class="article-grid">
+    <article class="prose" data-reveal><p>网上很多教程还在推荐 TeXstudio、WinEdt 这类专用编辑器，其实 <strong>VS Code + LaTeX Workshop</strong> 才是目前体验最好的方案：一个编辑器搞定代码、笔记、论文三件事。</p><h2 id=安装组合>安装组合</h2><ol><li><strong>TeX Live</strong>（发行版）：跨平台、宏包全。国内建议用清华镜像安装：<code>https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/</code></li><li><strong>VS Code + LaTeX Workshop 插件</strong>：编译、预览、跳转全包</li></ol><h2 id=必调配置>必调配置</h2><p>在 VS Code <code>settings.json</code> 中加入：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>{
 </span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;latex-workshop.latex.recipe.default&#34;</span>: <span style=color:#e6db74>&#34;latexmk (xelatex)&#34;</span>,
 </span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;latex-workshop.latex.autoBuild.run&#34;</span>: <span style=color:#e6db74>&#34;onSave&#34;</span>,
 </span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;latex-workshop.view.pdf.viewer&#34;</span>: <span style=color:#e6db74>&#34;tab&#34;</span>,
 </span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;latex-workshop.latex.clean.subfolder.enabled&#34;</span>: <span style=color:#66d9ef>true</span>,
 </span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;latex-workshop.latexindent.path&#34;</span>: <span style=color:#e6db74>&#34;latexindent&#34;</span>
-</span></span><span style=display:flex><span>}</span></span></code></pre></div><h2 id=三条心得>三条心得<a class=anchor href=#%e4%b8%89%e6%9d%a1%e5%bf%83%e5%be%97 aria-label=Link></a></h2><ul><li><strong>中文论文用 <code>xelatex</code> + <code>ctex</code> 宏包</strong>，不要用 pdflatex 硬刚 CJK，坑太多</li><li><strong>正反向跳转</strong>（SyncTeX）：<code>Ctrl+点击</code> 源码 ↔ PDF 互跳，改长公式时救命</li><li><strong>自动清理中间文件</strong>：开 <code>clean.subfolder</code>，否则 <code>.aux/.log/.out</code> 会把目录弄得很脏</li></ul><h2 id=overleaf-还是本地>Overleaf 还是本地？<a class=anchor href=#overleaf-%e8%bf%98%e6%98%af%e6%9c%ac%e5%9c%b0 aria-label=Link></a></h2><p>协作写作用 Overleaf（实时共同编辑无敌），自己写作用本地（编译快、可离线、能进 Git 版本管理）。我的做法是<strong>本地为主，投稿前传 Overleaf 与合作者过 final</strong>。</p></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div></div><div></div></div><script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script></footer><label for=menu-control class="hidden book-menu-overlay" aria-hidden=true></label></div><aside class=book-toc aria-label="Table of Contents"><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#安装组合>安装组合</a></li><li><a href=#必调配置>必调配置</a></li><li><a href=#三条心得>三条心得</a></li><li><a href=#overleaf-还是本地>Overleaf 还是本地？</a></li></ul></nav></div></aside></main></body></html>
+</span></span><span style=display:flex><span>}</span></span></code></pre></div><h2 id=三条心得>三条心得</h2><ul><li><strong>中文论文用 <code>xelatex</code> + <code>ctex</code> 宏包</strong>，不要用 pdflatex 硬刚 CJK，坑太多</li><li><strong>正反向跳转</strong>（SyncTeX）：<code>Ctrl+点击</code> 源码 ↔ PDF 互跳，改长公式时救命</li><li><strong>自动清理中间文件</strong>：开 <code>clean.subfolder</code>，否则 <code>.aux/.log/.out</code> 会把目录弄得很脏</li></ul><h2 id=overleaf-还是本地>Overleaf 还是本地？</h2><p>协作写作用 Overleaf（实时共同编辑无敌），自己写作用本地（编译快、可离线、能进 Git 版本管理）。我的做法是<strong>本地为主，投稿前传 Overleaf 与合作者过 final</strong>。</p></article>
+    
+<aside class="toc" aria-label="本页目录">
+  <div class="toc-title">目录</div>
+  <ol><li><a href="#%E5%AE%89%E8%A3%85%E7%BB%84%E5%90%88">安装组合</a></li><li><a href="#%E5%BF%85%E8%B0%83%E9%85%8D%E7%BD%AE">必调配置</a></li><li><a href="#%E4%B8%89%E6%9D%A1%E5%BF%83%E5%BE%97">三条心得</a></li><li><a href="#overleaf-%E8%BF%98%E6%98%AF%E6%9C%AC%E5%9C%B0">Overleaf 还是本地？</a></li></ol>
+</aside>
+  </div>
+  
+<nav class="pager" aria-label="翻页">
+  <a class="prev" href="/blog/writing-workflow/"><span class="dir">← 较早</span><span class="t">学术写作工作流：文献管理、模板与版本控制</span></a>
+  <a class="next" href="/blog/math-typesetting/"><span class="dir">较新 →</span><span class="t">数学公式排版心得：让公式既专业又好维护</span></a>
+</nav>
+  
+</div>
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div>
+      <div style="font-weight:600;color:var(--ink)">Y.S · 数学 · 投资组合优化</div>
+      <div class="footer-note">纯静态站点，托管于 GitHub Pages；公式由 KaTeX 渲染。</div>
+    </div>
+    <div class="footer-links">
+      <a href="/papers/">论文</a>
+      <a href="/topics/">研究方向</a>
+      <a href="/blog/">笔记</a>
+      <a href="/about/">关于</a>
+      <a href="/index.xml">RSS</a>
+      <a href="https://github.com/songyu0903" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<div class="search" id="search" hidden>
+  <div class="search-backdrop" data-search-close></div>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="站内搜索">
+    <div class="search-box">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+      <input id="searchInput" type="search" placeholder="搜索论文、研究方向、笔记…" autocomplete="off" spellcheck="false" aria-label="搜索关键词">
+      <kbd>Esc</kbd>
+      <button class="search-close icon-btn" type="button" data-search-close aria-label="关闭搜索">×</button>
+    </div>
+    <div class="search-results" id="searchResults" aria-live="polite"></div>
+    <div class="search-foot">
+      <span>↑↓ 选择 · ↵ 打开 · Esc 关闭</span>
+      <span id="searchCount"></span>
+    </div>
+  </div>
+</div>
+<script src="/assets/site.js" defer></script>
+<script>
+(function () {
+  var opts = {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "\\[", right: "\\]", display: true },
+      { left: "$", right: "$", display: false },
+      { left: "\\(", right: "\\)", display: false }
+    ],
+    throwOnError: false,
+    ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code", "option"]
+  };
+  function go() {
+    if (!window.renderMathInElement) return false;
+    try { renderMathInElement(document.body, opts); } catch (e) {}
+    return true;
+  }
+  if (!go()) {
+    var n = 0;
+    var timer = setInterval(function () {
+      if (go() || ++n > 80) clearInterval(timer);
+    }, 50);
+  }
+})();
+</script>
+</body>
+</html>

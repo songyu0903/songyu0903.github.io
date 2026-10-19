@@ -1,1 +1,79 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>🏠 首页 on Y.S</title><link>https://songyu0903.github.io/</link><description>Recent content in 🏠 首页 on Y.S</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Mon, 05 Oct 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://songyu0903.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>从 Wasserstein 球到尾部风险：投资组合分布鲁棒模型的边界与研究方向</title><link>https://songyu0903.github.io/papers/wasserstein-cvar-portfolio/</link><pubDate>Mon, 05 Oct 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/papers/wasserstein-cvar-portfolio/</guid><description>以尾部风险组合为例，解释 Wasserstein 对偶、半径校准与保守性，并用可复现实验提出条件模糊集研究问题。</description></item><item><title>让 R 图直出 LaTeX：tikzDevice 的配置方案与踩坑记录</title><link>https://songyu0903.github.io/blog/r-tikz-figures/</link><pubDate>Mon, 05 Oct 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/blog/r-tikz-figures/</guid><description>论文插图要矢量、字体与正文一致、公式风格统一——最省事的办法是让 R 直接输出 TikZ 代码。这里给出三套可复制的配置方案（含中文标签），以及 xeCJK、fontenc、standalone 三个坑的定位过程。</description></item><item><title>👤 关于</title><link>https://songyu0903.github.io/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/about/</guid><description>&lt;img class="avatar" src="https://songyu0903.github.io/media/authors/me.jpg" alt="Y.S" /&gt;&#10;&lt;p&gt;&lt;strong&gt;Y.S&lt;/strong&gt; 🎓 ｜ 数学专业硕士研究生 ｜ 数学学院&lt;/p&gt;&#10;&lt;p&gt;研究方向为&lt;strong&gt;投资组合优化&lt;/strong&gt;，聚焦鲁棒与分布鲁棒组合选择的理论与数值方法。&lt;/p&gt;&#10;&lt;h2 id="-教育经历"&gt;🎓 教育经历&lt;a class="anchor" href="#-%e6%95%99%e8%82%b2%e7%bb%8f%e5%8e%86" aria-label="Link"&gt;&lt;/a&gt;&lt;/h2&gt;&#10;&lt;ul&gt;&#10;&lt;li&gt;&lt;strong&gt;数学（硕士研究生）&lt;/strong&gt; — 数学学院&lt;/li&gt;&#10;&lt;/ul&gt;&#10;&lt;h2 id="-研究兴趣"&gt;🔬 研究兴趣&lt;a class="anchor" href="#-%e7%a0%94%e7%a9%b6%e5%85%b4%e8%b6%a3" aria-label="Link"&gt;&lt;/a&gt;&lt;/h2&gt;&#10;&lt;ul&gt;&#10;&lt;li&gt;投资组合优化&lt;/li&gt;&#10;&lt;li&gt;鲁棒优化&lt;/li&gt;&#10;&lt;li&gt;分布鲁棒优化（DRO）&lt;/li&gt;&#10;&lt;li&gt;凸优化 / 随机优化&lt;/li&gt;&#10;&lt;li&gt;量化金融&lt;/li&gt;&#10;&lt;/ul&gt;&#10;&lt;h2 id="-技能"&gt;🛠 技能&lt;a class="anchor" href="#-%e6%8a%80%e8%83%bd" aria-label="Link"&gt;&lt;/a&gt;&lt;/h2&gt;&#10;&lt;p&gt;&lt;strong&gt;编程与数值计算&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>高维投资组合为何放大估计误差：从线性收缩到约束导向的特征向量研究</title><link>https://songyu0903.github.io/papers/high-dimensional-shrinkage/</link><pubDate>Mon, 05 Oct 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/papers/high-dimensional-shrinkage/</guid><description>解释协方差误差如何经过矩阵求逆影响组合，用合成实验比较收缩强度，并提出面向约束与决策损失的研究方向。</description></item><item><title>厚尾收益与鲁棒估计：为什么统计精度改善未必带来组合效用提升</title><link>https://songyu0903.github.io/papers/heavy-tail-robust-estimation/</link><pubDate>Mon, 05 Oct 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/papers/heavy-tail-robust-estimation/</guid><description>区分自然厚尾与数据污染，通过真实计算比较均值分组中位数和温莎化，讨论统计误差向组合决策风险的传递。</description></item><item><title>交易成本如何改变有效前沿：持仓锚定、正则化与净收益优化</title><link>https://songyu0903.github.io/papers/transaction-cost-regularization/</link><pubDate>Mon, 05 Oct 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/papers/transaction-cost-regularization/</guid><description>从交易前持仓出发推导成本感知均值—方差模型，说明二次冲击与持仓锚定的关系，并以可复现合成实验评估换手和净收益。</description></item><item><title>从预测误差到决策遗憾：投资组合中的任务导向学习与可信校正</title><link>https://songyu0903.github.io/papers/decision-focused-portfolio/</link><pubDate>Mon, 05 Oct 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/papers/decision-focused-portfolio/</guid><description>推导预算约束下均值预测误差对应的精确决策度量，结合近期任务导向学习研究，用合成实验比较预测训练、决策训练与受限校正。</description></item><item><title>共形预测如何进入组合约束：同时覆盖、选择效应与分布漂移</title><link>https://songyu0903.github.io/papers/conformal-risk-calibration/</link><pubDate>Mon, 05 Oct 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/papers/conformal-risk-calibration/</guid><description>区分资产边际覆盖与组合所需的同时覆盖，推导共形集合支持的损失约束，并用合成实验展示保守性与分布漂移的影响。</description></item><item><title>多期投资组合的时间一致性：终端尾部风险、嵌套风险与再优化偏离</title><link>https://songyu0903.github.io/papers/time-consistent-dynamic-risk/</link><pubDate>Mon, 05 Oct 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/papers/time-consistent-dynamic-risk/</guid><description>通过条件风险递推和两期情景树精确枚举，说明终端风险最优策略可能发生再优化偏离，并提出兼顾长期目标与动态一致性的研究问题。</description></item><item><title>矩信息下的鲁棒缺口风险：多项式因子、最坏分布与 SOS 证书</title><link>https://songyu0903.github.io/papers/moment-shortfall-sos/</link><pubDate>Mon, 05 Oct 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/papers/moment-shortfall-sos/</guid><description>从矩约束的最坏缺口线性规划出发，解释多项式因子模型与矩—平方和方法的联系，以可验证数值实验讨论高阶矩信息的价值及统计代价。</description></item><item><title>数学公式排版心得：让公式既专业又好维护</title><link>https://songyu0903.github.io/blog/math-typesetting/</link><pubDate>Sun, 20 Sep 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/blog/math-typesetting/</guid><description>amsmath 环境怎么选、编号与交叉引用的正确姿势、数学生必备的宏包清单。</description></item><item><title>LaTeX 环境配置：TeX Live + VS Code 工作流</title><link>https://songyu0903.github.io/blog/vscode-setup/</link><pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/blog/vscode-setup/</guid><description>抛弃臃肿的专用编辑器，用 TeX Live + VS Code + LaTeX Workshop 搭一套轻量高效的本地写作环境。</description></item><item><title>学术写作工作流：文献管理、模板与版本控制</title><link>https://songyu0903.github.io/blog/writing-workflow/</link><pubDate>Tue, 01 Sep 2026 00:00:00 +0000</pubDate><guid>https://songyu0903.github.io/blog/writing-workflow/</guid><description>Zotero + BibTeX 的自动化文献流，Git 管理论文版本，以及投稿前的检查清单。</description></item></channel></rss>
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel>
+  <title>Y.S · 数学 · 投资组合优化</title>
+  <link>https://songyu0903.github.io/</link>
+  <description>投资组合优化方向的研究笔记与论文</description>
+  <language>zh-CN</language>
+  <item>
+    <title>让 R 图直出 LaTeX：tikzDevice 的配置方案与踩坑记录</title>
+    <link>https://songyu0903.github.io/blog/r-tikz-figures/</link>
+    <guid>https://songyu0903.github.io/blog/r-tikz-figures/</guid>
+    <description>论文插图要矢量、字体与正文一致、公式风格统一——最省事的办法是让 R 直接输出 TikZ 代码。这里给出三套可复制的配置方案（含中文标签），以及 xeCJK、fontenc、standalone 三个坑的定位过程。</description>
+  </item>
+  <item>
+    <title>矩信息下的鲁棒缺口风险：多项式因子、最坏分布与 SOS 证书</title>
+    <link>https://songyu0903.github.io/papers/moment-shortfall-sos/</link>
+    <guid>https://songyu0903.github.io/papers/moment-shortfall-sos/</guid>
+    <description>从矩约束的最坏缺口线性规划出发，解释多项式因子模型与矩—平方和方法的联系，以可验证数值实验讨论高阶矩信息的价值及统计代价。</description>
+  </item>
+  <item>
+    <title>多期投资组合的时间一致性：终端尾部风险、嵌套风险与再优化偏离</title>
+    <link>https://songyu0903.github.io/papers/time-consistent-dynamic-risk/</link>
+    <guid>https://songyu0903.github.io/papers/time-consistent-dynamic-risk/</guid>
+    <description>通过条件风险递推和两期情景树精确枚举，说明终端风险最优策略可能发生再优化偏离，并提出兼顾长期目标与动态一致性的研究问题。</description>
+  </item>
+  <item>
+    <title>共形预测如何进入组合约束：同时覆盖、选择效应与分布漂移</title>
+    <link>https://songyu0903.github.io/papers/conformal-risk-calibration/</link>
+    <guid>https://songyu0903.github.io/papers/conformal-risk-calibration/</guid>
+    <description>区分资产边际覆盖与组合所需的同时覆盖，推导共形集合支持的损失约束，并用合成实验展示保守性与分布漂移的影响。</description>
+  </item>
+  <item>
+    <title>从预测误差到决策遗憾：投资组合中的任务导向学习与可信校正</title>
+    <link>https://songyu0903.github.io/papers/decision-focused-portfolio/</link>
+    <guid>https://songyu0903.github.io/papers/decision-focused-portfolio/</guid>
+    <description>推导预算约束下均值预测误差对应的精确决策度量，结合近期任务导向学习研究，用合成实验比较预测训练、决策训练与受限校正。</description>
+  </item>
+  <item>
+    <title>交易成本如何改变有效前沿：持仓锚定、正则化与净收益优化</title>
+    <link>https://songyu0903.github.io/papers/transaction-cost-regularization/</link>
+    <guid>https://songyu0903.github.io/papers/transaction-cost-regularization/</guid>
+    <description>从交易前持仓出发推导成本感知均值—方差模型，说明二次冲击与持仓锚定的关系，并以可复现合成实验评估换手和净收益。</description>
+  </item>
+  <item>
+    <title>厚尾收益与鲁棒估计：为什么统计精度改善未必带来组合效用提升</title>
+    <link>https://songyu0903.github.io/papers/heavy-tail-robust-estimation/</link>
+    <guid>https://songyu0903.github.io/papers/heavy-tail-robust-estimation/</guid>
+    <description>区分自然厚尾与数据污染，通过真实计算比较均值分组中位数和温莎化，讨论统计误差向组合决策风险的传递。</description>
+  </item>
+  <item>
+    <title>高维投资组合为何放大估计误差：从线性收缩到约束导向的特征向量研究</title>
+    <link>https://songyu0903.github.io/papers/high-dimensional-shrinkage/</link>
+    <guid>https://songyu0903.github.io/papers/high-dimensional-shrinkage/</guid>
+    <description>解释协方差误差如何经过矩阵求逆影响组合，用合成实验比较收缩强度，并提出面向约束与决策损失的研究方向。</description>
+  </item>
+  <item>
+    <title>从 Wasserstein 球到尾部风险：投资组合分布鲁棒模型的边界与研究方向</title>
+    <link>https://songyu0903.github.io/papers/wasserstein-cvar-portfolio/</link>
+    <guid>https://songyu0903.github.io/papers/wasserstein-cvar-portfolio/</guid>
+    <description>以尾部风险组合为例，解释 Wasserstein 对偶、半径校准与保守性，并用可复现实验提出条件模糊集研究问题。</description>
+  </item>
+  <item>
+    <title>LaTeX 环境配置：TeX Live + VS Code 工作流</title>
+    <link>https://songyu0903.github.io/blog/vscode-setup/</link>
+    <guid>https://songyu0903.github.io/blog/vscode-setup/</guid>
+    <description>抛弃臃肿的专用编辑器，用 TeX Live + VS Code + LaTeX Workshop 搭一套轻量高效的本地写作环境。</description>
+  </item>
+  <item>
+    <title>数学公式排版心得：让公式既专业又好维护</title>
+    <link>https://songyu0903.github.io/blog/math-typesetting/</link>
+    <guid>https://songyu0903.github.io/blog/math-typesetting/</guid>
+    <description>amsmath 环境怎么选、编号与交叉引用的正确姿势、数学生必备的宏包清单。</description>
+  </item>
+  <item>
+    <title>学术写作工作流：文献管理、模板与版本控制</title>
+    <link>https://songyu0903.github.io/blog/writing-workflow/</link>
+    <guid>https://songyu0903.github.io/blog/writing-workflow/</guid>
+    <description>Zotero + BibTeX 的自动化文献流，Git 管理论文版本，以及投稿前的检查清单。</description>
+  </item>
+</channel></rss>
