@@ -4,6 +4,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
@@ -13,8 +14,24 @@ const REPO = "songyu0903.github.io";
 const BRANCH = "main";
 const API = "https://api.github.com";
 
-const TOKEN = process.env.GH_TOKEN;
-if (!TOKEN) throw new Error("缺少 GH_TOKEN 环境变量");
+function tokenFromGit() {
+  try {
+    const out = execFileSync("git", ["credential", "fill"], {
+      input: "protocol=https\nhost=github.com\n\n",
+      encoding: "utf8",
+    });
+    const m = out.match(/^password=(.+)$/m);
+    return m ? m[1].trim() : null;
+  } catch (_) {
+    return null;
+  }
+}
+const TOKEN = process.env.GH_TOKEN || tokenFromGit();
+if (!TOKEN) throw new Error("没有可用凭据：设置 GH_TOKEN，或先让 git credential 能取到 GitHub 凭据");
+if (process.argv.includes("--check")) {
+  console.log(`凭据可用（来源：${process.env.GH_TOKEN ? "GH_TOKEN 环境变量" : "git credential"}）`);
+  process.exit(0);
+}
 
 async function api(method, urlPath, body) {
   const res = await fetch(API + urlPath, {
@@ -97,5 +114,7 @@ await api("PATCH", `/repos/${OWNER}/${REPO}/git/refs/heads/${BRANCH}`, {
 });
 console.log(`已更新 ${BRANCH} → ${commit.sha.slice(0, 7)}`);
 fs.writeFileSync(path.join(ROOT, "deploy-result.json"), JSON.stringify({ commit: commit.sha, files: files.length, at: new Date().toISOString() }, null, 2));
+
+
 
 

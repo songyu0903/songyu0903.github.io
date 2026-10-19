@@ -1,4 +1,4 @@
-# site-redesign — 学术主页源码
+﻿# site-redesign — 学术主页源码
 
 个人学术主页 <https://songyu0903.github.io/> 的生成器、内容与发布脚本。
 站点是纯静态的：这里写内容 → `build.mjs` 生成 `dist/` → 推送到 GitHub Pages。
@@ -31,11 +31,11 @@ node serve.mjs 4173   # 预览：http://127.0.0.1:4173/
 node crawl.mjs        # 期望 broken: 0
 node imgcheck.mjs     # 期望 missing: 0
 node cdp-test.mjs     # 期望 15/15 passed
-node deploy.mjs       # 需要 GH_TOKEN 环境变量（GitHub PAT）
-node verify-live.mjs  # 需要 GH_TOKEN
+node deploy.mjs       # 凭据取自 GH_TOKEN，或回退到 git credential（GCM）
+node verify-live.mjs  # 同上
 ```
 
-`deploy.mjs` / `verify-live.mjs` 从环境变量读 token，不把凭据写进仓库。
+`deploy.mjs` / `verify-live.mjs` 优先读 `GH_TOKEN`，没有时用 `git credential fill` 取已保存的 GitHub 凭据；仓库里不存任何 token。
 
 ## 版本管理
 
@@ -68,3 +68,4 @@ node deploy.mjs                     # 发布构建产物到 main
 - 一篇文章的图片放在同一目录，正文用相对路径 `fig1.png`。
 - 新论文需要：`content/html/paper-<slug>.html` + `content/papers.json` 里加一条；标签 slug 沿用旧站规则（小写、空格转 `-`、中文保留）。
 - 站点不引入外部 CDN，KaTeX 与字体都在仓库内。
+
