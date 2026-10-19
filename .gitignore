@@ -1,0 +1,10 @@
+﻿# 构建产物与本地预览（由 build.mjs / mirror.mjs 生成）
+dist/
+preview/
+deploy-result.json
+
+# 依赖与缓存
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
