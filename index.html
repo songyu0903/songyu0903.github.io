@@ -12,7 +12,7 @@
 <meta property="og:description" content="Y.S 的个人学术主页：数学专业硕士研究生，研究投资组合优化中的鲁棒与分布鲁棒方法、估计误差与决策导向学习，附 8 篇可复现的研究笔记。">
 <meta property="og:url" content="https://songyu0903.github.io/">
 <meta property="og:locale" content="zh_CN">
-<meta name="theme-color" content="#eef2f8">
+<meta name="theme-color" content="#f4f1e8">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.png" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -63,26 +63,17 @@
           <strong>矩约束</strong>与<strong>决策导向学习</strong>放进可复现的小型实验，
           用数值证据说明哪些稳健性是真实的，哪些只是保守。
         </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="/papers/">浏览 8 篇论文 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          <a class="btn btn-ghost" href="/topics/">研究方向</a>
-          <a class="btn btn-ghost" href="/uploads/resume.pdf" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg> 简历 PDF</a>
-        </div>
-        <div class="hero-stats">
-          <div><b data-count="8">8</b><span>可复现论文</span></div>
-          <div><b data-count="6">6</b><span>研究方向</span></div>
-          <div><b data-count="4">4</b><span>工具类笔记</span></div>
-        </div>
+        <p class="hero-lede">这里收录 8 篇可复现论文与 4 篇工具笔记，每篇论文都附完整推导、数值表与复现脚本。</p>
+        <ul class="hero-links">
+          <li><a href="/papers/">论文</a></li>
+          <li><a href="/topics/">研究方向</a></li>
+          <li><a href="/blog/">笔记</a></li>
+          <li><a href="/uploads/resume.pdf">简历 (PDF)</a></li>
+          <li><a href="https://github.com/songyu0903">GitHub</a></li>
+          <li><a href="/index.xml">RSS</a></li>
+        </ul>
       </div>
-
-      <aside class="hero-card glass" data-reveal>
-        <div class="hero-card-label"><span>Markowitz · 1952</span><span class="tag">起点</span></div>
-        <div class="hero-formula">$$\min_{w}\ w^{\top}\Sigma w \quad \text{s.t.}\quad \mathbf{1}^{\top}w=1,\ w\geq 0$$</div>
-        <div class="hero-card-note">
-          均值—方差框架是全部讨论的起点。它的解对 $\mu$ 与 $\Sigma$ 的估计误差极其敏感——
-          这正是鲁棒、分布鲁棒与决策导向方法试图回答的问题。
-        </div>
-      </aside>
+      <img class="hero-photo" src="/media/authors/me.jpg" alt="Y.S 的照片" width="760" height="758" loading="eager">
     </div>
   </section>
 
@@ -227,7 +218,7 @@
 </div>
     <ol class="updates-list"><li class="update-item">
     <time datetime="2026-10-05">2026-10-05</time>
-    <div><details><summary>8 篇论文 · 1 篇笔记</summary><ul><li><a href="/papers/wasserstein-cvar-portfolio/">从 Wasserstein 球到尾部风险：投资组合分布鲁棒模型的边界与研究方向</a></li><li><a href="/papers/high-dimensional-shrinkage/">高维投资组合为何放大估计误差：从线性收缩到约束导向的特征向量研究</a></li><li><a href="/papers/heavy-tail-robust-estimation/">厚尾收益与鲁棒估计：为什么统计精度改善未必带来组合效用提升</a></li><li><a href="/papers/transaction-cost-regularization/">交易成本如何改变有效前沿：持仓锚定、正则化与净收益优化</a></li><li><a href="/papers/decision-focused-portfolio/">从预测误差到决策遗憾：投资组合中的任务导向学习与可信校正</a></li><li><a href="/papers/conformal-risk-calibration/">共形预测如何进入组合约束：同时覆盖、选择效应与分布漂移</a></li><li><a href="/papers/time-consistent-dynamic-risk/">多期投资组合的时间一致性：终端尾部风险、嵌套风险与再优化偏离</a></li><li><a href="/papers/moment-shortfall-sos/">矩信息下的鲁棒缺口风险：多项式因子、最坏分布与 SOS 证书</a></li><li><a href="/blog/r-tikz-figures/">让 R 图直出 LaTeX：tikzDevice 的配置方案与踩坑记录</a></li></ul></details></div>
+    <div><a href="/blog/r-tikz-figures/">让 R 图直出 LaTeX：tikzDevice 的配置方案与踩坑记录</a><p>笔记</p></div>
   </li><li class="update-item">
     <time datetime="2026-10-01">2026-10-01</time>
     <div><a href="/blog/vscode-setup/">LaTeX 环境配置：TeX Live + VS Code 工作流</a><p>笔记</p></div>

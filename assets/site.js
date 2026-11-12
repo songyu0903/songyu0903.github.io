@@ -82,7 +82,7 @@
     }
     doc.setAttribute("data-theme", mode);
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", mode === "dark" ? "#06070b" : "#eef2f8");
+    if (meta) meta.setAttribute("content", mode === "dark" ? "#262624" : "#f4f1e8");
     document.querySelectorAll(".theme-toggle").forEach((btn) => {
       btn.setAttribute("aria-label", mode === "dark" ? "切换到浅色模式" : "切换到深色模式");
       btn.setAttribute("aria-pressed", String(mode === "dark"));
