@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Y.S · 数学 · 投资组合优化</title>
-<meta name="description" content="Y.S 的个人学术主页：数学专业硕士研究生，研究投资组合优化中的鲁棒与分布鲁棒方法、估计误差与决策导向学习，附 8 篇可复现的研究笔记。">
+<title>Y.S · 数学 · 组合优化与机器学习</title>
+<meta name="description" content="Y.S 的个人学术主页：数学专业硕士研究生，研究方向为组合优化与机器学习，记录优化、学习与写作工具的笔记。">
 <link rel="canonical" href="https://songyu0903.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Y.S">
-<meta property="og:title" content="Y.S · 数学 · 投资组合优化">
-<meta property="og:description" content="Y.S 的个人学术主页：数学专业硕士研究生，研究投资组合优化中的鲁棒与分布鲁棒方法、估计误差与决策导向学习，附 8 篇可复现的研究笔记。">
+<meta property="og:title" content="Y.S · 数学 · 组合优化与机器学习">
+<meta property="og:description" content="Y.S 的个人学术主页：数学专业硕士研究生，研究方向为组合优化与机器学习，记录优化、学习与写作工具的笔记。">
 <meta property="og:url" content="https://songyu0903.github.io/">
 <meta property="og:locale" content="zh_CN">
 <meta name="theme-color" content="#f4f1e8">
@@ -54,16 +54,14 @@
   <section class="hero">
     <div class="hero-grid">
       <div class="hero-main">
-        <div class="hero-eyebrow"><span class="dot"></span>数学 · 投资组合优化</div>
+        <div class="hero-eyebrow"><span class="dot"></span>数学 · 组合优化与机器学习</div>
         <h1 class="hero-name">Y.S<span class="accent">.</span></h1>
         <p class="hero-sub">数学专业硕士研究生 · 数学学院</p>
         <p class="hero-lede">
-          我在<strong>投资组合优化</strong>的框架下研究分布不确定性与参数估计误差：当收益分布只能从有限样本中估计，
-          决策如何保持稳健？我的工作把 <strong>Wasserstein 模糊集</strong>、<strong>共形校准</strong>、
-          <strong>矩约束</strong>与<strong>决策导向学习</strong>放进可复现的小型实验，
-          用数值证据说明哪些稳健性是真实的，哪些只是保守。
+          我的研究方向是<strong>组合优化与机器学习</strong>。一方面关注离散优化问题的建模、算法与复杂度；
+          另一方面关注机器学习方法如何为优化与决策提供预测、近似与泛化上的支持。
         </p>
-        <p class="hero-lede">这里收录 8 篇可复现论文与 4 篇工具笔记，每篇论文都附完整推导、数值表与复现脚本。</p>
+        <p class="hero-lede">这里目前收录 4 篇工具笔记，记录公式排版、R 绘图与论文写作流程。</p>
         <ul class="hero-links">
           <li><a href="/papers/">论文</a></li>
           <li><a href="/topics/">研究方向</a></li>
@@ -82,129 +80,31 @@
 <div class="section-head">
   <div>
     <span class="eyebrow">Research</span>
-    <h2>六个研究方向</h2>
-    <p>每个方向都对应一组论文与可复现实验，从估计误差到尾部风险逐层展开。</p>
+    <h2>组合优化与机器学习</h2>
+    <p>研究兴趣集中在两个方向的交叉：离散结构的建模与求解，以及学习方法如何进入优化与决策流程。</p>
   </div>
-  <a class="link-more" href="/topics/">全部方向 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 </div>
-    <div class="grid grid-3">
+    <div class="grid grid-2">
       
-<a class="card" href="/topics/dro-robust/" data-reveal data-reveal-delay="0">
+<div class="card" data-reveal data-reveal-delay="0">
   <span class="card-index">01</span>
-  <div class="card-title">分布鲁棒与鲁棒优化</div>
-  <p class="card-desc">从均值—方差框架出发，处理&quot;真实分布未知、只知它落在某个不确定集内&quot;时的组合选择问题。 论文《从 Wasserstein 球到尾部风险》解释 Wasserstein 对偶重构、半径校准与保守性的代价， 并用可…</p>
+  <div class="card-title">组合优化</div>
+  <p class="card-desc">离散优化问题的建模与求解：整数规划、组合结构、近似算法与复杂度分析；关心问题结构如何决定可解性与近似质量。</p>
   <div class="card-foot">
-    <span>1 篇论文</span>
-    <span class="card-arrow">进入方向 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    <span>整数规划 · 近似算法 · 复杂度</span>
   </div>
-</a>
-<a class="card" href="/topics/estimation-highdim/" data-reveal data-reveal-delay="55">
+</div>
+<div class="card" data-reveal data-reveal-delay="55">
   <span class="card-index">02</span>
-  <div class="card-title">估计误差与高维统计</div>
-  <p class="card-desc">参数估计误差是均值—方差框架的头号敌人。两篇论文分别研究：协方差误差经过矩阵求逆如何放大成决策误差 （从扰动公式出发比较线性收缩强度，并讨论面向约束与决策损失的估计目标），以及厚尾与污染下的鲁棒估计 （分组均…</p>
+  <div class="card-title">机器学习</div>
+  <p class="card-desc">统计学习与预测方法：模型泛化、概率校准与不确定性度量；关心学习方法如何为优化与决策提供可靠输入。</p>
   <div class="card-foot">
-    <span>2 篇论文</span>
-    <span class="card-arrow">进入方向 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    <span>泛化 · 校准 · 学习型优化</span>
   </div>
-</a>
-<a class="card" href="/topics/risk-structure/" data-reveal data-reveal-delay="110">
-  <span class="card-index">03</span>
-  <div class="card-title">风险度量与组合结构</div>
-  <p class="card-desc">风险怎么度量、组合结构怎么约束。论文《矩信息下的鲁棒缺口风险》从矩约束下的最坏缺口线性规划出发， 连接多项式因子模型与矩—平方和方法，用完整枚举的有限支撑实验讨论高阶矩信息的经济价值与它的统计代价 （支撑集误…</p>
-  <div class="card-foot">
-    <span>1 篇论文</span>
-    <span class="card-arrow">进入方向 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-  </div>
-</a>
-<a class="card" href="/topics/dynamic-compute/" data-reveal data-reveal-delay="165">
-  <span class="card-index">04</span>
-  <div class="card-title">动态与计算</div>
-  <p class="card-desc">多期与动态情形下的建模与求解。论文《交易成本如何改变有效前沿》把成本写进决策：从交易前持仓出发推导 比例成本与二次冲击下的成本感知均值—方差模型，说明成本惩罚越强并不等于净收益越高；</p>
-  <div class="card-foot">
-    <span>2 篇论文</span>
-    <span class="card-arrow">进入方向 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-  </div>
-</a>
-<a class="card" href="/topics/evaluation-learning/" data-reveal data-reveal-delay="220">
-  <span class="card-index">05</span>
-  <div class="card-title">策略评估与决策聚焦学习</div>
-  <p class="card-desc">策略到底好不好、预测该不该直接服务于决策。论文《从预测误差到决策遗憾》在预算约束的均值—方差模型下 推导预测误差与决策遗憾之间的精确恒等式，并比较预测训练、决策训练与可信区域内的受限校正；</p>
-  <div class="card-foot">
-    <span>2 篇论文</span>
-    <span class="card-arrow">进入方向 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-  </div>
-</a>
-<a class="card" href="/topics/research-writing/" data-reveal data-reveal-delay="275">
-  <span class="card-index">06</span>
-  <div class="card-title">研究入门与写作工具</div>
-  <p class="card-desc">日常研究的基础设施：数学排版（LaTeX / KaTeX 与公式排版心得）、R 图直出 LaTeX（TikZ）渲染的配置方案与踩坑， 以及 VS Code + TeX Live 工作流与论文写作（文献管理、模…</p>
-  <div class="card-foot">
-    <span>4 篇笔记</span>
-    <span class="card-arrow">进入方向 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-  </div>
-</a>
+</div>
     </div>
   </section>
 
-  <section class="section" id="papers">
-    
-<div class="section-head">
-  <div>
-    <span class="eyebrow">Papers</span>
-    <h2>精选五篇</h2>
-    <p>每篇包含完整推导、真实数值表、插图、复现脚本与结果数据。</p>
-  </div>
-  <a class="link-more" href="/papers/">全部论文 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-</div>
-    <div class="paper-list">
-      
-<article class="paper-item" data-reveal data-reveal-delay="0" data-topics="dro-robust">
-  <span class="paper-date">2026-10-05</span>
-  <div class="paper-main">
-    <h3 class="paper-title"><a class="paper-link" href="/papers/wasserstein-cvar-portfolio/">从 Wasserstein 球到尾部风险：投资组合分布鲁棒模型的边界与研究方向</a></h3>
-    <p class="paper-abs">以尾部风险组合为例，解释 Wasserstein 对偶、半径校准与保守性，并用可复现实验提出条件模糊集研究问题。</p>
-    <div class="paper-tags"><a class="chip" href="/tags/%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88%E4%BC%98%E5%8C%96/">投资组合优化</a><a class="chip" href="/tags/%E5%88%86%E5%B8%83%E9%B2%81%E6%A3%92%E4%BC%98%E5%8C%96/">分布鲁棒优化</a><a class="chip" href="/tags/%E5%B0%BE%E9%83%A8%E9%A3%8E%E9%99%A9/">尾部风险</a></div>
-  </div>
-  <span class="paper-go" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-</article>
-<article class="paper-item" data-reveal data-reveal-delay="45" data-topics="estimation-highdim">
-  <span class="paper-date">2026-10-05</span>
-  <div class="paper-main">
-    <h3 class="paper-title"><a class="paper-link" href="/papers/high-dimensional-shrinkage/">高维投资组合为何放大估计误差：从线性收缩到约束导向的特征向量研究</a></h3>
-    <p class="paper-abs">解释协方差误差如何经过矩阵求逆影响组合，用合成实验比较收缩强度，并提出面向约束与决策损失的研究方向。</p>
-    <div class="paper-tags"><a class="chip" href="/tags/%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88%E4%BC%98%E5%8C%96/">投资组合优化</a><a class="chip" href="/tags/%E9%AB%98%E7%BB%B4%E7%BB%9F%E8%AE%A1/">高维统计</a><a class="chip" href="/tags/%E5%8D%8F%E6%96%B9%E5%B7%AE%E6%94%B6%E7%BC%A9/">协方差收缩</a></div>
-  </div>
-  <span class="paper-go" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-</article>
-<article class="paper-item" data-reveal data-reveal-delay="90" data-topics="risk-structure">
-  <span class="paper-date">2026-10-05</span>
-  <div class="paper-main">
-    <h3 class="paper-title"><a class="paper-link" href="/papers/moment-shortfall-sos/">矩信息下的鲁棒缺口风险：多项式因子、最坏分布与 SOS 证书</a></h3>
-    <p class="paper-abs">从矩约束的最坏缺口线性规划出发，解释多项式因子模型与矩—平方和方法的联系，以可验证数值实验讨论高阶矩信息的价值及统计代价。</p>
-    <div class="paper-tags"><a class="chip" href="/tags/%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88%E4%BC%98%E5%8C%96/">投资组合优化</a><a class="chip" href="/tags/%E7%9F%A9%E6%A8%A1%E7%B3%8A%E9%9B%86/">矩模糊集</a><a class="chip" href="/tags/%E5%B9%B3%E6%96%B9%E5%92%8C%E4%BC%98%E5%8C%96/">平方和优化</a></div>
-  </div>
-  <span class="paper-go" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-</article>
-<article class="paper-item" data-reveal data-reveal-delay="135" data-topics="dynamic-compute">
-  <span class="paper-date">2026-10-05</span>
-  <div class="paper-main">
-    <h3 class="paper-title"><a class="paper-link" href="/papers/time-consistent-dynamic-risk/">多期投资组合的时间一致性：终端尾部风险、嵌套风险与再优化偏离</a></h3>
-    <p class="paper-abs">通过条件风险递推和两期情景树精确枚举，说明终端风险最优策略可能发生再优化偏离，并提出兼顾长期目标与动态一致性的研究问题。</p>
-    <div class="paper-tags"><a class="chip" href="/tags/%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88%E4%BC%98%E5%8C%96/">投资组合优化</a><a class="chip" href="/tags/%E5%8A%A8%E6%80%81%E9%A3%8E%E9%99%A9%E5%BA%A6%E9%87%8F/">动态风险度量</a><a class="chip" href="/tags/%E6%97%B6%E9%97%B4%E4%B8%80%E8%87%B4%E6%80%A7/">时间一致性</a></div>
-  </div>
-  <span class="paper-go" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-</article>
-<article class="paper-item" data-reveal data-reveal-delay="180" data-topics="evaluation-learning">
-  <span class="paper-date">2026-10-05</span>
-  <div class="paper-main">
-    <h3 class="paper-title"><a class="paper-link" href="/papers/decision-focused-portfolio/">从预测误差到决策遗憾：投资组合中的任务导向学习与可信校正</a></h3>
-    <p class="paper-abs">推导预算约束下均值预测误差对应的精确决策度量，结合近期任务导向学习研究，用合成实验比较预测训练、决策训练与受限校正。</p>
-    <div class="paper-tags"><a class="chip" href="/tags/%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88%E4%BC%98%E5%8C%96/">投资组合优化</a><a class="chip" href="/tags/%E5%86%B3%E7%AD%96%E5%AF%BC%E5%90%91%E5%AD%A6%E4%B9%A0/">决策导向学习</a><a class="chip" href="/tags/%E9%A2%84%E6%B5%8B%E5%90%8E%E4%BC%98%E5%8C%96/">预测后优化</a></div>
-  </div>
-  <span class="paper-go" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-</article>
-    </div>
-  </section>
 
   <section class="section" id="notes">
     
@@ -236,7 +136,7 @@
 <footer class="footer">
   <div class="container footer-inner">
     <div>
-      <div style="font-weight:600;color:var(--ink)">Y.S · 数学 · 投资组合优化</div>
+      <div style="font-weight:600;color:var(--ink)">Y.S · 数学 · 组合优化与机器学习</div>
       <div class="footer-note">纯静态站点，托管于 GitHub Pages；公式由 KaTeX 渲染。</div>
     </div>
     <div class="footer-links">
