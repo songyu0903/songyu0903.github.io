@@ -1671,3 +1671,11 @@ html { font-size: 18px; }
 @media (max-width: 480px) {
   html { font-size: 16.5px; }
 }
+
+/* ---------- 移动端宽表：横向滚动，避免竖排挤压 ---------- */
+.table-scroll { margin: 1.8em 0; }
+.table-scroll > table { margin: 0; }
+@media (max-width: 820px) {
+  .table-scroll { overflow-x: auto; padding-bottom: 6px; -webkit-overflow-scrolling: touch; }
+  .table-scroll > table { min-width: 640px; font-size: 0.82rem; }
+}

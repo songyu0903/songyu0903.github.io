@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>泛化误差的三种视角：VC 维、Rademacher 复杂度与稳定性 · Y.S</title>
+<meta name="description" content="从 ERM 出发，比较 VC 维、Rademacher 复杂度与算法稳定性给出的泛化界，说明各自的适用条件与常见误用。">
+<link rel="canonical" href="https://songyu0903.github.io/papers/generalization-vc-rademacher/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Y.S">
+<meta property="og:title" content="泛化误差的三种视角：VC 维、Rademacher 复杂度与稳定性 · Y.S">
+<meta property="og:description" content="从 ERM 出发，比较 VC 维、Rademacher 复杂度与算法稳定性给出的泛化界，说明各自的适用条件与常见误用。">
+<meta property="og:url" content="https://songyu0903.github.io/papers/generalization-vc-rademacher/">
+<meta property="og:locale" content="zh_CN">
+<meta name="theme-color" content="#f4f1e8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.png" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="alternate" type="application/rss+xml" title="Y.S" href="/index.xml">
+<link rel="stylesheet" href="/assets/site.css">
+<script>(function(){try{var q=new URLSearchParams(location.search).get("theme");var s=localStorage.getItem("ys-theme");var m=window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.setAttribute("data-theme",q==="dark"||q==="light"?q:(s||(m?"dark":"light")));}catch(e){document.documentElement.setAttribute("data-theme","light");}})();</script>
+
+<link rel="stylesheet" href="/katex/katex.min.css">
+<script defer src="/katex/katex.min.js"></script>
+<script defer src="/katex/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="bg" aria-hidden="true">
+  <span class="blob blob-1"></span><span class="blob blob-2"></span>
+  <span class="blob blob-3"></span><span class="blob blob-4"></span>
+  <span class="grid-overlay"></span>
+</div>
+<a class="skip-link" href="#main">跳到主要内容</a>
+
+<header class="nav">
+  <a class="brand" href="/">
+    <span class="brand-mark">YS</span>
+  </a>
+  <nav class="nav-links" aria-label="主导航"><a href="/">首页</a><a href="/topics/">研究方向</a><a href="/papers/" aria-current="page">论文</a><a href="/blog/">笔记</a><a href="/about/">关于</a></nav>
+  <div class="nav-tools">
+    <button class="icon-btn" type="button" data-search-open aria-label="搜索（Ctrl 或 ⌘ + K）" title="搜索 ⌘K" hidden><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg></button>
+    <button class="icon-btn theme-toggle" type="button" aria-label="切换深浅色" aria-pressed="false" hidden><svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.6 6.6 0 0 0 9.8 9.8Z"/></svg><svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+    <a class="icon-btn" href="https://github.com/songyu0903" target="_blank" rel="noopener" aria-label="GitHub"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.77-.24.77-.54v-2.1c-3.12.68-3.78-1.32-3.78-1.32-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.68.08-.68 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.27.93.1-.72.39-1.22.71-1.5-2.49-.28-5.11-1.25-5.11-5.56 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.43.11-2.98 0 0 .94-.3 3.08 1.15a10.6 10.6 0 0 1 5.6 0c2.14-1.45 3.08-1.15 3.08-1.15.61 1.55.23 2.7.11 2.98.72.79 1.16 1.79 1.16 3.02 0 4.32-2.62 5.28-5.12 5.55.4.35.76 1.03.76 2.08v3.08c0 .3.2.65.78.54A11.2 11.2 0 0 0 12 .8Z"/></svg></a>
+    <button class="nav-toggle icon-btn" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="mobile-menu" hidden>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+<div class="drawer" id="mobile-menu" hidden>
+  <nav aria-label="移动端导航"><a href="/">首页</a><a href="/topics/">研究方向</a><a href="/papers/" aria-current="page">论文</a><a href="/blog/">笔记</a><a href="/about/">关于</a></nav>
+</div>
+<main id="main" tabindex="-1">
+
+<div class="progress" aria-hidden="true"></div>
+<div class="container container-article">
+  <div class="article-head">
+    <div class="breadcrumb">
+      <a href="/">首页</a><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg><a href="/papers/">论文</a><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg><span>泛化误差的三种视角：VC 维…</span>
+    </div>
+    <h1>泛化误差的三种视角：VC 维、Rademacher 复杂度与稳定性</h1>
+    <div class="article-meta">
+      <span>2026-10-19</span>
+      <span class="meta-dot"></span>
+      <span>约 9 分钟</span>
+      <a class="chip" href="/topics/statistical-learning-theory/">统计学习理论</a>
+    </div>
+  </div>
+  <div class="article-grid">
+    <article class="prose" data-reveal>
+      <p>经验风险最小化（ERM）只优化训练集上的平均损失，泛化理论要回答一个更基本的问题：训练损失在多大程度上能代表真实风险。本文比较三种常用工具——VC 维、Rademacher 复杂度与算法稳定性——说明它们各自依赖什么、给出什么样的界，以及在什么条件下会失效。</p>
+      <p>三种工具不是互相替代的竞争理论，而是从不同角度回答同一个问题：假设空间有多大、数据本身有多难、算法对单个样本有多敏感。理解这一点，比记住某个具体不等式更重要。</p>
+
+      <h2 id="erm-与一致收敛">ERM 与一致收敛</h2>
+      <p>设样本 $S=\{(X_i,Y_i)\}_{i=1}^n$ 独立同分布于 $\mathcal{D}$，损失 $\ell(h(X),Y)\in[0,1]$。真实风险与经验风险分别为</p>
+      $$
+      R(h)=\mathbb{E}_{(X,Y)\sim\mathcal{D}}\ell(h(X),Y),\qquad
+      R_n(h)=\frac{1}{n}\sum_{i=1}^{n}\ell(h(X_i),Y_i).
+      $$
+      <p>ERM 返回 $\hat h=\arg\min_{h\in\mathcal{H}}R_n(h)$。如果对整个假设空间一致地有 $|R(h)-R_n(h)|\le\varepsilon$，那么</p>
+      $$
+      R(\hat h)\le R_n(\hat h)+\varepsilon\le R_n(h^\star)+\varepsilon\le R(h^\star)+2\varepsilon,
+      $$
+      <p>其中 $h^\star$ 是 $\mathcal{H}$ 内风险最小的假设。这条链说明：泛化误差可以分解为“估计误差”（一致收敛项）与“近似误差”（$\mathcal{H}$ 是否包含好假设）。VC 与 Rademacher 都在控制第一项，稳定性则直接控制 ERM 输出与训练集之间的依赖。</p>
+
+      <h2 id="vc-维">VC 维</h2>
+      <p>VC 维衡量假设空间打散点集的能力。若存在 $d$ 个点能被 $\mathcal{H}$ 以所有 $2^d$ 种方式标记，且不存在 $d+1$ 个点被完全打散，则 $\mathrm{VCdim}(\mathcal{H})=d$。</p>
+      <p>Sauer–Shelah 引理给出增长函数的组合上界：若 VC 维为 $d$，则</p>
+      $$
+      \Pi_{\mathcal{H}}(n)=\max_{x_1,\dots,x_n}\big|\{(h(x_1),\dots,h(x_n)):h\in\mathcal{H}\}\big|
+      \le\sum_{i=0}^{d}\binom{n}{i}\le\Big(\frac{en}{d}\Big)^d.
+      $$
+      <p>由此得到经典的分布无关界：以至少 $1-\delta$ 的概率，对所有 $h\in\mathcal{H}$，</p>
+      $$
+      R(h)\le R_n(h)+O\!\left(\sqrt{\frac{d\log(n/d)+\log(1/\delta)}{n}}\right).
+      $$
+      <p>这个界只依赖 VC 维与样本量，不依赖具体分布，因此非常通用。它的代价也在这里：最坏情形下的界通常偏松，尤其当 $d$ 与 $n$ 同阶时，根号项接近常数，界失去意义。深度网络的 VC 维可以远大于参数数，直接把参数数代入会得到空洞的结论。</p>
+      <p>VC 维仍是理解“容量”的第一把尺子：阈值函数在 $\mathbb{R}$ 上 VC 维为 1，区间分类器为 2，$\mathbb{R}^d$ 中的半空间为 $d+1$。这些例子说明容量不是参数个数，而是假设空间能实现的标记模式数。</p>
+
+      <h2 id="rademacher-复杂度">Rademacher 复杂度</h2>
+      <p>Rademacher 复杂度把“容量”变成数据相关的量。给定 $n$ 个样本点，令 $\sigma_i$ 为独立均匀的 $\{\pm1\}$ 随机变量，定义</p>
+      $$
+      \mathfrak{R}_n(\mathcal{H})=\mathbb{E}_{\sigma,X}\sup_{h\in\mathcal{H}}\frac{1}{n}\sum_{i=1}^{n}\sigma_i h(X_i).
+      $$
+      <p>它衡量假设空间拟合随机噪声的能力。通过对称化，可以得到</p>
+      $$
+      \mathbb{E}\sup_{h\in\mathcal{H}}\big(R(h)-R_n(h)\big)\le 2\,\mathfrak{R}_n(\mathcal{H}),
+      $$
+      <p>并以至少 $1-\delta$ 的概率有</p>
+      $$
+      \sup_{h\in\mathcal{H}}\big(R(h)-R_n(h)\big)\le 2\,\mathfrak{R}_n(\mathcal{H})+\sqrt{\frac{\log(1/\delta)}{2n}}.
+      $$
+      <p>与 VC 界相比，Rademacher 界可以随数据分布变小。例如 $\ell_2$ 范数不超过 $B$ 的线性分类器、输入范数不超过 $\Lambda$ 时，</p>
+      $$
+      \mathfrak{R}_n(\mathcal{H})\le \frac{B\Lambda}{\sqrt{n}},
+      $$
+      <p>这个界与维度无关，解释了为什么高维线性模型仍能泛化。核方法、神经网络也有对应的范数型界，但常数与层间依赖需要仔细处理。</p>
+
+      <h2 id="算法稳定性">算法稳定性</h2>
+      <p>前两种工具只看假设空间，稳定性则看算法。若把训练集中的任意一个样本替换掉，算法输出的假设在任意测试点上的损失变化不超过 $\beta$，称算法是 $\beta$-一致稳定的。对这类算法，泛化误差可以被 $\beta$ 与一个集中不等式控制：</p>
+      $$
+      \mathbb{E}\big[R(\hat h_S)-R_n(\hat h_S)\big]\le 2\beta,
+      $$
+      <p>并以高概率成立相应的有限样本版本。强凸正则化的 ERM 是典型例子：目标函数 $R_n(h)+\lambda\|h\|^2$ 的稳定性参数约为 $O(1/(\lambda n))$，于是泛化界随 $n$ 以 $1/n$ 的速度收紧，比 VC 的 $1/\sqrt{n}$ 更快。</p>
+      <p>稳定性的优势是它能解释算法相关的现象：正则化、早停、随机梯度下降的隐式偏差都可以通过稳定性来分析；它也不要求假设空间有有限 VC 维。代价是稳定性参数必须被证明，而不是假设；对深度网络，得到非平凡的 $\beta$ 仍然困难。</p>
+      <div class="table-scroll"><table>
+        <thead><tr><th>工具</th><th>依赖对象</th><th>典型速率</th><th>适用场景</th><th>主要弱点</th></tr></thead>
+        <tbody>
+          <tr><td>VC 维</td><td>假设空间</td><td>$\sqrt{d/n}$</td><td>有限容量、分布无关</td><td>高维模型下界空洞</td></tr>
+          <tr><td>Rademacher</td><td>假设空间 + 数据</td><td>$\sqrt{\mathfrak{R}_n^2+\log(1/\delta)/n}$</td><td>范数型模型、核方法</td><td>需要界损失、常数敏感</td></tr>
+          <tr><td>稳定性</td><td>算法</td><td>$\beta$（常为 $1/n$）</td><td>正则化 ERM、SGD</td><td>参数需证明、依赖算法细节</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 id="常见误用">常见误用</h2>
+      <ul>
+        <li><strong>把参数数当容量</strong>：深度网络的 VC 维不能简单用参数数替代；即使替代，得到的界通常大于 1，没有信息量。</li>
+        <li><strong>忽略损失有界</strong>：Rademacher 界常假设损失在 $[0,1]$；对回归或未裁剪的损失直接套用，会得到错误结论。裁剪会改变假设空间，需要重新论证。</li>
+        <li><strong>把稳定性当结论</strong>：没有证明 $\beta$ 就引用稳定性界，等于把要证的结论当前提。</li>
+        <li><strong>混淆泛化与分布偏移</strong>：所有界都假设测试分布与训练分布相同；分布偏移下的性能需要另一套工具。</li>
+        <li><strong>用界解释双下降</strong>：经典界是上界，模型在插值区仍可能泛化；界变松不等于泛化变差。</li>
+      </ul>
+
+      <h2 id="小结">小结</h2>
+      <p>VC 维回答“空间有多大”，Rademacher 回答“数据有多难”，稳定性回答“算法有多敏感”。三者给出的是上界，而不是泛化的必要条件；在实际研究中，更有价值的问题往往是：哪个量能解释观察到的现象，哪个假设在实验条件下成立。下一篇把预测模型放进优化流程，讨论误差如何转化为决策损失。</p>
+      <h2 id="参考文献">参考文献</h2>
+      <ol>
+        <li>S. Shalev-Shwartz, S. Ben-David. <em>Understanding Machine Learning: From Theory to Algorithms</em>. Cambridge University Press, 2014.</li>
+        <li>O. Bousquet, S. Boucheron, G. Lugosi. Introduction to statistical learning theory. In <em>Advanced Lectures on Machine Learning</em>, Springer, 2004.</li>
+        <li>P. L. Bartlett, S. Mendelson. Rademacher and Gaussian complexities: risk bounds and structural results. <em>JMLR</em>, 2002.</li>
+        <li>O. Bousquet, A. Elisseeff. Stability and generalization. <em>JMLR</em>, 2002.</li>
+        <li>V. N. Vapnik. <em>Statistical Learning Theory</em>. Wiley, 1998.</li>
+      </ol>
+
+    <details class="citation">
+      <summary>引用本文（BibTeX）</summary>
+      <p>此条目引用本站研究笔记；文中参考文献见文末列表。</p>
+      <div class="citation-toolbar">
+        <button class="btn btn-ghost" type="button" data-copy-citation data-target="citation-generalization-vc-rademacher" hidden>复制 BibTeX</button>
+        <span class="copy-status" role="status" aria-live="polite"></span>
+      </div>
+      <pre id="citation-generalization-vc-rademacher" tabindex="0"><code>@misc{ys2026generalizationvcrademacher,
+  author = {{Y.S}},
+  title = {泛化误差的三种视角：VC 维、Rademacher 复杂度与稳定性},
+  year = {2026},
+  month = {10},
+  day = {19},
+  url = {https://songyu0903.github.io/papers/generalization-vc-rademacher/},
+  note = {研究笔记，2026-10-19}
+}</code></pre>
+    </details></article>
+
+    <aside class="toc" aria-label="本页目录">
+      <div class="toc-title">目录</div>
+      <ol><li><a href="#erm-%E4%B8%8E%E4%B8%80%E8%87%B4%E6%94%B6%E6%95%9B">ERM 与一致收敛</a></li><li><a href="#vc-%E7%BB%B4">VC 维</a></li><li><a href="#rademacher-%E5%A4%8D%E6%9D%82%E5%BA%A6">Rademacher 复杂度</a></li><li><a href="#%E7%AE%97%E6%B3%95%E7%A8%B3%E5%AE%9A%E6%80%A7">算法稳定性</a></li><li><a href="#%E5%B8%B8%E8%A7%81%E8%AF%AF%E7%94%A8">常见误用</a></li><li><a href="#%E5%B0%8F%E7%BB%93">小结</a></li><li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li></ol>
+    </aside>
+  </div>
+
+  <nav class="pager" aria-label="翻页">
+    <a class="prev" href="/papers/approximation-greedy-rounding-primal-dual/"><span class="dir">← 较早</span><span class="t">近似算法的三条路线：贪心、LP 舍入与原始-对偶</span></a>
+    <a class="next" href="/papers/predict-then-optimize-spo/"><span class="dir">较新 →</span><span class="t">预测后优化与决策导向学习：把损失对准决策</span></a>
+  </nav>
+</div>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div>
+      <div style="font-weight:600;color:var(--ink)">Y.S · 数学 · 组合优化与机器学习</div>
+      <div class="footer-note">纯静态站点，托管于 GitHub Pages；公式由 KaTeX 渲染。</div>
+    </div>
+    <div class="footer-links">
+      <a href="/papers/">论文</a>
+      <a href="/topics/">研究方向</a>
+      <a href="/blog/">笔记</a>
+      <a href="/about/">关于</a>
+      <a href="/index.xml">RSS</a>
+      <a href="https://github.com/songyu0903" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<div class="search" id="search" hidden>
+  <div class="search-backdrop" data-search-close></div>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="站内搜索">
+    <div class="search-box">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+      <input id="searchInput" type="search" placeholder="搜索论文、研究方向、笔记…" autocomplete="off" spellcheck="false" aria-label="搜索关键词">
+      <kbd>Esc</kbd>
+      <button class="search-close icon-btn" type="button" data-search-close aria-label="关闭搜索">×</button>
+    </div>
+    <div class="search-results" id="searchResults" aria-live="polite"></div>
+    <div class="search-foot">
+      <span>↑↓ 选择 · ↵ 打开 · Esc 关闭</span>
+      <span id="searchCount"></span>
+    </div>
+  </div>
+</div>
+<script src="/assets/site.js" defer></script>
+
+<script>
+(function () {
+  var opts = {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "\[", right: "\]", display: true },
+      { left: "$", right: "$", display: false },
+      { left: "\(", right: "\)", display: false }
+    ],
+    throwOnError: false,
+    ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code", "option"]
+  };
+  function go() {
+    if (!window.renderMathInElement) return false;
+    try { renderMathInElement(document.body, opts); } catch (e) {}
+    return true;
+  }
+  if (!go()) {
+    var n = 0;
+    var timer = setInterval(function () {
+      if (go() || ++n > 80) clearInterval(timer);
+    }, 50);
+  }
+})();
+</script>
+</body>
+</html>

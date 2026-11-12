@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>预测后优化与决策导向学习：把损失对准决策 · Y.S</title>
+<meta name="description" content="解释预测后优化的误差传播、SPO 损失与凸代理，比较预测训练与决策训练，并给出一个报童式小例子。">
+<link rel="canonical" href="https://songyu0903.github.io/papers/predict-then-optimize-spo/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Y.S">
+<meta property="og:title" content="预测后优化与决策导向学习：把损失对准决策 · Y.S">
+<meta property="og:description" content="解释预测后优化的误差传播、SPO 损失与凸代理，比较预测训练与决策训练，并给出一个报童式小例子。">
+<meta property="og:url" content="https://songyu0903.github.io/papers/predict-then-optimize-spo/">
+<meta property="og:locale" content="zh_CN">
+<meta name="theme-color" content="#f4f1e8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.png" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="alternate" type="application/rss+xml" title="Y.S" href="/index.xml">
+<link rel="stylesheet" href="/assets/site.css">
+<script>(function(){try{var q=new URLSearchParams(location.search).get("theme");var s=localStorage.getItem("ys-theme");var m=window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.setAttribute("data-theme",q==="dark"||q==="light"?q:(s||(m?"dark":"light")));}catch(e){document.documentElement.setAttribute("data-theme","light");}})();</script>
+
+<link rel="stylesheet" href="/katex/katex.min.css">
+<script defer src="/katex/katex.min.js"></script>
+<script defer src="/katex/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="bg" aria-hidden="true">
+  <span class="blob blob-1"></span><span class="blob blob-2"></span>
+  <span class="blob blob-3"></span><span class="blob blob-4"></span>
+  <span class="grid-overlay"></span>
+</div>
+<a class="skip-link" href="#main">跳到主要内容</a>
+
+<header class="nav">
+  <a class="brand" href="/">
+    <span class="brand-mark">YS</span>
+  </a>
+  <nav class="nav-links" aria-label="主导航"><a href="/">首页</a><a href="/topics/">研究方向</a><a href="/papers/" aria-current="page">论文</a><a href="/blog/">笔记</a><a href="/about/">关于</a></nav>
+  <div class="nav-tools">
+    <button class="icon-btn" type="button" data-search-open aria-label="搜索（Ctrl 或 ⌘ + K）" title="搜索 ⌘K" hidden><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg></button>
+    <button class="icon-btn theme-toggle" type="button" aria-label="切换深浅色" aria-pressed="false" hidden><svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.6 6.6 0 0 0 9.8 9.8Z"/></svg><svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+    <a class="icon-btn" href="https://github.com/songyu0903" target="_blank" rel="noopener" aria-label="GitHub"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.77-.24.77-.54v-2.1c-3.12.68-3.78-1.32-3.78-1.32-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.68.08-.68 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.27.93.1-.72.39-1.22.71-1.5-2.49-.28-5.11-1.25-5.11-5.56 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.43.11-2.98 0 0 .94-.3 3.08 1.15a10.6 10.6 0 0 1 5.6 0c2.14-1.45 3.08-1.15 3.08-1.15.61 1.55.23 2.7.11 2.98.72.79 1.16 1.79 1.16 3.02 0 4.32-2.62 5.28-5.12 5.55.4.35.76 1.03.76 2.08v3.08c0 .3.2.65.78.54A11.2 11.2 0 0 0 12 .8Z"/></svg></a>
+    <button class="nav-toggle icon-btn" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="mobile-menu" hidden>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+<div class="drawer" id="mobile-menu" hidden>
+  <nav aria-label="移动端导航"><a href="/">首页</a><a href="/topics/">研究方向</a><a href="/papers/" aria-current="page">论文</a><a href="/blog/">笔记</a><a href="/about/">关于</a></nav>
+</div>
+<main id="main" tabindex="-1">
+
+<div class="progress" aria-hidden="true"></div>
+<div class="container container-article">
+  <div class="article-head">
+    <div class="breadcrumb">
+      <a href="/">首页</a><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg><a href="/papers/">论文</a><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg><span>预测后优化与决策导向学习：把…</span>
+    </div>
+    <h1>预测后优化与决策导向学习：把损失对准决策</h1>
+    <div class="article-meta">
+      <span>2026-10-26</span>
+      <span class="meta-dot"></span>
+      <span>约 8 分钟</span>
+      <a class="chip" href="/topics/learning-to-optimize/">学习型优化</a>
+    </div>
+  </div>
+  <div class="article-grid">
+    <article class="prose" data-reveal>
+      <p>预测后优化（predict-then-optimize）把预测与决策分成两步：先估计不确定参数，再求解优化。这个流程简单、模块化，却有一个常被忽略的问题：预测误差未必对齐决策损失。本文用报童模型说明误差如何传播，介绍 SPO 损失与 SPO+ 凸代理，并讨论什么时候值得把训练目标直接对准决策。</p>
+      <p>核心问题是：如果下游只需要一个决策，为什么还要先追求一个“准确”的预测？答案取决于预测误差经过优化映射后会被放大、缩小，还是被目标函数抹平。</p>
+
+      <h2 id="预测后优化">预测后优化</h2>
+      <p>设决策变量 $z$ 属于凸紧集 $Z\subseteq\mathbb{R}^d$，真实成本参数为 $c$，观测到特征 $x$。预测模型 $f$ 给出 $\hat c=f(x)$，随后求解</p>
+      $$
+      z^*(\hat c)=\arg\min_{z\in Z}\ \hat c^{\top}z.
+      $$
+      <p>真实决策损失（regret）定义为</p>
+      $$
+      \ell(\hat c,c)=c^{\top}z^*(\hat c)-c^{\top}z^*(c)\ge 0.
+      $$
+      <p>注意这里的损失不是预测误差 $\|\hat c-c\|$，而是“用错参数做决策”多付的成本。两者可以同向，也可以完全脱节：一个在大多数样本上很准的模型，可能在关键样本上做出代价很高的错误决策。</p>
+
+      <h2 id="误差如何传播">误差如何传播</h2>
+      <p>若 $z^*(\cdot)$ 关于 $\hat c$ 是 Lipschitz 的，常数为 $L$，则</p>
+      $$
+      \ell(\hat c,c)\le \|c\|\,L\,\|\hat c-c\|.
+      $$
+      <p>强凸目标（如带 $\ell_2$ 正则的二次规划）满足这一条件，$L$ 与强凸参数成反比；线性规划则不满足：最优解在可行域顶点之间跳变，参数穿过某个法锥边界时，决策可能瞬间改变。此时预测误差很小，决策损失却可以很大。</p>
+      <p>一个简单的几何图像是：$z^*(\hat c)$ 在 $\hat c$ 的空间里被划分成若干区域，每个区域对应一个最优顶点。预测落在区域内部时，小的参数扰动不改变决策；落在边界附近时，任意小的扰动都可能把决策推到另一个顶点。决策损失的大小取决于两个顶点在真实成本下的差距，而不是扰动本身的大小。</p>
+      <p>因此，“预测精度”不是决策质量的充分统计量。评估一个预测后优化系统，至少应同时报告预测误差与决策损失；只看 RMSE 可能完全误导。</p>
+
+      <h2 id="spo-损失">SPO 损失</h2>
+      <p>把上面的决策损失称为 SPO（smart predict-then-optimize）损失：</p>
+      $$
+      \ell_{\mathrm{SPO}}(\hat c,c)=c^{\top}\big(z^*(c)-z^*(\hat c)\big).
+      $$
+      <p>它有几个不友好的性质：非负、在 $\hat c=c$ 处为零，但关于 $\hat c$ 一般<strong>不是凸的</strong>。对固定 $c$，$z^*(\hat c)$ 是分段常值的，SPO 损失也是分段线性/常值的，存在跳变与平坦区。直接对 SPO 损失做梯度下降没有良好定义，需要次梯度、分段结构或黑箱优化。</p>
+      <p>尽管不凸，SPO 损失仍可计算：给定 $\hat c$ 与 $c$，只需解一次优化得到 $z^*(\hat c)$，再与 $z^*(c)$ 比较。训练时如果能反复调用优化 oracle，就可以用决策损失作为评估与早停依据；难点在于如何把梯度传回预测模型。</p>
+
+      <h2 id="凸代理与端到端">凸代理与端到端</h2>
+      <p>SPO+ 是最常用的凸代理：</p>
+      $$
+      \ell_{\mathrm{SPO+}}(\hat c,c)
+      =\max_{z\in Z}\Big\{(c-2\hat c)^{\top}z\Big\}
+      +2\hat c^{\top}z^*(c)-c^{\top}z^*(c).
+      $$
+      <p>它是 $\hat c$ 的凸函数（仿射函数的最大值），且满足 $\ell_{\mathrm{SPO+}}(\hat c,c)\ge\ell_{\mathrm{SPO}}(\hat c,c)$：把 $z=z^*(\hat c)$ 代入即可得到 SPO 损失加上一个非负项。更重要的是，它在 $\hat c=c$ 处取零，并具有 Fisher 一致性——在总体层面最小化 SPO+ 的预测器，其诱导的决策是最优的。</p>
+      <p>另一条路线是把优化层本身当作网络的一层，做端到端训练：用隐函数定理或展开求解器计算 $\partial z^*/\partial\hat c$，把决策损失的梯度传回预测模型。这类方法（可微凸优化层、展开的迭代算法）在中小规模问题上很有效，但计算图深、内存开销大，约束结构复杂时还需要专门的微分技巧。</p>
+      <p>两条路线共享一个前提：训练时必须能访问决策问题。若只拿到预测标签而没有下游优化结构，决策导向训练无从谈起；这也是它与普通监督学习最根本的区别。</p>
+
+      <h2 id="报童例子">报童例子</h2>
+      <p>需求 $d\sim U[0,100]$，订货量 $q$，缺货成本 $c_u=4$，过剩成本 $c_o=1$。报童的最优订货量由临界分位数给出：</p>
+      $$
+      q^\star=F^{-1}\!\left(\frac{c_u}{c_o+c_u}\right)=F^{-1}(0.8)=80.
+      $$
+      <p>期望成本为</p>
+      $$
+      C(q)=c_o\,\mathbb{E}[(q-d)^+]+c_u\,\mathbb{E}[(d-q)^+]
+      =\frac{q^2}{200}+4\cdot\frac{(100-q)^2}{200}.
+      $$
+      <p>若预测模型给出需求均值 $50$，并直接令 $q=50$，期望成本为 $12.5+50=62.5$；最优成本为 $40$，高出约 $56\%$。预测模型在均方误差意义上未必差，但它没有把“缺货比过剩贵四倍”这一决策不对称性纳入训练。</p>
+      <div class="table-scroll"><table>
+        <thead><tr><th>订货量 $q$</th><th>期望成本 $C(q)$</th><th>相对最优</th></tr></thead>
+        <tbody>
+          <tr><td>0</td><td>200.0</td><td>5.00×</td></tr>
+          <tr><td>50（均值预测）</td><td>62.5</td><td>1.56×</td></tr>
+          <tr><td>80（最优）</td><td>40.0</td><td>1.00×</td></tr>
+          <tr><td>100</td><td>50.0</td><td>1.25×</td></tr>
+        </tbody>
+      </table></div>
+      <p>决策导向的做法不是预测条件均值，而是直接学习条件分位数 $0.8$，或最小化 SPO/SPO+ 损失。两者都可能比“预测均值再代入”更接近最优，尤其是在高临界分位数（缺货成本远高于过剩成本）时。</p>
+
+      <h2 id="何时值得">何时值得</h2>
+      <p>决策导向训练不是默认更好的选择。若下游目标对参数不敏感（最优解在较大区域内稳定），或预测误差本身很小，预测后优化简单、可解释、训练成本低，通常足够。相反，当决策边界附近样本多、目标函数不对称、或预测误差会被优化放大时，决策导向训练的价值更大。</p>
+      <ul>
+        <li><strong>评估指标</strong>：同时报告预测误差、决策损失/regret、约束违反率；不要只看 RMSE。</li>
+        <li><strong>训练成本</strong>：SPO+ 需要反复求解优化；端到端需要可微层，内存与时间开销更高。</li>
+        <li><strong>分布偏移</strong>：决策损失对分布变化更敏感；需要在不同分布上验证，而不能只依赖训练集损失。</li>
+        <li><strong>可解释性</strong>：预测后优化把“预测”和“决策”分开，便于审计；端到端模型更难解释误差来源。</li>
+      </ul>
+
+      <h2 id="小结">小结</h2>
+      <p>预测后优化的核心不是“预测得更准”，而是“预测误差是否落在决策要害上”。SPO 损失把决策代价显式化，SPO+ 提供了可优化的凸代理，端到端方法则进一步把优化层纳入训练。三者共同指向一个原则：当预测服务于决策时，训练目标应该与决策目标对齐；是否值得这样做，取决于问题结构、数据规模与可接受的工程复杂度。</p>
+      <h2 id="参考文献">参考文献</h2>
+      <ol>
+        <li>A. N. Elmachtoub, P. Grigas. Smart “predict, then optimize”. <em>Management Science</em>, 2022.</li>
+        <li>D. Bertsimas, N. Kallus. From predictive to prescriptive analytics. <em>Management Science</em>, 2020.</li>
+        <li>B. Wilder, B. Dilkina, M. Tambe. Melding the data-decisions pipeline: decision-focused learning for combinatorial optimization. <em>AAAI</em>, 2019.</li>
+        <li>P. Donti, B. Amos, J. Z. Kolter. Task-based end-to-end model learning in stochastic optimization. <em>NeurIPS</em>, 2017.</li>
+        <li>A. Agrawal et al. Differentiable convex optimization layers. <em>NeurIPS</em>, 2019.</li>
+        <li>G.-Y. Ban, C. Rudin. The big data newsvendor: practical insights from machine learning. <em>Operations Research</em>, 2019.</li>
+      </ol>
+
+    <details class="citation">
+      <summary>引用本文（BibTeX）</summary>
+      <p>此条目引用本站研究笔记；文中参考文献见文末列表。</p>
+      <div class="citation-toolbar">
+        <button class="btn btn-ghost" type="button" data-copy-citation data-target="citation-predict-then-optimize-spo" hidden>复制 BibTeX</button>
+        <span class="copy-status" role="status" aria-live="polite"></span>
+      </div>
+      <pre id="citation-predict-then-optimize-spo" tabindex="0"><code>@misc{ys2026predictthenoptimizespo,
+  author = {{Y.S}},
+  title = {预测后优化与决策导向学习：把损失对准决策},
+  year = {2026},
+  month = {10},
+  day = {26},
+  url = {https://songyu0903.github.io/papers/predict-then-optimize-spo/},
+  note = {研究笔记，2026-10-26}
+}</code></pre>
+    </details></article>
+
+    <aside class="toc" aria-label="本页目录">
+      <div class="toc-title">目录</div>
+      <ol><li><a href="#%E9%A2%84%E6%B5%8B%E5%90%8E%E4%BC%98%E5%8C%96">预测后优化</a></li><li><a href="#%E8%AF%AF%E5%B7%AE%E5%A6%82%E4%BD%95%E4%BC%A0%E6%92%AD">误差如何传播</a></li><li><a href="#spo-%E6%8D%9F%E5%A4%B1">SPO 损失</a></li><li><a href="#%E5%87%B8%E4%BB%A3%E7%90%86%E4%B8%8E%E7%AB%AF%E5%88%B0%E7%AB%AF">凸代理与端到端</a></li><li><a href="#%E6%8A%A5%E7%AB%A5%E4%BE%8B%E5%AD%90">报童例子</a></li><li><a href="#%E4%BD%95%E6%97%B6%E5%80%BC%E5%BE%97">何时值得</a></li><li><a href="#%E5%B0%8F%E7%BB%93">小结</a></li><li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li></ol>
+    </aside>
+  </div>
+
+  <nav class="pager" aria-label="翻页">
+    <a class="prev" href="/papers/generalization-vc-rademacher/"><span class="dir">← 较早</span><span class="t">泛化误差的三种视角：VC 维、Rademacher 复杂度与稳定性</span></a>
+    <span></span>
+  </nav>
+</div>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div>
+      <div style="font-weight:600;color:var(--ink)">Y.S · 数学 · 组合优化与机器学习</div>
+      <div class="footer-note">纯静态站点，托管于 GitHub Pages；公式由 KaTeX 渲染。</div>
+    </div>
+    <div class="footer-links">
+      <a href="/papers/">论文</a>
+      <a href="/topics/">研究方向</a>
+      <a href="/blog/">笔记</a>
+      <a href="/about/">关于</a>
+      <a href="/index.xml">RSS</a>
+      <a href="https://github.com/songyu0903" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<div class="search" id="search" hidden>
+  <div class="search-backdrop" data-search-close></div>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="站内搜索">
+    <div class="search-box">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+      <input id="searchInput" type="search" placeholder="搜索论文、研究方向、笔记…" autocomplete="off" spellcheck="false" aria-label="搜索关键词">
+      <kbd>Esc</kbd>
+      <button class="search-close icon-btn" type="button" data-search-close aria-label="关闭搜索">×</button>
+    </div>
+    <div class="search-results" id="searchResults" aria-live="polite"></div>
+    <div class="search-foot">
+      <span>↑↓ 选择 · ↵ 打开 · Esc 关闭</span>
+      <span id="searchCount"></span>
+    </div>
+  </div>
+</div>
+<script src="/assets/site.js" defer></script>
+
+<script>
+(function () {
+  var opts = {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "\[", right: "\]", display: true },
+      { left: "$", right: "$", display: false },
+      { left: "\(", right: "\)", display: false }
+    ],
+    throwOnError: false,
+    ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code", "option"]
+  };
+  function go() {
+    if (!window.renderMathInElement) return false;
+    try { renderMathInElement(document.body, opts); } catch (e) {}
+    return true;
+  }
+  if (!go()) {
+    var n = 0;
+    var timer = setInterval(function () {
+      if (go() || ++n > 80) clearInterval(timer);
+    }, 50);
+  }
+})();
+</script>
+</body>
+</html>
